@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local working files
+/.claude/
+/.playwright-mcp/
+/hero-*.png
+/landing-*.png
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
