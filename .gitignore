@@ -50,6 +50,8 @@ yarn-error.log*
 /both-*.png
 /final-*.png
 /final.png
+/chev-*.png
+/tooltip-*.png
 /orphans.png
 /problem-*.png
 

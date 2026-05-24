@@ -18,15 +18,23 @@ export function FinalCTA() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
           <a
             href="#early-access"
-            className="inline-flex items-center justify-center h-12 px-8 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors"
+            aria-label="Request a Pilot — schedule a time to talk with us"
+            className="group relative inline-flex items-center justify-center h-12 px-8 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors"
           >
             Request a Pilot
+            <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+              Schedule a time to talk with us
+            </span>
           </a>
           <a
             href="#early-access"
-            className="inline-flex items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
+            aria-label="Join Early Access — join the list to hear updates as the product becomes more publicly available"
+            className="group relative inline-flex items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
           >
             Join Early Access
+            <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+              Hear updates as the product becomes more publicly available
+            </span>
           </a>
         </div>
       </div>
