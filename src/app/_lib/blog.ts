@@ -86,6 +86,12 @@ function assertSources(value: unknown, file: string): asserts value is BlogSourc
   });
 }
 
+function getPostFileNames(): string[] {
+  if (!fs.existsSync(postsDirectory)) return [];
+
+  return fs.readdirSync(postsDirectory).filter((fileName) => fileName.endsWith(".md"));
+}
+
 function parsePost(fileName: string): BlogPost {
   const fullPath = path.join(postsDirectory, fileName);
   const raw = fs.readFileSync(fullPath, "utf8");
@@ -99,7 +105,11 @@ function parsePost(fileName: string): BlogPost {
   assertDiagram(data.diagram, fileName);
   assertSources(data.sources, fileName);
 
-  const inlineImages = Array.isArray(data.inlineImages) ? data.inlineImages : [];
+  if (data.inlineImages !== undefined && !Array.isArray(data.inlineImages)) {
+    throw new Error(`${fileName} frontmatter field "inlineImages" must be an array`);
+  }
+
+  const inlineImages = data.inlineImages ?? [];
   inlineImages.forEach((image, index) => assertImage(image, `inlineImages.${index}`, fileName));
 
   return {
@@ -118,11 +128,7 @@ function parsePost(fileName: string): BlogPost {
 }
 
 export function getAllPosts(): BlogPostMeta[] {
-  if (!fs.existsSync(postsDirectory)) return [];
-
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((fileName) => fileName.endsWith(".md"))
+  return getPostFileNames()
     .map(parsePost)
     .map((post) => ({
       title: post.title,
@@ -144,12 +150,9 @@ export function getAllPostSlugs(): { slug: string }[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
-  const fileName = `${slug}.md`;
-  const fullPath = path.join(postsDirectory, fileName);
-
-  if (!fs.existsSync(fullPath)) return null;
-
-  return parsePost(fileName);
+  return getPostFileNames()
+    .map(parsePost)
+    .find((post) => post.slug === slug) ?? null;
 }
 
 export function getRelatedPosts(currentSlug: string, topic: string, limit = 3): BlogPostMeta[] {
