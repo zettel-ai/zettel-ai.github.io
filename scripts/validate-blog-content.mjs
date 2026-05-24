@@ -34,7 +34,12 @@ function fail(message) {
 
 function publicPathExists(src) {
   if (typeof src !== "string" || !src.startsWith("/")) return false;
-  return fs.existsSync(path.join(publicDir, src));
+
+  const candidate = path.resolve(publicDir, `.${src}`);
+  const relative = path.relative(publicDir, candidate);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) return false;
+
+  return fs.existsSync(candidate);
 }
 
 function hasText(value) {
@@ -116,6 +121,18 @@ if (!fs.existsSync(contentDir)) {
     }
 
     const articleBody = sourcesHeading ? content.slice(0, sourcesHeading.index) : content;
+    const sourcesSection = sourcesHeading ? content.slice(sourcesHeading.index + sourcesHeading[0].length) : "";
+
+    if (sourcesHeading && sourcesSection.trim().length === 0) {
+      fail(`${label} has an empty "## Sources" section`);
+    }
+
+    for (let i = 1; i <= sources.length; i += 1) {
+      if (!sourcesSection.includes(`[${i}]`)) {
+        fail(`${label} Sources section is missing source marker [${i}]`);
+      }
+    }
+
     const citations = Array.from(articleBody.matchAll(/\[(\d+)\]/g), (match) => Number(match[1]));
     if (citations.length === 0) fail(`${label} has no inline citations`);
 
@@ -131,7 +148,7 @@ if (!fs.existsSync(contentDir)) {
       }
     }
 
-    if (content.trim().length < 1500) {
+    if (articleBody.trim().length < 1500) {
       fail(`${label} content is unexpectedly short`);
     }
   }
