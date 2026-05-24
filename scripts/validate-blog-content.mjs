@@ -84,15 +84,21 @@ if (!fs.existsSync(contentDir)) {
     const inlineImages = Array.isArray(data.inlineImages) ? data.inlineImages : [];
     for (const image of inlineImages) {
       if (!publicPathExists(image.src)) fail(`${label} inline image is missing: ${image.src}`);
-      if (!image.sourceUrl || !image.license) fail(`${label} inline image missing sourceUrl or license`);
+      if (!hasText(image.sourceUrl) || !hasText(image.license)) {
+        fail(`${label} inline image missing sourceUrl or license`);
+      }
     }
 
-    if (!data.heroImage.sourceUrl || !data.heroImage.license) {
+    if (!hasText(data.heroImage?.sourceUrl) || !hasText(data.heroImage?.license)) {
       fail(`${label} hero image missing sourceUrl or license`);
     }
 
     if (!data.diagram || !publicPathExists(data.diagram.src)) {
       fail(`${label} diagram.src is missing or does not exist`);
+    }
+
+    if (!hasText(data.diagram?.alt) || !hasText(data.diagram?.caption)) {
+      fail(`${label} diagram missing alt or caption`);
     }
 
     const sources = Array.isArray(data.sources) ? data.sources : [];
