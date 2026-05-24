@@ -110,7 +110,13 @@ if (!fs.existsSync(contentDir)) {
       }
     });
 
-    const citations = Array.from(content.matchAll(/\[(\d+)\]/g), (match) => Number(match[1]));
+    const sourcesHeading = content.match(/^## Sources\s*$/m);
+    if (!sourcesHeading) {
+      fail(`${label} missing "## Sources" section`);
+    }
+
+    const articleBody = sourcesHeading ? content.slice(0, sourcesHeading.index) : content;
+    const citations = Array.from(articleBody.matchAll(/\[(\d+)\]/g), (match) => Number(match[1]));
     if (citations.length === 0) fail(`${label} has no inline citations`);
 
     for (const citation of citations) {
@@ -120,13 +126,9 @@ if (!fs.existsSync(contentDir)) {
     }
 
     for (let i = 1; i <= sources.length; i += 1) {
-      if (!content.includes(`[${i}]`)) {
+      if (!articleBody.includes(`[${i}]`)) {
         fail(`${label} source ${i} is not cited inline`);
       }
-    }
-
-    if (!/## Sources\s*$/m.test(content)) {
-      fail(`${label} missing "## Sources" section`);
     }
 
     if (content.trim().length < 1500) {
