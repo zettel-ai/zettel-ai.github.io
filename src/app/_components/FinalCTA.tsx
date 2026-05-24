@@ -6,12 +6,14 @@ export function FinalCTA() {
     >
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl font-light text-on-background mb-6">
-          Get Updates or Schedule a Demo
+          Ready to put Zettel to work?
         </h2>
         <p className="text-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
-          Join the early-access cohort for teams that want to prevent
-          avoidable delays, automate documentation, and transform their supply
-          chain visibility with Zettel Ops.
+          Join the early-access cohort for ops teams that want to prevent
+          avoidable delays, automate documentation, and get a handle on
+          container-level visibility. We&apos;ll walk through the workflow,
+          show you the product, and figure out together how we can help you
+          keep containers moving.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
           <a

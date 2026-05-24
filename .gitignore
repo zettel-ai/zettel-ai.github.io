@@ -38,9 +38,20 @@ yarn-error.log*
 
 # local working files
 /.claude/
+/.idea/
 /.playwright-mcp/
 /hero-*.png
 /landing-*.png
+/steps-*.png
+/cards-*.png
+/sol-*.png
+/solution-*.png
+/copy-pass*.png
+/both-*.png
+/final-*.png
+/final.png
+/orphans.png
+/problem-*.png
 
 # typescript
 *.tsbuildinfo
