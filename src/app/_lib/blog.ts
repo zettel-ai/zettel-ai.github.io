@@ -109,8 +109,11 @@ function parsePost(fileName: string): BlogPost {
     throw new Error(`${fileName} frontmatter field "inlineImages" must be an array`);
   }
 
-  const inlineImages = data.inlineImages ?? [];
-  inlineImages.forEach((image, index) => assertImage(image, `inlineImages.${index}`, fileName));
+  const inlineImageData: unknown[] = data.inlineImages ?? [];
+  const inlineImages = inlineImageData.map((image, index) => {
+    assertImage(image, `inlineImages.${index}`, fileName);
+    return image;
+  });
 
   return {
     title: data.title,
