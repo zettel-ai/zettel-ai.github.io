@@ -1,0 +1,130 @@
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
+import matter from "gray-matter";
+
+const root = process.cwd();
+const contentDir = path.join(root, "src/content/blog");
+const publicDir = path.join(root, "public");
+const requiredFields = [
+  "title",
+  "slug",
+  "description",
+  "date",
+  "topic",
+  "readTime",
+  "heroImage",
+  "diagram",
+  "sources",
+];
+
+const bannedPatterns = [
+  "What would you like to do next",
+  "writer-gpt.com",
+  "Translate this article",
+  "Private Prompt Library",
+  "Article Mode",
+  "Blog Article + Image Mode",
+];
+
+function fail(message) {
+  console.error(`Blog validation failed: ${message}`);
+  process.exitCode = 1;
+}
+
+function publicPathExists(src) {
+  if (typeof src !== "string" || !src.startsWith("/")) return false;
+  return fs.existsSync(path.join(publicDir, src));
+}
+
+function countMatches(content, regex) {
+  return Array.from(content.matchAll(regex)).length;
+}
+
+if (!fs.existsSync(contentDir)) {
+  fail(`missing content directory: ${path.relative(root, contentDir)}`);
+} else {
+  const files = fs.readdirSync(contentDir).filter((file) => file.endsWith(".md"));
+
+  if (files.length !== 18) {
+    fail(`expected 18 blog posts, found ${files.length}`);
+  }
+
+  const slugs = new Set();
+
+  for (const file of files) {
+    const fullPath = path.join(contentDir, file);
+    const raw = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(raw);
+    const label = path.relative(root, fullPath);
+
+    for (const field of requiredFields) {
+      if (data[field] === undefined || data[field] === null || data[field] === "") {
+        fail(`${label} missing frontmatter field "${field}"`);
+      }
+    }
+
+    if (typeof data.slug === "string") {
+      if (slugs.has(data.slug)) fail(`${label} duplicate slug "${data.slug}"`);
+      slugs.add(data.slug);
+      if (`${data.slug}.md` !== file) {
+        fail(`${label} filename must match slug "${data.slug}.md"`);
+      }
+    }
+
+    if (raw.includes("—")) fail(`${label} contains an em dash`);
+    for (const pattern of bannedPatterns) {
+      if (raw.includes(pattern)) fail(`${label} contains banned boilerplate: ${pattern}`);
+    }
+
+    if (!data.heroImage || !publicPathExists(data.heroImage.src)) {
+      fail(`${label} heroImage.src is missing or does not exist`);
+    }
+
+    const inlineImages = Array.isArray(data.inlineImages) ? data.inlineImages : [];
+    for (const image of inlineImages) {
+      if (!publicPathExists(image.src)) fail(`${label} inline image is missing: ${image.src}`);
+      if (!image.sourceUrl || !image.license) fail(`${label} inline image missing sourceUrl or license`);
+    }
+
+    if (!data.heroImage.sourceUrl || !data.heroImage.license) {
+      fail(`${label} hero image missing sourceUrl or license`);
+    }
+
+    if (!data.diagram || !publicPathExists(data.diagram.src)) {
+      fail(`${label} diagram.src is missing or does not exist`);
+    }
+
+    const sources = Array.isArray(data.sources) ? data.sources : [];
+    if (sources.length === 0) fail(`${label} must include at least one factual source`);
+
+    sources.forEach((source, index) => {
+      if (!source.label || !source.url) {
+        fail(`${label} source ${index + 1} missing label or url`);
+      }
+    });
+
+    const citationCount = countMatches(content, /\[(\d+)\]/g);
+    if (citationCount === 0) fail(`${label} has no inline citations`);
+
+    for (let i = 1; i <= sources.length; i += 1) {
+      if (!content.includes(`[${i}]`)) {
+        fail(`${label} source ${i} is not cited inline`);
+      }
+    }
+
+    if (!/## Sources\s*$/m.test(content)) {
+      fail(`${label} missing "## Sources" section`);
+    }
+
+    if (content.trim().length < 1500) {
+      fail(`${label} content is unexpectedly short`);
+    }
+  }
+}
+
+if (process.exitCode) {
+  process.exit(process.exitCode);
+}
+
+console.log("Blog validation passed.");
