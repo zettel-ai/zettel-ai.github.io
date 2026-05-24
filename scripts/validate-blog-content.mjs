@@ -37,8 +37,8 @@ function publicPathExists(src) {
   return fs.existsSync(path.join(publicDir, src));
 }
 
-function countMatches(content, regex) {
-  return Array.from(content.matchAll(regex)).length;
+function hasText(value) {
+  return typeof value === "string" && value.trim().length > 0;
 }
 
 if (!fs.existsSync(contentDir)) {
@@ -99,13 +99,19 @@ if (!fs.existsSync(contentDir)) {
     if (sources.length === 0) fail(`${label} must include at least one factual source`);
 
     sources.forEach((source, index) => {
-      if (!source.label || !source.url) {
+      if (!hasText(source.label) || !hasText(source.url)) {
         fail(`${label} source ${index + 1} missing label or url`);
       }
     });
 
-    const citationCount = countMatches(content, /\[(\d+)\]/g);
-    if (citationCount === 0) fail(`${label} has no inline citations`);
+    const citations = Array.from(content.matchAll(/\[(\d+)\]/g), (match) => Number(match[1]));
+    if (citations.length === 0) fail(`${label} has no inline citations`);
+
+    for (const citation of citations) {
+      if (citation < 1 || citation > sources.length) {
+        fail(`${label} citation [${citation}] does not match a declared source`);
+      }
+    }
 
     for (let i = 1; i <= sources.length; i += 1) {
       if (!content.includes(`[${i}]`)) {
