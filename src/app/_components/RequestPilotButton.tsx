@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-const CALENDLY_URL =
+export const CALENDLY_URL =
   "https://calendly.com/zettel-ops/30min?background_color=fbf9f8&text_color=1b1c1c&primary_color=006527";
 
 type CalendlyWindow = Window & {

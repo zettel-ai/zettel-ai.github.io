@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Public_Sans } from "next/font/google";
 import "./globals.css";
 
+import { CalendlyBadge } from "./_components/CalendlyBadge";
+
 const publicSans = Public_Sans({
   variable: "--font-public-sans",
   subsets: ["latin"],
@@ -32,6 +34,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-background">
         {children}
+        <CalendlyBadge />
       </body>
     </html>
   );
