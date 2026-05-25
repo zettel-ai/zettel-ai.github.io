@@ -9,7 +9,7 @@ type DiagramFigureProps = {
 export function DiagramFigure({ diagram }: DiagramFigureProps) {
   return (
     <figure className="my-12 border border-outline-variant bg-surface-container-lowest p-4 shadow-sm">
-      <div className="relative aspect-[16/10] w-full">
+      <div className="relative aspect-[16/10] w-full [content-visibility:auto]">
         <Image
           src={diagram.src}
           alt={diagram.alt}

@@ -13,7 +13,7 @@ export function ImageFigure({ image, priority = false, className = "" }: ImageFi
     <figure
       className={`my-10 overflow-hidden border border-outline-variant bg-surface-container-lowest ${className}`}
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
+      <div className="relative aspect-[16/9] w-full overflow-hidden [content-visibility:auto]">
         <Image
           src={image.src}
           alt={image.alt}

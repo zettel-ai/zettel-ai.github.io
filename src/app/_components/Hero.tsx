@@ -28,7 +28,7 @@ export function Hero() {
               <br />
               through emails, messages, and PDFs.
             </h1>
-            <div className="mb-6 mx-auto lg:mx-0 border border-primary/30 bg-white/85 px-5 py-4 text-left shadow-sm backdrop-blur-sm">
+            <div className="mb-6 mx-auto lg:mx-0 border border-primary/30 bg-white/95 px-5 py-4 text-left shadow-sm">
               <p className="text-lg leading-relaxed text-on-surface-variant text-pretty">
                 Zettel is an AI operations assistant that turns scattered
                 shipping documents (BOLs, DOs, invoices, arrival notices) into

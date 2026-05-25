@@ -12,7 +12,7 @@ export function BlogCard({ post, priority = false }: BlogCardProps) {
   return (
     <article className="group overflow-hidden border border-outline-variant bg-surface-container-lowest transition-colors hover:border-primary">
       <Link href={`/blog/${post.slug}`} className="block">
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/10] overflow-hidden [content-visibility:auto]">
           <Image
             src={post.heroImage.src}
             alt={post.heroImage.alt}

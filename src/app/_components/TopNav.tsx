@@ -13,7 +13,7 @@ export function TopNav() {
     "text-sm font-medium text-on-surface-variant transition-colors hover:text-primary";
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-200">
+    <header className="fixed top-0 w-full z-50 bg-white border-b border-zinc-200">
       <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
         <Link href="/" className="flex items-center gap-2">
           <Image
