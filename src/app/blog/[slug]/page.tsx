@@ -18,7 +18,10 @@ type BlogPageProps = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getAllPostSlugs();
+  const postSlugs = getAllPostSlugs();
+
+  // Static export requires one generated param for this dynamic route before real blog posts exist.
+  return postSlugs.length > 0 ? postSlugs : [{ slug: "__empty__" }];
 }
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
