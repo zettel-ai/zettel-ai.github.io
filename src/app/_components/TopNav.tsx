@@ -27,6 +27,12 @@ export function TopNav() {
           >
             Blog
           </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
+          >
+            Contact
+          </Link>
           <RequestPilotButton className="group relative inline-flex cursor-pointer items-center justify-center h-10 px-6 text-sm font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors active:scale-95 duration-150">
             Request a Pilot
             <span className="pointer-events-none absolute top-full right-0 mt-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">

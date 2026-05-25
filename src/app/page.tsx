@@ -5,7 +5,6 @@ import { Problem } from "./_components/Problem";
 import { Solution } from "./_components/Solution";
 import { FeatureGrid } from "./_components/FeatureGrid";
 import { FinalCTA } from "./_components/FinalCTA";
-import { Contact } from "./_components/Contact";
 import { Footer } from "./_components/Footer";
 
 export default function Home() {
@@ -21,7 +20,6 @@ export default function Home() {
         <Solution />
         <FeatureGrid />
         <FinalCTA />
-        <Contact />
       </main>
       <Footer />
     </>

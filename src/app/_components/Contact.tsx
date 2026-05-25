@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 
 import { CALENDLY_URL } from "./RequestPilotButton";
 
 const TALLY_EMBED_SRC =
   "https://tally.so/embed/NpRbO0?alignLeft=1&transparentBackground=1&dynamicHeight=1";
+
+// Client-only flag without setState-in-effect; getServerSnapshot returns false
+// so the Tally iframe is never server-rendered (it is mutated by Tally on load).
+const subscribeNoop = () => () => {};
 
 type ContactWindow = Window & {
   Calendly?: { initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void };
@@ -17,11 +21,11 @@ export function Contact() {
   // Render the Tally iframe only on the client. Tally's script mutates the
   // iframe (src, id, styles) as soon as it loads, which would otherwise cause
   // a hydration mismatch against the server-rendered markup.
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     if (!mounted) return;
