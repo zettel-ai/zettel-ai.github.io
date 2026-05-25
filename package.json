@@ -16,6 +16,7 @@
     "validate:hero-mobile-image-order": "node scripts/validate-hero-mobile-image-order.mjs",
     "validate:mobile-overflow-guards": "node scripts/validate-mobile-overflow-guards.mjs",
     "validate:slack-diagrams": "node scripts/validate-slack-diagrams.mjs",
+    "validate:faq-page": "node scripts/validate-faq-page.mjs",
     "validate:blog": "node scripts/validate-blog-content.mjs"
   },
   "dependencies": {

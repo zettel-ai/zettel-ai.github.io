@@ -91,7 +91,12 @@ export function Contact() {
             <div
               ref={calendlyRef}
               className="mt-6 w-full min-w-0 overflow-hidden border border-outline-variant"
-              style={{ width: "100%", height: 1000 }}
+              // Cap the embed so it never fills the viewport: a full-height
+              // Calendly iframe captures wheel/touch scrolling and leaves no
+              // page area to scroll past it, trapping users before the footer.
+              // 80svh keeps ~20% of the screen as scrollable "escape room";
+              // 760px keeps the scheduler comfortable on tall screens.
+              style={{ width: "100%", height: "min(760px, 80svh)" }}
             />
           </div>
 

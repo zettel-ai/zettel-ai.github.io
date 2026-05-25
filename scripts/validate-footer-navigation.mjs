@@ -24,7 +24,6 @@ for (const [href, label] of footerLinks) {
   assert(footer.includes(href) && footer.includes(label), `Footer must include ${label} linked with ${href}.`);
 }
 
-assert(!footer.includes('title: "Home"'), "Footer must not include a standalone Home navigation column.");
 assert(footer.includes('<Link href="/" className="inline-flex items-center gap-2">'), "Footer logo must still link home.");
 
 assert(blogPage.includes('id="featured"'), "Blog page must expose a #featured anchor.");

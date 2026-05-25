@@ -1,23 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const footerNavGroups = [
-  {
-    title: "Blog",
-    href: "/blog",
-    links: [
-      { label: "Featured Blog", href: "/blog#featured" },
-      { label: "Latest Blogs", href: "/blog#latest" },
-    ],
-  },
-  {
-    title: "Contact Us",
-    href: "/contact",
-    links: [
-      { label: "Request pilot", href: "/contact#request-pilot" },
-      { label: "Join Early Access", href: "/contact#early-access" },
-    ],
-  },
+// Each column holds one or more headings; a heading may have its own sub-links.
+const footerNavColumns = [
+  [
+    {
+      title: "Blog",
+      href: "/blog",
+      links: [
+        { label: "Featured Blog", href: "/blog#featured" },
+        { label: "Latest Blogs", href: "/blog#latest" },
+      ],
+    },
+  ],
+  [
+    { title: "Home", href: "/", links: [] },
+    { title: "FAQ", href: "/faq", links: [] },
+  ],
+  [
+    {
+      title: "Contact Us",
+      href: "/contact",
+      links: [
+        { label: "Request pilot", href: "/contact#request-pilot" },
+        { label: "Join Early Access", href: "/contact#early-access" },
+      ],
+    },
+  ],
 ];
 
 export function Footer() {
@@ -44,28 +53,32 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer navigation" className="grid gap-8 sm:grid-cols-3">
-            {footerNavGroups.map((group) => (
-              <div key={group.title}>
-                <Link
-                  href={group.href}
-                  className="text-sm font-semibold text-on-background transition-colors hover:text-primary"
-                >
-                  {group.title}
-                </Link>
-                {group.links.length > 0 && (
-                  <ul className="mt-3 space-y-2">
-                    {group.links.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="text-sm text-on-surface-variant transition-colors hover:text-primary"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+            {footerNavColumns.map((column, columnIndex) => (
+              <div key={columnIndex} className="space-y-6">
+                {column.map((group) => (
+                  <div key={group.title}>
+                    <Link
+                      href={group.href}
+                      className="text-sm font-semibold text-on-background transition-colors hover:text-primary"
+                    >
+                      {group.title}
+                    </Link>
+                    {group.links.length > 0 && (
+                      <ul className="mt-3 space-y-2">
+                        {group.links.map((link) => (
+                          <li key={link.href}>
+                            <Link
+                              href={link.href}
+                              className="text-sm text-on-surface-variant transition-colors hover:text-primary"
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
               </div>
             ))}
           </nav>

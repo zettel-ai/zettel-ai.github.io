@@ -42,6 +42,12 @@ export function TopNav() {
             Blog
           </Link>
           <Link
+            href="/faq"
+            className={navLinkClass}
+          >
+            FAQ
+          </Link>
+          <Link
             href="/contact"
             className={navLinkClass}
           >
@@ -79,6 +85,9 @@ export function TopNav() {
             </Link>
             <Link href="/blog" className="px-1 py-3 text-base font-medium text-on-background">
               Blog
+            </Link>
+            <Link href="/faq" className="px-1 py-3 text-base font-medium text-on-background">
+              FAQ
             </Link>
             <Link href="/contact" className="px-1 py-3 text-base font-medium text-on-background">
               Contact
