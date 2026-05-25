@@ -44,21 +44,21 @@ export function Problem() {
           {cards.map((c) => (
             <div
               key={c.title}
-              className="p-5 md:p-5 lg:p-6 border border-error-container bg-error-container/20 rounded-2xl shadow-sm"
+              className="p-5 lg:p-6 border border-error-container bg-error-container/20 rounded-2xl shadow-sm"
             >
-              <h3 className="text-base md:text-base lg:text-lg font-semibold text-error mb-3 flex items-center gap-2">
+              <h3 className="text-base lg:text-lg font-semibold text-error mb-3 flex items-center gap-2">
                 <span className="material-symbols-outlined text-error text-xl shrink-0">
                   warning
                 </span>
                 {c.title}
               </h3>
-              <p className="text-sm md:text-sm lg:text-base text-on-background leading-relaxed">
+              <p className="text-sm lg:text-base text-on-background leading-relaxed">
                 {c.body}
                 <a
                   href={c.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-3 text-xs md:text-xs lg:text-sm font-semibold opacity-90 text-error/80 uppercase tracking-wider hover:underline hover:opacity-100"
+                  className="block mt-3 text-xs lg:text-sm font-semibold opacity-90 text-error/80 uppercase tracking-wider hover:underline hover:opacity-100"
                 >
                   {c.source}
                 </a>

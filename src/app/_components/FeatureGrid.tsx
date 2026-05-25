@@ -67,23 +67,23 @@ export function FeatureGrid() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="bg-surface-container-lowest p-5 md:p-5 lg:p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+              className="bg-surface-container-lowest p-5 lg:p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-primary-fixed rounded-lg flex items-center justify-center mb-4 md:mb-4 lg:mb-6">
-                <span className="material-symbols-outlined text-on-primary-fixed-variant text-xl md:text-xl lg:text-2xl">
+              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-primary-fixed rounded-lg flex items-center justify-center mb-4 lg:mb-6">
+                <span className="material-symbols-outlined text-on-primary-fixed-variant text-xl lg:text-2xl">
                   {f.icon}
                 </span>
               </div>
-              <h3 className="text-base md:text-base lg:text-lg font-semibold text-on-background mb-3">
+              <h3 className="text-base lg:text-lg font-semibold text-on-background mb-3">
                 {f.title}
               </h3>
-              <p className="text-sm md:text-sm lg:text-base text-on-surface-variant leading-relaxed">
+              <p className="text-sm lg:text-base text-on-surface-variant leading-relaxed">
                 {f.body}
                 <a
                   href={f.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-3 text-xs md:text-xs lg:text-sm font-semibold opacity-90 text-primary uppercase tracking-wider hover:underline hover:opacity-100"
+                  className="block mt-3 text-xs lg:text-sm font-semibold opacity-90 text-primary uppercase tracking-wider hover:underline hover:opacity-100"
                 >
                   {f.source}
                 </a>
