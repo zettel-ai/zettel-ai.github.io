@@ -23,16 +23,13 @@ export function Hero() {
               <span className="text-primary font-bold">
                 Your Operations Assistant.
               </span>
-              <br />
-              Keep containers{" "}
-              <span className="text-primary font-bold">moving</span> without
-              digging
-              <br />
-              through emails, messages, and PDFs.
             </h1>
             <div className="mb-6 mx-auto lg:mx-0 border border-primary/30 bg-white/95 px-5 py-4 text-left shadow-sm">
               <p className="text-lg leading-relaxed text-on-surface-variant text-pretty">
-                Zettel is an AI operations assistant that turns scattered
+                Keep containers{" "}
+                <span className="text-primary font-bold">moving</span>{" "}
+                without digging through emails, messages, and PDFs. Zettel is an
+                AI operations assistant that turns scattered
                 shipping documents (BOLs, DOs, invoices, arrival notices) into
                 container-level answers, actions, and stakeholder updates. Ask
                 anything, or let it chase what&apos;s missing.{" "}
