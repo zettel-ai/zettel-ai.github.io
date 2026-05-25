@@ -15,6 +15,8 @@ type BlogPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getAllPostSlugs();
 }

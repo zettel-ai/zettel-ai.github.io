@@ -33,6 +33,15 @@ export default function BlogIndexPage() {
         </section>
 
         <section className="mx-auto max-w-7xl px-6 py-14">
+          {posts.length === 0 && (
+            <div className="max-w-2xl border-l-4 border-primary bg-surface-container-low px-6 py-5">
+              <h2 className="text-xl font-semibold tracking-tight text-on-background">No posts published yet</h2>
+              <p className="mt-2 text-base leading-7 text-on-surface-variant">
+                Blog posts are being prepared and will be published here as soon as they are ready.
+              </p>
+            </div>
+          )}
+
           {featured && (
             <div className="mb-12">
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary">Featured</p>
