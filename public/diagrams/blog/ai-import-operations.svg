@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="0.7.1" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1117 526"><svg class="d2-3202485804 d2-svg" width="1117" height="526" viewBox="-89 -89 1117 526"><rect x="-89.000000" y="-89.000000" width="1117.000000" height="526.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+.d2-3202485804 .text-bold {
+	font-family: "d2-3202485804-font-bold";
+}
+@font-face {
+	font-family: d2-3202485804-font-bold;
+	src: url("data:application/font-woff;base64,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");
+}]]></style><style type="text/css"><![CDATA[.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-3202485804 .fill-N1{fill:#0A0F25;}
+		.d2-3202485804 .fill-N2{fill:#676C7E;}
+		.d2-3202485804 .fill-N3{fill:#9499AB;}
+		.d2-3202485804 .fill-N4{fill:#CFD2DD;}
+		.d2-3202485804 .fill-N5{fill:#DEE1EB;}
+		.d2-3202485804 .fill-N6{fill:#EEF1F8;}
+		.d2-3202485804 .fill-N7{fill:#FFFFFF;}
+		.d2-3202485804 .fill-B1{fill:#0D32B2;}
+		.d2-3202485804 .fill-B2{fill:#0D32B2;}
+		.d2-3202485804 .fill-B3{fill:#E3E9FD;}
+		.d2-3202485804 .fill-B4{fill:#E3E9FD;}
+		.d2-3202485804 .fill-B5{fill:#EDF0FD;}
+		.d2-3202485804 .fill-B6{fill:#F7F8FE;}
+		.d2-3202485804 .fill-AA2{fill:#4A6FF3;}
+		.d2-3202485804 .fill-AA4{fill:#EDF0FD;}
+		.d2-3202485804 .fill-AA5{fill:#F7F8FE;}
+		.d2-3202485804 .fill-AB4{fill:#EDF0FD;}
+		.d2-3202485804 .fill-AB5{fill:#F7F8FE;}
+		.d2-3202485804 .stroke-N1{stroke:#0A0F25;}
+		.d2-3202485804 .stroke-N2{stroke:#676C7E;}
+		.d2-3202485804 .stroke-N3{stroke:#9499AB;}
+		.d2-3202485804 .stroke-N4{stroke:#CFD2DD;}
+		.d2-3202485804 .stroke-N5{stroke:#DEE1EB;}
+		.d2-3202485804 .stroke-N6{stroke:#EEF1F8;}
+		.d2-3202485804 .stroke-N7{stroke:#FFFFFF;}
+		.d2-3202485804 .stroke-B1{stroke:#0D32B2;}
+		.d2-3202485804 .stroke-B2{stroke:#0D32B2;}
+		.d2-3202485804 .stroke-B3{stroke:#E3E9FD;}
+		.d2-3202485804 .stroke-B4{stroke:#E3E9FD;}
+		.d2-3202485804 .stroke-B5{stroke:#EDF0FD;}
+		.d2-3202485804 .stroke-B6{stroke:#F7F8FE;}
+		.d2-3202485804 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-3202485804 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-3202485804 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-3202485804 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-3202485804 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-3202485804 .background-color-N1{background-color:#0A0F25;}
+		.d2-3202485804 .background-color-N2{background-color:#676C7E;}
+		.d2-3202485804 .background-color-N3{background-color:#9499AB;}
+		.d2-3202485804 .background-color-N4{background-color:#CFD2DD;}
+		.d2-3202485804 .background-color-N5{background-color:#DEE1EB;}
+		.d2-3202485804 .background-color-N6{background-color:#EEF1F8;}
+		.d2-3202485804 .background-color-N7{background-color:#FFFFFF;}
+		.d2-3202485804 .background-color-B1{background-color:#0D32B2;}
+		.d2-3202485804 .background-color-B2{background-color:#0D32B2;}
+		.d2-3202485804 .background-color-B3{background-color:#E3E9FD;}
+		.d2-3202485804 .background-color-B4{background-color:#E3E9FD;}
+		.d2-3202485804 .background-color-B5{background-color:#EDF0FD;}
+		.d2-3202485804 .background-color-B6{background-color:#F7F8FE;}
+		.d2-3202485804 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-3202485804 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-3202485804 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-3202485804 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-3202485804 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-3202485804 .color-N1{color:#0A0F25;}
+		.d2-3202485804 .color-N2{color:#676C7E;}
+		.d2-3202485804 .color-N3{color:#9499AB;}
+		.d2-3202485804 .color-N4{color:#CFD2DD;}
+		.d2-3202485804 .color-N5{color:#DEE1EB;}
+		.d2-3202485804 .color-N6{color:#EEF1F8;}
+		.d2-3202485804 .color-N7{color:#FFFFFF;}
+		.d2-3202485804 .color-B1{color:#0D32B2;}
+		.d2-3202485804 .color-B2{color:#0D32B2;}
+		.d2-3202485804 .color-B3{color:#E3E9FD;}
+		.d2-3202485804 .color-B4{color:#E3E9FD;}
+		.d2-3202485804 .color-B5{color:#EDF0FD;}
+		.d2-3202485804 .color-B6{color:#F7F8FE;}
+		.d2-3202485804 .color-AA2{color:#4A6FF3;}
+		.d2-3202485804 .color-AA4{color:#EDF0FD;}
+		.d2-3202485804 .color-AA5{color:#F7F8FE;}
+		.d2-3202485804 .color-AB4{color:#EDF0FD;}
+		.d2-3202485804 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3202485804);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3202485804);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3202485804);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3202485804);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3202485804);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3202485804);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3202485804);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3202485804);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="Y3VzdG9tcw== source"><g class="shape" ><rect x="12.000000" y="12.000000" width="248.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#FFFFFF" style="stroke-width:1;" /></g><text x="136.000000" y="50.500000" fill="#3F4A3E" class="text-bold" style="text-anchor:middle;font-size:16px">Customs and broker updates</text></g><g class="Y2Fycmllcg== source"><g class="shape" ><rect x="84.000000" y="98.000000" width="176.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#FFFFFF" style="stroke-width:1;" /></g><text x="172.000000" y="136.500000" fill="#3F4A3E" class="text-bold" style="text-anchor:middle;font-size:16px">Carrier milestones</text></g><g class="dGVybWluYWw= source"><g class="shape" ><rect x="40.000000" y="184.000000" width="220.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#FFFFFF" style="stroke-width:1;" /></g><text x="150.000000" y="222.500000" fill="#3F4A3E" class="text-bold" style="text-anchor:middle;font-size:16px">Terminal and port status</text></g><g class="ZG9jcw== source"><g class="shape" ><rect x="84.000000" y="270.000000" width="176.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#FFFFFF" style="stroke-width:1;" /></g><text x="172.000000" y="308.500000" fill="#3F4A3E" class="text-bold" style="text-anchor:middle;font-size:16px">Import documents</text></g><g class="emV0dGVs zettel"><g class="shape" ><rect x="390.000000" y="94.000000" width="219.000000" height="160.000000" rx="10.000000" stroke="#00531E" fill="#006527" style="stroke-width:2;" /></g><text x="499.500000" y="179.500000" fill="#FFFFFF" class="text-bold" style="text-anchor:middle;font-size:16px">Zettel import operations</text></g><g class="Y2xlYXJlZA== outcome"><g class="shape" ><rect x="689.000000" y="55.000000" width="238.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#F5F3F3" style="stroke-width:1;" /></g><text x="808.000000" y="93.500000" fill="#1B1C1C" class="text-bold" style="text-anchor:middle;font-size:16px">Customs and release status</text></g><g class="cmVhZHk= outcome"><g class="shape" ><rect x="689.000000" y="141.000000" width="227.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#F5F3F3" style="stroke-width:1;" /></g><text x="802.500000" y="179.500000" fill="#1B1C1C" class="text-bold" style="text-anchor:middle;font-size:16px">Containers ready to move</text></g><g class="cmlzaw== outcome"><g class="shape" ><rect x="689.000000" y="227.000000" width="219.000000" height="66.000000" rx="8.000000" stroke="#BECABB" fill="#F5F3F3" style="stroke-width:1;" /></g><text x="798.500000" y="265.500000" fill="#1B1C1C" class="text-bold" style="text-anchor:middle;font-size:16px">Demurrage and hold risk</text></g><g class="KGN1c3RvbXMgLSZndDsgemV0dGVsKVswXQ=="><marker id="mk-d2-3202485804-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 261.500000 45.000000 L 340.000000 45.000000 S 350.000000 45.000000 350.000000 55.000000 L 350.000000 116.000000 S 350.000000 126.000000 360.000000 126.000000 L 386.000000 126.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><g class="KGNhcnJpZXIgLSZndDsgemV0dGVsKVswXQ=="><path d="M 261.500000 131.000000 L 290.000000 131.000000 S 300.000000 131.000000 300.000000 141.000000 L 300.000000 148.000000 S 300.000000 158.000000 310.000000 158.000000 L 386.000000 158.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><g class="KHRlcm1pbmFsIC0mZ3Q7IHpldHRlbClbMF0="><path d="M 261.500000 217.000000 L 290.000000 217.000000 S 300.000000 217.000000 300.000000 207.000000 L 300.000000 200.000000 S 300.000000 190.000000 310.000000 190.000000 L 386.000000 190.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><g class="KGRvY3MgLSZndDsgemV0dGVsKVswXQ=="><path d="M 261.500000 303.000000 L 340.000000 303.000000 S 350.000000 303.000000 350.000000 293.000000 L 350.000000 232.000000 S 350.000000 222.000000 360.000000 222.000000 L 386.000000 222.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><g class="KHpldHRlbCAtJmd0OyBjbGVhcmVkKVswXQ=="><path d="M 611.000000 134.000000 L 639.000000 134.000000 S 649.000000 134.000000 649.000000 124.000000 L 649.000000 98.000000 S 649.000000 88.000000 659.000000 88.000000 L 685.500000 88.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><g class="KHpldHRlbCAtJmd0OyByZWFkeSlbMF0="><path d="M 611.000000 174.000000 L 685.500000 174.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><g class="KHpldHRlbCAtJmd0OyByaXNrKVswXQ=="><path d="M 611.000000 214.000000 L 639.000000 214.000000 S 649.000000 214.000000 649.000000 224.000000 L 649.000000 250.000000 S 649.000000 260.000000 659.000000 260.000000 L 685.500000 260.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3202485804-3488378134)" mask="url(#d2-3202485804)" /></g><mask id="d2-3202485804" maskUnits="userSpaceOnUse" x="-89" y="-89" width="1117" height="526">
+<rect x="-89" y="-89" width="1117" height="526" fill="white"></rect>
+
+</mask></svg></svg>
