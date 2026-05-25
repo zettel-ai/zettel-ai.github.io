@@ -68,7 +68,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="border-t border-outline-variant bg-background py-20">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-4xl px-6">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Contact</p>
           <h2 className="mt-4 text-4xl font-semibold leading-tight tracking-tight text-on-background md:text-5xl">
@@ -80,22 +80,29 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-14 space-y-16">
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-on-surface-variant">
+            <h3 className="text-2xl font-semibold tracking-tight text-on-background">
               Book a 30-minute call
             </h3>
+            <p className="mt-2 text-base leading-7 text-on-surface-variant">
+              Pick a time that works for you and we will walk through your workflow live.
+            </p>
             <div
               ref={calendlyRef}
-              className="overflow-hidden border border-outline-variant"
+              className="mt-6 overflow-hidden border border-outline-variant"
               style={{ minWidth: 320, height: 700 }}
             />
           </div>
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-on-surface-variant">
+
+          <div className="border-t border-outline-variant pt-16">
+            <h3 className="text-2xl font-semibold tracking-tight text-on-background">
               Join the early-access list
             </h3>
-            <div className="border border-outline-variant p-2">
+            <p className="mt-2 text-base leading-7 text-on-surface-variant">
+              Not ready to talk yet? Leave your details and we will keep you posted.
+            </p>
+            <div className="mt-6 border border-outline-variant p-2">
               {mounted && (
                 <iframe
                   data-tally-src={TALLY_EMBED_SRC}
@@ -108,18 +115,30 @@ export function Contact() {
               )}
             </div>
           </div>
-        </div>
 
-        <p className="mt-12 text-base leading-7 text-on-surface-variant">
-          Prefer email? Reach us at{" "}
-          <a
-            className="font-medium text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
-            href="mailto:zettel.ops@gmail.com"
-          >
-            zettel.ops@gmail.com
-          </a>
-          .
-        </p>
+          <div className="border-t border-outline-variant pt-16">
+            <h3 className="text-2xl font-semibold tracking-tight text-on-background">
+              Prefer email?
+            </h3>
+            <p className="mt-2 text-base leading-7 text-on-surface-variant">
+              Send us a note directly and we will get back to you within a business day.
+            </p>
+            <div className="mt-6 flex flex-col items-center border border-outline-variant bg-surface-container-lowest px-6 py-10 text-center">
+              <span className="material-symbols-outlined text-[40px] text-primary" aria-hidden="true">
+                mail
+              </span>
+              <p className="mt-3 text-sm font-medium uppercase tracking-[0.08em] text-on-surface-variant">
+                Email us at
+              </p>
+              <a
+                className="mt-2 text-2xl font-semibold tracking-tight text-primary hover:underline md:text-3xl"
+                href="mailto:zettel.ops@gmail.com"
+              >
+                zettel.ops@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
