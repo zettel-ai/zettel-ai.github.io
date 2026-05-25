@@ -10,7 +10,7 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Zettel Ops: Logistics intelligence for the enterprise",
+  title: "Zettel Ops: Logistics Intelligence for Enterprise",
   description:
     "Zettel is an AI operations assistant that turns scattered shipping documents into container-level answers, actionable insights, and stakeholder updates.",
 };
