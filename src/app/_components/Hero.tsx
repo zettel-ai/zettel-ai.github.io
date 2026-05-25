@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { RequestPilotButton } from "./RequestPilotButton";
+
 export function Hero() {
   return (
     <section className="relative pt-10 pb-6 overflow-hidden bg-surface-container-lowest">
@@ -34,11 +36,7 @@ export function Hero() {
               inbox.
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <a
-                href="#early-access"
-                aria-label="Request a Pilot — schedule a time to talk with us"
-                className="group relative inline-flex items-center justify-center h-12 px-8 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors"
-              >
+              <RequestPilotButton className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors">
                 Request a Pilot
                 <span className="material-symbols-outlined ml-2 text-[20px] group-hover:translate-x-1 transition-transform">
                   arrow_forward
@@ -46,7 +44,7 @@ export function Hero() {
                 <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
                   Schedule a time to talk with us
                 </span>
-              </a>
+              </RequestPilotButton>
               <a
                 href="#early-access"
                 aria-label="Join Early Access — join the list to hear updates as the product becomes more publicly available"
