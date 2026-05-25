@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { RequestPilotButton } from "./RequestPilotButton";
+import { Tooltip } from "./Tooltip";
 
 export function TopNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,9 +56,7 @@ export function TopNav() {
           </Link>
           <RequestPilotButton className="group relative inline-flex cursor-pointer items-center justify-center h-10 px-6 text-sm font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors active:scale-95 duration-150">
             Request a Pilot
-            <span className="pointer-events-none absolute right-0 top-full mt-2 hidden rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
-              Schedule a time to talk with us
-            </span>
+            <Tooltip text="Schedule a time to talk with us" placement="bottom-right" />
           </RequestPilotButton>
         </div>
         <button

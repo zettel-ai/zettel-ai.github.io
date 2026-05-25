@@ -58,7 +58,7 @@ export function Problem() {
                   href={c.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-3 text-xs lg:text-sm font-semibold opacity-90 text-error/80 uppercase tracking-wider hover:underline hover:opacity-100"
+                  className="block mt-3 text-xs lg:text-sm font-semibold text-error uppercase tracking-wider hover:underline"
                 >
                   {c.source}
                 </a>

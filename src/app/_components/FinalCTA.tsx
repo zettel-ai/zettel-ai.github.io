@@ -1,11 +1,9 @@
 import { RequestPilotButton } from "./RequestPilotButton";
+import { Tooltip } from "./Tooltip";
 
 export function FinalCTA() {
   return (
-    <section
-      id="early-access"
-      className="py-24 bg-surface-container-lowest border-b border-outline-variant"
-    >
+    <section className="py-24 bg-surface-container-lowest border-b border-outline-variant">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl font-light text-on-background mb-6">
           Ready to put Zettel to work?
@@ -20,9 +18,7 @@ export function FinalCTA() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
           <RequestPilotButton className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors">
             Request a Pilot
-            <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
-              Schedule a time to talk with us
-            </span>
+            <Tooltip text="Schedule a time to talk with us" />
           </RequestPilotButton>
           <button
             type="button"
@@ -35,9 +31,7 @@ export function FinalCTA() {
             className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
           >
             Join Early Access
-            <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
-              Hear updates as the product becomes more publicly available
-            </span>
+            <Tooltip text="Hear updates as the product becomes more publicly available" />
           </button>
         </div>
       </div>

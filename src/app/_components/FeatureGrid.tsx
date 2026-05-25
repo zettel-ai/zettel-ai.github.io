@@ -83,7 +83,7 @@ export function FeatureGrid() {
                   href={f.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mt-3 text-xs lg:text-sm font-semibold opacity-90 text-primary uppercase tracking-wider hover:underline hover:opacity-100"
+                  className="block mt-3 text-xs lg:text-sm font-semibold text-primary uppercase tracking-wider hover:underline"
                 >
                   {f.source}
                 </a>

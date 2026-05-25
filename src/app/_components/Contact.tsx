@@ -3,6 +3,7 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 
 import { CALENDLY_URL } from "./RequestPilotButton";
+import { loadCalendly, loadTally } from "./widgetLoaders";
 
 const TALLY_EMBED_SRC =
   "https://tally.so/embed/NpRbO0?alignLeft=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1";
@@ -30,6 +31,10 @@ export function Contact() {
   useEffect(() => {
     if (!mounted) return;
     let cancelled = false;
+
+    // This page hosts both embeds, so make sure their scripts are requested.
+    loadCalendly();
+    loadTally();
 
     function initCalendly() {
       if (cancelled) return;

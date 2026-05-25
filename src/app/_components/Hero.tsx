@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { RequestPilotButton } from "./RequestPilotButton";
+import { Tooltip } from "./Tooltip";
 
 export function Hero() {
   return (
@@ -63,9 +64,7 @@ export function Hero() {
                 <span className="material-symbols-outlined ml-2 text-[20px] group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
-                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
-                  Schedule a time to talk with us
-                </span>
+                <Tooltip text="Schedule a time to talk with us" />
               </RequestPilotButton>
               <button
                 type="button"
@@ -78,9 +77,7 @@ export function Hero() {
                 className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
               >
                 Join Early Access
-                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
-                  Hear updates as the product becomes more publicly available
-                </span>
+                <Tooltip text="Hear updates as the product becomes more publicly available" />
               </button>
             </div>
           </div>
