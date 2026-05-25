@@ -1,3 +1,4 @@
+import { JoinEarlyAccessButton } from "./JoinEarlyAccessButton";
 import { RequestPilotButton } from "./RequestPilotButton";
 import { Tooltip } from "./Tooltip";
 
@@ -20,19 +21,13 @@ export function FinalCTA() {
             Request a Pilot
             <Tooltip text="Schedule a time to talk with us" />
           </RequestPilotButton>
-          <button
-            type="button"
-            data-tally-open="NpRbO0"
-            data-tally-layout="modal"
-            data-tally-emoji-animation="none"
-            data-tally-auto-close="1000"
-            data-tally-form-events-forwarding="1"
-            aria-label="Join Early Access — join the list to hear updates as the product becomes more publicly available"
+          <JoinEarlyAccessButton
+            ariaLabel="Join Early Access — join the list to hear updates as the product becomes more publicly available"
             className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
           >
             Join Early Access
             <Tooltip text="Hear updates as the product becomes more publicly available" />
-          </button>
+          </JoinEarlyAccessButton>
         </div>
       </div>
     </section>

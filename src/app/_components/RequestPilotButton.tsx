@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { loadCalendly } from "./widgetLoaders";
+import { loadCalendly, prewarmCalendly } from "./widgetLoaders";
 
 export const CALENDLY_URL =
   "https://calendly.com/zettel-ops/30min?background_color=fbf9f8&text_color=1b1c1c&primary_color=006527";
@@ -22,6 +22,9 @@ export function RequestPilotButton({ className, children }: RequestPilotButtonPr
       type="button"
       aria-label="Request a Pilot — schedule a time to talk with us"
       className={className}
+      onPointerEnter={() => prewarmCalendly(CALENDLY_URL)}
+      onFocus={() => prewarmCalendly(CALENDLY_URL)}
+      onPointerDown={() => prewarmCalendly(CALENDLY_URL)}
       onClick={() => {
         loadCalendly();
         // widget.js loads lazily; poll briefly until the popup API is ready.

@@ -41,6 +41,11 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
+        {/* Warm connections to the booking/early-access widget origins so their
+            popup iframes load near-instantly when a CTA is clicked. */}
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="preconnect" href="https://calendly.com" />
+        <link rel="preconnect" href="https://tally.so" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-background">
         {children}

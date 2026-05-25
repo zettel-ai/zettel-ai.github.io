@@ -4,6 +4,28 @@
 
 let calendlyRequested = false;
 let tallyRequested = false;
+const prefetched = new Set<string>();
+
+// Warm the document cache for a popup's iframe URL so it renders fast on open.
+function prefetchDocument(url: string) {
+  if (typeof document === "undefined" || prefetched.has(url)) return;
+  prefetched.add(url);
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.href = url;
+  document.head.appendChild(link);
+}
+
+// Call on hover/focus/pointer-down (before the click) so the script is ready
+// and the popup content is warm by the time the user actually clicks.
+export function prewarmCalendly(popupUrl: string) {
+  loadCalendly();
+  prefetchDocument(popupUrl);
+}
+
+export function prewarmTally() {
+  loadTally();
+}
 
 export function loadCalendly() {
   if (calendlyRequested || typeof document === "undefined") return;

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 import { CALENDLY_URL } from "./RequestPilotButton";
-import { loadCalendly, loadTally } from "./widgetLoaders";
+import { loadCalendly } from "./widgetLoaders";
 
 type CalendlyWindow = Window & {
   Calendly?: { initBadgeWidget: (options: Record<string, unknown>) => void };
@@ -16,8 +16,6 @@ export function CalendlyBadge() {
     // Calendly powers this always-visible badge and the Request-a-Pilot
     // buttons site-wide, so load it as soon as we hydrate.
     loadCalendly();
-    // Tally only backs the early-access modal/form; defer it past first paint.
-    const tallyTimer = window.setTimeout(loadTally, 1500);
 
     function init() {
       if (cancelled) return;
@@ -42,7 +40,6 @@ export function CalendlyBadge() {
     init();
     return () => {
       cancelled = true;
-      window.clearTimeout(tallyTimer);
     };
   }, []);
 
