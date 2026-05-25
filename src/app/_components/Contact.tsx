@@ -91,7 +91,7 @@ export function Contact() {
             <div
               ref={calendlyRef}
               className="mt-6 overflow-hidden border border-outline-variant"
-              style={{ minWidth: 320, height: 700 }}
+              style={{ minWidth: 320, height: 1000 }}
             />
           </div>
 
