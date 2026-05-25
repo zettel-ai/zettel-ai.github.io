@@ -31,6 +31,7 @@ export default function RootLayout({
         />
         <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
         <script src="https://assets.calendly.com/assets/external/widget.js" async />
+        <script src="https://tally.so/widgets/embed.js" async />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-background">
         {children}

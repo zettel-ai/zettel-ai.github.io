@@ -45,16 +45,21 @@ export function Hero() {
                   Schedule a time to talk with us
                 </span>
               </RequestPilotButton>
-              <a
-                href="#early-access"
+              <button
+                type="button"
+                data-tally-open="NpRbO0"
+                data-tally-layout="modal"
+                data-tally-emoji-animation="none"
+                data-tally-auto-close="1000"
+                data-tally-form-events-forwarding="1"
                 aria-label="Join Early Access — join the list to hear updates as the product becomes more publicly available"
-                className="group relative inline-flex items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
+                className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
               >
                 Join Early Access
                 <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
                   Hear updates as the product becomes more publicly available
                 </span>
-              </a>
+              </button>
             </div>
           </div>
           <div className="relative w-full max-w-[563px] mx-auto lg:mx-0 lg:ml-auto">
