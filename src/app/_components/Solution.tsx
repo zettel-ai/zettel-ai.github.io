@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Solution() {
   return (
-    <section className="py-24 bg-surface-container-lowest border-b border-outline-variant">
+    <section className="pt-16 pb-8 md:py-24 bg-surface-container-lowest border-b border-outline-variant">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-light text-on-background mb-4">
