@@ -6,6 +6,7 @@ import matter from "gray-matter";
 const root = process.cwd();
 const contentDir = path.join(root, "src/content/blog");
 const publicDir = path.join(root, "public");
+const minInlineImageBytes = 80_000;
 const requiredFields = [
   "title",
   "slug",
@@ -32,14 +33,26 @@ function fail(message) {
   process.exitCode = 1;
 }
 
-function publicPathExists(src) {
-  if (typeof src !== "string" || !src.startsWith("/")) return false;
+function publicFilePath(src) {
+  if (typeof src !== "string" || !src.startsWith("/")) return null;
 
   const candidate = path.resolve(publicDir, `.${src}`);
   const relative = path.relative(publicDir, candidate);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) return false;
+  if (relative.startsWith("..") || path.isAbsolute(relative)) return null;
 
-  return fs.existsSync(candidate);
+  return candidate;
+}
+
+function publicPathExists(src) {
+  const filePath = publicFilePath(src);
+  return filePath !== null && fs.existsSync(filePath);
+}
+
+function imageHasEnoughVisualData(src) {
+  const filePath = publicFilePath(src);
+  if (filePath === null || !fs.existsSync(filePath)) return false;
+
+  return fs.statSync(filePath).size >= minInlineImageBytes;
 }
 
 function hasText(value) {
@@ -89,6 +102,9 @@ if (!fs.existsSync(contentDir)) {
     const inlineImages = Array.isArray(data.inlineImages) ? data.inlineImages : [];
     for (const image of inlineImages) {
       if (!publicPathExists(image.src)) fail(`${label} inline image is missing: ${image.src}`);
+      if (publicPathExists(image.src) && !imageHasEnoughVisualData(image.src)) {
+        fail(`${label} inline image looks like a placeholder or low-information asset: ${image.src}`);
+      }
       if (!hasText(image.sourceUrl) || !hasText(image.license)) {
         fail(`${label} inline image missing sourceUrl or license`);
       }

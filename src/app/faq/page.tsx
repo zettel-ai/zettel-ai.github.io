@@ -41,11 +41,6 @@ const faqs = [
       "Zettel can extract fields such as container ID, shipment reference, carrier, customer, terminal, arrival dates, Last Free Day, invoice details, delivery status, appointment details, counterparties, and other key operational data.",
   },
   {
-    question: "What is the container-level context graph?",
-    answer:
-      "The container-level context graph is the connected data layer Zettel builds from your documents and shipment events. It links containers, documents, bookings, parties, dates, exceptions, appointments, and payment signals so teams can ask operational questions and get grounded answers.",
-  },
-  {
     question: "Can I ask Zettel Ops questions about my shipments?",
     answer:
       'Yes. You can ask questions like "Which shipments are blocked and why?", "What documents are missing?", "Which containers are at risk today?", "When is the Last Free Day?", or "Who do we need to contact?" Zettel answers using the underlying documents and shipment graph.',

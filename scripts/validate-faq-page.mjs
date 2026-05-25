@@ -15,7 +15,7 @@ assert(existsSync(faqPagePath), "FAQ page must exist at /faq.");
 const faqPage = readFileSync(faqPagePath, "utf8");
 const questionCount = (faqPage.match(/question:/g) || []).length;
 
-assert(questionCount === 20, `FAQ page should define 20 questions, found ${questionCount}.`);
+assert(questionCount === 19, `FAQ page should define 19 questions, found ${questionCount}.`);
 assert(faqPage.includes('"@type": "FAQPage"'), "FAQ page must include FAQPage JSON-LD.");
 assert(
   faqPage.includes("JSON.stringify(faqJsonLd).replace(/</g,"),

@@ -19,12 +19,12 @@ heroImage:
   license: Public domain
 inlineImages:
   - src: /images/blog/document-ownership-freight/inline-1.jpg
-    alt: Logistics professionals reviewing paperwork together
+    alt: Logistics professional reviewing paperwork at a desk
     caption: A shared record clarifies who owns each document and each handoff.
-    credit: DAKONTE
+    credit: Sue Brink / NAVFAC
     sourceUrl: >-
-      https://commons.wikimedia.org/wiki/File:Generic_magnetic_job_ticket_holder%2Bclear_heat_welded_edges.jpg
-    license: CC0
+      https://commons.wikimedia.org/wiki/File:Reviewing_documents_(8656437132).jpg
+    license: CC BY 2.0
 diagram:
   src: /diagrams/blog/document-ownership-freight.svg
   alt: >-
