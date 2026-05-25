@@ -99,6 +99,8 @@ Long email threads can hide the real issue. AI can help summarize open questions
 
 This gives operators operational context without making them read every thread from the beginning.
 
+{{diagram}}
+
 ### Missing document detection
 Missing document detection helps teams see what is not ready. For example, the connected shipment record may show an arrival notice and commercial invoice, but no delivery order or appointment confirmation.
 
@@ -182,6 +184,8 @@ Common blockers include:
 * Unclear terminal or pickup location
 
 When these blockers are visible, teams can act earlier.
+
+{{image:0}}
 
 ---
 

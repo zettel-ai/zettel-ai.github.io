@@ -151,6 +151,23 @@ if (!fs.existsSync(contentDir)) {
     if (articleBody.trim().length < 1500) {
       fail(`${label} content is unexpectedly short`);
     }
+
+    const imageMarkers = Array.from(articleBody.matchAll(/\{\{image:(\d+)\}\}/g), (match) => Number(match[1]));
+    for (const markerIndex of imageMarkers) {
+      if (!inlineImages[markerIndex]) {
+        fail(`${label} has image marker without inline image metadata: ${markerIndex}`);
+      }
+    }
+    if (inlineImages.length > 0) {
+      for (let i = 0; i < inlineImages.length; i += 1) {
+        if (!imageMarkers.includes(i)) {
+          fail(`${label} inline image ${i} is not placed with an image marker`);
+        }
+      }
+    }
+    if (!articleBody.includes("{{diagram}}")) {
+      fail(`${label} missing diagram marker`);
+    }
   }
 }
 

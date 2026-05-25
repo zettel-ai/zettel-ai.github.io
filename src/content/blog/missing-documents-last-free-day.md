@@ -93,6 +93,8 @@ That’s where **shipment document intelligence** becomes useful. The goal is no
 
 ---
 
+{{diagram}}
+
 ## The Four Document Gaps That Most Often Raise LFD Risk
 ### 1. Missing Delivery Order
 A delivery order is one of the most important release documents in import operations. Without it, the drayage provider may not have the authorization or release details needed to pick up the container. Even when the container is discharged and visible at the terminal, the pickup may still be blocked.
@@ -150,6 +152,8 @@ Is customs release confirmed?
 Is the arrival notice linked to the right container?
 Is the appointment confirmation attached?
 Is the shipment file searchable by container, shipment, reference number, carrier, and consignee?
+
+{{image:0}}
 
 An **AI document hub** supports document readiness by bringing scattered PDFs, emails, attachments, and notes into a **searchable shipment file**. With **missing document detection**, teams can see what is absent before the LFD becomes urgent.
 

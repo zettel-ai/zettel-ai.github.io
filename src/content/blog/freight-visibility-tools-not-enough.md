@@ -97,6 +97,8 @@ Trade documentation is still a heavy operational burden. McKinsey notes that doc
 
 That matters because freight teams still work across messy document sources:
 
+{{diagram}}
+
 | Source | Common Problem |
 | --------------- | ----------------------------- |
 | Email inboxes | Files get buried in threads |
@@ -166,6 +168,8 @@ Visibility alone may show that a shipment has not moved. Operational context exp
 An AI document hub helps logistics teams manage the document side of freight exceptions.
 
 It can support:
+
+{{image:0}}
 
 * Document intake from email, PDFs, and uploads
 * Document classification by type

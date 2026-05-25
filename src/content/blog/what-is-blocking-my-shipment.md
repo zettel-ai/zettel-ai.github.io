@@ -122,6 +122,8 @@ The issue is not only that a file is missing. The harder issue is that the file 
 
 Many teams still manage import documents through email inboxes, shared drives, forwarded PDFs, and portal screenshots. This is a common problem: operations depend on BOLs, DOs, invoices, arrival notices, and vendor paperwork, but those files are often scattered across inboxes, shared drives, and forwarded email chains, leading to missed LFDs, delayed pickups, slow clearance, vendor disputes, reconciliation work, and AP timing problems.
 
+{{diagram}}
+
 ### Why Document-to-Container Matching Matters
 A **searchable shipment file** is only useful if the right documents are attached to the right operational unit. For import and drayage teams, that unit is often the container.
 
@@ -216,6 +218,8 @@ Common payment blockers include:
 * Incorrect invoice coding
 * Credit hold
 * Disputed charge not resolved
+
+{{image:0}}
 
 The FMC’s 2024 final rule on detention and demurrage billing practices shows how important billing clarity has become. The rule sets requirements around who can be billed, billing timeframes, and dispute processes, and it states that invoices can only be issued to specific parties rather than multiple parties at once. [4]
 

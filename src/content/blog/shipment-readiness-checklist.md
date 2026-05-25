@@ -116,6 +116,8 @@ This is where document-to-container matching becomes critical. If a delivery ord
 
 A container-level document view helps solve this. Instead of asking, “Where is the delivery order?” the team asks, “Show me every document tied to container ABCU1234567.” That shift turns document search into operational context.
 
+{{diagram}}
+
 ## Step 2: Build a Connected Shipment Record
 A connected shipment record is the single place where shipment documents, key fields, release status, appointment status, owner notes, and blockers live together.
 
@@ -205,6 +207,8 @@ Unknown status should be treated as a blocker until confirmed. That may sound st
 Customs status needs its own checkpoint because a shipment can look operationally ready while still being blocked for clearance.
 
 At a minimum, the checklist should capture:
+
+{{image:0}}
 
 * Broker assigned
 * Entry filed
@@ -322,6 +326,8 @@ Shipment document intelligence means the system helps answer questions like:
 * Is customs status clear?
 * What is blocking pickup?
 * Who owns the next action?
+
+{{image:1}}
 
 That kind of operational context helps teams move from reactive chasing to earlier action.
 

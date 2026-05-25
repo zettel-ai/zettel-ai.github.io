@@ -83,6 +83,8 @@ In a healthy workflow, document ownership includes six practical questions:
 
 This simple structure creates operational context. It shows not only that a file is missing, but why it matters. That is the difference between a checklist and shipment document intelligence.
 
+{{diagram}}
+
 ## The core fields every freight team should track
 The best document ownership systems are practical. They do not ask operators to fill out long forms while they are already fighting fires. Instead, they track the fields that help the team act.
 
@@ -135,6 +137,8 @@ Container xChange explains that demurrage charges relate to container use within
 Freight exception management works best when ownership is visible. A team does not need more alerts if no one knows who should act. It needs alerts tied to owners, shipment records, and next steps.
 
 A practical workflow might look like this:
+
+{{image:0}}
 
 1. The AI document hub receives an arrival notice by email.
 2. Shipment document intelligence extracts the container number, terminal, carrier, and dates.

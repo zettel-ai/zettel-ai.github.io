@@ -105,6 +105,8 @@ The Bill of Lading is one of the most important documents in ocean freight. It i
 
 In daily import operations, the Bill of Lading helps teams confirm:
 
+{{diagram}}
+
 * Shipper and consignee
 * Carrier
 * Vessel and voyage
@@ -176,6 +178,8 @@ If invoice information is missing or unclear, teams may face:
 * Vendor follow-up
 * Finance delays
 * Incorrect landed cost assumptions
+
+{{image:0}}
 
 A Commercial Invoice should be checked against the Packing List, Bill of Lading, and purchase order. If product quantities, descriptions, or values do not match, the team should know before the shipment reaches a critical milestone.
 

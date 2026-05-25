@@ -120,6 +120,8 @@ Customs clearance is another major pickup dependency. If a customs hold, exam, o
 
 Teams should confirm:
 
+{{diagram}}
+
 * Customs release
 * Exam status
 * Partner government agency holds, when applicable
@@ -198,6 +200,8 @@ Teams should confirm:
 * Finance has the right backup documents
 
 The FMC’s final rule on detention and demurrage billing practices requires certain billing information and aims to create a clearer connection between failure to pick up cargo or return equipment and the related fee. [4] The Federal Register version of the rule also states that demurrage and detention invoice information can be pulled from documents such as the bill of lading, tariffs, terminal schedules, or other transportation documents. [5]
+
+{{image:0}}
 
 That makes organized shipment documentation important not just for operations, but also for finance and exception review.
 

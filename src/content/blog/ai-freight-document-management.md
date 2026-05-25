@@ -141,6 +141,8 @@ For freight teams, this means the system can help process:
 
 The value is not just storage. A basic folder stores files. An AI document hub helps teams understand what those files mean in an operational workflow.
 
+{{diagram}}
+
 That is the difference between “we uploaded a PDF” and “this container is missing the delivery order needed for pickup readiness.”
 
 ---
@@ -248,6 +250,8 @@ A container-level document view helps teams see all documents tied to a specific
 This is powerful because it gives operators a practical control panel for daily work.
 
 A strong container-level document view may show:
+
+{{image:0}}
 
 | Item | Example |
 | ------------------------ | ---------------------- |
@@ -387,6 +391,8 @@ This is useful for import managers, drayage coordinators, documentation teams, c
 It also helps with handoffs. If one operator is out of office, another operator can open the connected shipment record and understand the operational context without reading through every email.
 
 ---
+
+{{image:1}}
 
 ##### Example: A Blocked Import Container
 Imagine an import container arrives at the terminal.

@@ -123,6 +123,8 @@ The first practical use case is document intake.
 
 Import teams receive documents from many sources:
 
+{{diagram}}
+
 * Email attachments
 * Google Drive folders
 * Shared inboxes
@@ -239,6 +241,8 @@ The goal is not to create a fancy database for its own sake. The goal is to give
 Operational context matters because freight delays rarely come from one event. A shipment may be delayed because a customs hold overlaps with a missing document, an appointment issue, and an unclear release status. Looking at any one item alone may not explain the problem.
 
 The Federal Maritime Commission’s 2020 interpretive rule emphasized that detention and demurrage practices should consider whether cargo interests can actually retrieve containers or return equipment, and it highlighted notice of cargo availability and clear policies as important themes. [4] That reinforces why freight teams need more than isolated status updates. They need context around whether action is actually possible.
+
+{{image:0}}
 
 ---
 
@@ -357,6 +361,8 @@ Example:
 This is a safe and practical AI workflow. It helps teams move faster without claiming that AI fully automates freight operations.
 
 ---
+
+{{image:1}}
 
 ## Where AI Helps Most in Import, Drayage, and Logistics Teams
 AI document operations can support several teams.

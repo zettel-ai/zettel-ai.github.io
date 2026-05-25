@@ -89,6 +89,8 @@ A good AI document hub helps by turning scattered documents into a connected shi
 
 This is not about promising that delays will disappear. The safer and more useful promise is that the system helps teams organize documents, identify missing information, understand blockers, and act earlier.
 
+{{diagram}}
+
 ### Missing document detection
 Missing document detection should answer a simple question: **What required file is not in the shipment record yet?**
 
@@ -166,6 +168,8 @@ A strong exception workflow does not just say, “appointment soon.” It says, 
 Not all shipments have equal customer impact. A delayed container for a high-volume customer, a retail promotion, a production line, or a time-sensitive consignee may need faster attention.
 
 Customer impact can include:
+
+{{image:0}}
 
 | Impact type | Example |
 | -------------------- | --------------------------------------------- |

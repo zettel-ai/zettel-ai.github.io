@@ -83,6 +83,8 @@ A container can arrive on time and still not be ready for pickup. ETA answers on
 
 Paperwork problems, late customs clearance, missed appointments, or port issues can turn a profitable move into a loss, and brokers and forwarders need timely communication to avoid surprise bills.
 
+{{diagram}}
+
 ## What Counts as a Missing Document?
 A missing document is not always “lost.” Sometimes it exists, but it is not attached to the right shipment. Sometimes it is in the wrong email thread. Sometimes it is missing a reference number. Sometimes it is uploaded, but no one has checked whether it matches the container, bill of lading, vendor, or invoice.
 
@@ -126,6 +128,8 @@ Not every document delay happens before pickup. Some happen after delivery, when
 This creates a quiet but costly workflow problem. Finance asks ops for help. Ops has to stop working active shipments and dig through old emails. Vendors wait for payment. Customers may ask why a cost is being passed through. If the invoice is paid without enough review, the team may lose control over cost accuracy. If it is held too long, vendor relationships may suffer.
 
 Scattered shipment documents can cause AP to pay too early or too late, and pay-ready signals can help finance know when documents and milestones are ready for review.
+
+{{image:0}}
 
 ## How Missing Documents Become Shipment Blockers
 Missing documents usually delay freight through a chain reaction:

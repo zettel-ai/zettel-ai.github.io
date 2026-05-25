@@ -6,7 +6,7 @@ description: >-
   how to assemble a complete packet before the truck arrives.
 date: '2026-04-26'
 topic: Pickup Readiness
-readTime: 14 min read
+readTime: 15 min read
 heroImage:
   src: /images/blog/documents-needed-for-container-pickup/hero.jpg
   alt: Container being lifted by a crane at a terminal
@@ -147,6 +147,8 @@ This is where document-to-container matching matters. If a logistics team receiv
 
 ---
 
+{{diagram}}
+
 ### 2. Arrival Notice
 The Arrival Notice tells the consignee or notify party that cargo has arrived or is expected to arrive soon.
 
@@ -252,6 +254,8 @@ There may be several types of release involved:
 Maersk’s Delivery Order request guidance shows that release status may depend on items such as Bills of Lading being surrendered and prepaid charges being paid. [8]
 
 This is a common reason containers look available but remain blocked. The container may be physically at the terminal, but one release signal is missing.
+
+{{image:0}}
 
 A strong document readiness process should answer:
 

@@ -87,6 +87,8 @@ For import teams, document readiness is the difference between “this shipment 
 
 When those documents are incomplete or hard to find, clearance can slow down. A missing invoice detail may trigger a broker question. A packing list mismatch may create a review issue. A wrong consignee name may create a handoff problem.
 
+{{diagram}}
+
 An AI document hub helps import teams by checking document readiness earlier. It can flag missing documents, incomplete fields, mismatched references, or documents that are linked to the wrong shipment. That gives coordinators time to ask vendors, suppliers, or brokers for fixes before the shipment reaches a costly point in the process.
 
 ## Drayage Teams Need Pickup Readiness
@@ -133,6 +135,8 @@ Appointment confirmations matter because drayage is time-sensitive. A container 
 Email threads are often where the real story lives. A PDF may show the official document, but the email explains the exception: “vendor is correcting invoice,” “broker needs revised packing list,” “terminal hold still active,” or “appointment moved to tomorrow.”
 
 That is why a searchable shipment file should include both documents and relevant email context. Teams should not have to hunt through ten forwarded chains to understand what happened.
+
+{{image:0}}
 
 ## Why Manual Document Tracking Fails
 Manual tracking fails because freight work changes too quickly. A spreadsheet may be accurate at 9:00 a.m. and stale by noon. A folder may hold the right file, but the file name may not include the container number. A document may be uploaded, but no one may know whether it matches the right shipment.

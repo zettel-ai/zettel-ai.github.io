@@ -84,6 +84,8 @@ Demurrage risk often starts before anyone sees a bill. A shipment blocker may be
 
 A strong import workflow should connect terminal status, document readiness, and pickup readiness. That means the team should know:
 
+{{diagram}}
+
 | Question | Why It Matters |
 | -------------------------------- | ---------------------------------- |
 | Is the container available? | Confirms whether pickup can happen |
@@ -138,6 +140,8 @@ LFD is a deadline. It does not explain whether the shipment is actually ready. A
 * chassis issue
 * unclear empty return location
 * mismatched container number on a document
+
+{{image:0}}
 
 That is why document readiness and pickup readiness should be managed together. A container-level document view helps the team see what is present, what is missing, and what action is needed next.
 

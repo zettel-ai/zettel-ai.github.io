@@ -54,6 +54,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
 
   const relatedPosts = getRelatedPosts(post.slug, post.topic);
   const contentWithoutSources = post.content.replace(/\n## Sources[\s\S]*$/m, "");
+  const parts = contentWithoutSources.split(/(\{\{image:\d+\}\}|\{\{diagram\}\})/g);
 
   return (
     <>
@@ -61,11 +62,20 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       <main className="flex-grow bg-background">
         <ArticleHero post={post} />
         <article className="mx-auto max-w-3xl px-6 py-12">
-          <BlogMarkdown content={contentWithoutSources} />
-          {post.inlineImages.map((image) => (
-            <ImageFigure key={image.src} image={image} />
-          ))}
-          <DiagramFigure diagram={post.diagram} />
+          {parts.map((part, index) => {
+            const imageMatch = part.match(/^\{\{image:(\d+)\}\}$/);
+
+            if (imageMatch) {
+              const image = post.inlineImages[Number(imageMatch[1])];
+              return image ? <ImageFigure key={`${part}-${index}`} image={image} /> : null;
+            }
+
+            if (part === "{{diagram}}") {
+              return <DiagramFigure key={`${part}-${index}`} diagram={post.diagram} />;
+            }
+
+            return <BlogMarkdown key={index} content={part} />;
+          })}
           <SourcesList sources={post.sources} />
         </article>
 

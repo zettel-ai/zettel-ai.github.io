@@ -83,6 +83,8 @@ LFD matters because delay costs can grow quickly. The Federal Maritime Commissio
 
 That does not mean every shipment will face those costs. It does mean a missed LFD can become more than a small administrative mistake. It can affect landed cost, customer communication, warehouse labor, and carrier relationships.
 
+{{diagram}}
+
 A late pickup can also create a chain reaction. A customs hold may delay release. A missing delivery order may delay drayage dispatch. A missed appointment may push pickup to the next day. A chassis shortage may stop the trucker from moving the box even when the cargo is otherwise ready. Each issue may seem small alone, but together they can create a shipment blocker.
 
 ## How Last Free Day Is Usually Calculated
@@ -124,6 +126,8 @@ LFD problems often happen between teams, not inside one team. The importer may w
 Document readiness means the required shipment documents are present, accurate, matched to the right container, and usable for the next step. It is different from simply storing files in a folder.
 
 A searchable shipment file should answer questions like:
+
+{{image:0}}
 
 | Question | Why It Matters |
 | ---------------------------------------------------- | -------------------------------------------- |

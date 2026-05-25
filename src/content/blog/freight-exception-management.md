@@ -98,6 +98,8 @@ The customs broker needs a corrected commercial invoice.
 The drayage provider has the appointment, but not the release details.
 The customer service team has an update, but it is buried in an email thread.
 
+{{diagram}}
+
 This is why document readiness is so important. A shipment is document-ready when the required documents are present, accurate, matched to the right shipment or container, and easy for the right team to find. Pickup readiness goes one step further. It asks whether the documents, release status, appointment details, and container-level information support the next physical move.
 
 A practical AI document hub should not just store PDFs. It should help teams see whether a shipment is ready for action.
@@ -164,6 +166,8 @@ That is different from claiming that software fully runs freight operations. Peo
 A connected shipment record brings together the documents, extracted details, statuses, owners, and blockers related to a shipment. Instead of asking, “Where did someone put the PDF?” the team can ask, “What is missing from this shipment?”
 
 A connected shipment record can include:
+
+{{image:0}}
 
 Commercial documents
 Transportation documents

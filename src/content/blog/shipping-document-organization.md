@@ -106,6 +106,8 @@ A shipment blocker is anything that prevents the next step from happening. It ma
 
 For example, a container may be physically available at a terminal, but pickup readiness may still be weak because:
 
+{{diagram}}
+
 * The delivery order is not linked to the container.
 * The appointment confirmation is in a dispatcher’s inbox.
 * The commercial invoice has the wrong consignee name.
@@ -202,6 +204,8 @@ An AI document hub can help by extracting key fields and linking them to the rig
 Freight teams usually search with operational questions, not file names.
 
 They ask:
+
+{{image:0}}
 
 * “Do we have the delivery order for this container?”
 * “Which shipment is missing the commercial invoice?”
