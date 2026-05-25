@@ -16,12 +16,11 @@ heroImage:
   license: CC BY-SA 2.0
 inlineImages:
   - src: /images/blog/shipping-document-organization/inline-1.jpg
-    alt: Freight documents and a laptop on an operations desk
+    alt: Shelves filled with labeled file folders
     caption: 'An organized record is searchable by shipment, not buried in folders.'
-    credit: Alex 'Florstein' Fedorov
-    sourceUrl: >-
-      https://commons.wikimedia.org/wiki/File:Vitebsky_Rail_Terminal_Vestibule_1.jpg
-    license: CC BY-SA 4.0
+    credit: Alex Gorzen
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Shelves-of-file-folders.jpg'
+    license: CC BY-SA 2.0
 diagram:
   src: /diagrams/blog/shipping-document-organization.svg
   alt: >-

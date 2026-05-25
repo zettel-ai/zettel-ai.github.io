@@ -9,11 +9,13 @@ topic: Document Management
 readTime: 14 min read
 heroImage:
   src: /images/blog/document-ownership-freight/hero.jpg
-  alt: Freight documents and a clipboard on a warehouse desk
-  caption: Most document gaps trace back to unclear ownership between parties.
-  credit: Unknown authorUnknown author
+  alt: A printed bill of lading form used to document a freight shipment
+  caption: >-
+    A bill of lading is one of the core documents whose ownership and handoffs
+    teams must track.
+  credit: Scanned by SCEhardt on 12-29-2004
   sourceUrl: >-
-    https://commons.wikimedia.org/wiki/File:Bill_of_lading,_steamer_Wyoming,_St._Louis,_August_1886.jpg
+    https://commons.wikimedia.org/wiki/File:Bill_of_Lading_-_Southern_Railway_Company_front.jpg
   license: Public domain
 inlineImages:
   - src: /images/blog/document-ownership-freight/inline-1.jpg

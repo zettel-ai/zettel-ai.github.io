@@ -17,11 +17,13 @@ heroImage:
   license: Public domain
 inlineImages:
   - src: /images/blog/documents-needed-for-container-pickup/inline-1.jpg
-    alt: Bill of lading and customs paperwork on a desk
-    caption: 'The right documents, matched to the right container, authorize pickup.'
-    credit: Mark William Langlois
+    alt: Customs officers inspecting a shipping container at a port
+    caption: >-
+      Customs release is one of the documents that must clear before a container
+      can be picked up.
+    credit: CBP Photography
     sourceUrl: >-
-      https://commons.wikimedia.org/wiki/File:Mark_William_Langlois_-_Mark_William_Langlois_(UK,_1848-1924)_Medium_Oil_on_canvas_Signature(s).jpg
+      https://commons.wikimedia.org/wiki/File:U_S_Customs_%26_Border_Protection_Port_of_New_York_-_Newark_Resumes_Vessel_and_Cargo_Container_Inspection_Following_Hurricane_Sandy_(8167655254).jpg
     license: Public domain
 diagram:
   src: /diagrams/blog/documents-needed-for-container-pickup.svg

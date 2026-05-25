@@ -25,12 +25,11 @@ inline 1:
 
 Hero:
 - Local path: `/images/blog/ai-freight-document-management/hero.jpg`
-- Alt: `The Union Minister for Road Transport & Highways and Shipping, Shri Nitin Gadkari visiting the “India Maritime 2015” International Exhibition & Conference on Port, Shipping, Logistics and Marine Technology, in Mumbai on January 08, 2015.`
-- Caption: `AI Freight Document Management visual reference.`
-- Credit: `Ministry of Road Transport & Highways (GODL-India)`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Nitin_Gadkari_visiting_the_%E2%80%9CIndia_Maritime_2015%E2%80%9D_International_Exhibition_%26_Conference_on_Port,_Shipping,_Logistics_and_Marine_Technology,_in_Mumbai_on_January_08,_2015.jpg`
-- License: `GODL-India`
-- License URL: `https://data.gov.in/sites/default/files/Gazette_Notification_OGDL.pdf`
+- Alt: `Gantry cranes at a container terminal under a clear sky`
+- Caption: `Document problems often surface only when a container is close to pickup.`
+- Credit: `H. Zell`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Container-Terminal_Bremerhaven_02.jpg`
+- License: `CC BY-SA 3.0`
 
 inline 1:
 - Local path: `/images/blog/ai-freight-document-management/inline-1.jpg`
@@ -123,10 +122,10 @@ inline 1:
 
 Hero:
 - Local path: `/images/blog/document-ownership-freight/hero.jpg`
-- Alt: `Title: Bill of lading, steamer Wyoming, St. Louis, August 1886`
-- Caption: `Document Ownership in Freight visual reference.`
-- Credit: `Unknown authorUnknown author`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Bill_of_lading,_steamer_Wyoming,_St._Louis,_August_1886.jpg`
+- Alt: `A printed bill of lading form used to document a freight shipment`
+- Caption: `A bill of lading is one of the core documents whose ownership and handoffs teams must track.`
+- Credit: `Scanned by SCEhardt on 12-29-2004`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Bill_of_Lading_-_Southern_Railway_Company_front.jpg`
 - License: `Public domain`
 
 inline 1:
@@ -150,10 +149,10 @@ Hero:
 
 inline 1:
 - Local path: `/images/blog/documents-needed-for-container-pickup/inline-1.jpg`
-- Alt: `Artist(s): Mark William Langlois (UK, 1848-1924) Medium: Oil on canvas Signature(s): "M. W. Langlois", lower right. Paperwork: N/A Damage: Scattered inpainting, craquelure, and minor wear to frame. Flecks of missing paint to upper margin. Measurement(s): 21" x 17" (canvas), 27" x 23" (frame) In-house shipping is available. Please see our website regarding our in-house shipping procedures.`
-- Caption: `Documents Needed for Container Pickup visual reference.`
-- Credit: `Mark William Langlois`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Mark_William_Langlois_-_Mark_William_Langlois_(UK,_1848-1924)_Medium_Oil_on_canvas_Signature(s).jpg`
+- Alt: `Customs officers inspecting a shipping container at a port`
+- Caption: `Customs release is one of the documents that must clear before a container can be picked up.`
+- Credit: `CBP Photography`
+- Source URL: `https://commons.wikimedia.org/wiki/File:U_S_Customs_%26_Border_Protection_Port_of_New_York_-_Newark_Resumes_Vessel_and_Cargo_Container_Inspection_Following_Hurricane_Sandy_(8167655254).jpg`
 - License: `Public domain`
 
 ## freight-document-checklist
@@ -180,20 +179,19 @@ inline 1:
 
 Hero:
 - Local path: `/images/blog/freight-document-management/hero.jpg`
-- Alt: `U.S. Air Force Tech. Sgt. James Guinn, 145th Logistics Readiness Squadron (LRS), labels shipping containers with the appropriate paperwork before shipment to the Defense Reutilization and Marketing Office (DRMO) at Fort Bragg, N.C. The Air Force released a new policy mandating the reduction in mobility equipment stored at LRS from 100 to 25 percent, and the process of downsizing is in its final stages at the North Carolina Air National Guard Base, Charlotte Douglas Intl. Airport, Sept. 11, 2014. (U.S. Air National Guard photo by Staff Sgt. Julianne M. Showalter, 145th Public Affairs/Released) Unit: 145th Airlift Wing, North Carolina Air National Guard DVIDS Tags: supply; air national guard; lrs; 145th aw; ncang; 145th airlift wing; 145 aw; afi; staff sgt julianne m showalter; ssgt showalter; afman`
-- Caption: `Freight Document Management visual reference.`
-- Credit: `Staff Sgt. Julianne Showalter`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Logistics_cleans_house_to_meet_new_standards_140911-Z-RZ465-061.jpg`
-- License: `Public domain`
+- Alt: `A container ship being worked by cranes at a port terminal`
+- Caption: `Behind most freight delays is a document no one could find in time.`
+- Credit: `Matti Blume`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Container_Terminal_Tollerort,_Vorhafen,_Hamburg_(P1080405).jpg`
+- License: `CC BY-SA 4.0`
 
 inline 1:
 - Local path: `/images/blog/freight-document-management/inline-1.jpg`
-- Alt: `Highland Spring Freight Terminal, Blackford, Perth & Kinross. Container crane.`
-- Caption: `Freight Document Management visual reference.`
-- Credit: `Rosser1954`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Highland_Spring_Freight_Terminal,_Blackford,_Perth_%26_Kinross._Container_crane.jpg`
-- License: `CC BY-SA 4.0`
-- License URL: `https://creativecommons.org/licenses/by-sa/4.0`
+- Alt: `An intermodal gantry crane at a rail freight facility`
+- Caption: `A connected record links documents across terminal, rail, and truck moves.`
+- Credit: `Thomas R Machnitzki`
+- Source URL: `https://commons.wikimedia.org/wiki/File:BNSF_crane_at_intermodal_facility_US78_Memphis_TN_01.jpg`
+- License: `CC BY 3.0`
 
 ## freight-exception-management
 
@@ -218,20 +216,19 @@ inline 1:
 
 Hero:
 - Local path: `/images/blog/freight-operations-prioritization/hero.jpg`
-- Alt: `The SPACEHAB Double Module (bottom) and Integrated Cargo Carrier (above) are ready to be moved from the payload canister into the Payload Changeout Room (PCR) at Launch Pad 39A. Part of the Rotating Service Structure, the PCR is an environmentally controlled facility supporting cargo delivery to the pad and vertical installation in the orbiter cargo bay. The primary payloads on mission STS-101, the module and ICC contain internal logistics and resupply cargo for restoring full redundancy to the International Space Station power system in preparation for the arrival of the next pressurized module, the Russian-built Zvezda. The payloads will be transferred to Space Shuttle Atlantis after Atlantis rolls out to the pad. Launch of Atlantis on mission STS-101 is scheduled no earlier than April 17, 2000.`
-- Caption: `Freight Operations Prioritization visual reference.`
-- Credit: `NASA/KSC`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Spacehab_Logistics_Double_Module_and_and_ICC_in_Shuttle_payload_canister_for_STS-101_(KSC-00pp0371).jpg`
+- Alt: `Ship-to-shore cranes working containers at a busy port terminal`
+- Caption: `On a busy desk, the hardest question is which shipment to work first.`
+- Credit: `ROBINSON NIÑAL/PPD`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Ship-to-shore_cranes_at_the_Davao_International_Container_Terminal.jpg`
 - License: `Public domain`
 
 inline 1:
 - Local path: `/images/blog/freight-operations-prioritization/inline-1.jpg`
-- Alt: `Title: [Warehouse Loading Docks, Texas & Pacific Railway Company] Creator: Robert Yarnall Richie Date: ca. 1946 Series: http://digitalcollections.smu.edu/cdm/search/collection/ryr/searchterm/Series 6: Negatives and Color Transparencies/field/series/; http://digitalcollections.smu.edu/cdm/search/collection/ryr/searchterm/Negative Series: 2869/field/series/ Part of: http://digitalcollections.smu.edu/cdm/search/collection/ryr/searchterm/Robert Yarnall Richie photograph collection/field/part/ Place: Fort Worth, Tarrant County, Texas Physical Description: 1 transparency: film, color; 2.6 x 3.8 cm File: ag1982_0234_2869_K_2_texaspacificrailway_sm_opt.jpg Rights: Please cite DeGolyer Library, Southern Methodist University when using this file. A high-resolution version of this file may be obtained for a fee. For details see the https://sites.smu.edu/cul/degolyer/research/permissions/ web page. For other information, contact degolyer@smu.edu. For more information and to view the image in high resolution, see: http://digitalcollections.smu.edu/cdm/ref/collection/ryr/id/2776 View the http://digitalcollections.smu.edu/all/cul/ryr/`
-- Caption: `Freight Operations Prioritization visual reference.`
-- Credit: `Robert Yarnall Richie`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Warehouse_Loading_Docks,_Texas_and_Pacific_Railway_Company_(12324313855).jpg`
-- License: `No restrictions`
-- License URL: `https://www.flickr.com/commons/usage/`
+- Alt: `A row of freight trailers backed into a warehouse loading dock`
+- Caption: `Appointment and dock scheduling are part of what drives prioritization.`
+- Credit: `David E. Lucas`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg`
+- License: `Public domain`
 
 ## freight-visibility-tools-not-enough
 
@@ -297,12 +294,11 @@ inline 1:
 
 Hero:
 - Local path: `/images/blog/missing-shipping-documents/hero.jpg`
-- Alt: `a hole punch (ein Locher)`
-- Caption: `Missing Shipping Documents visual reference.`
-- Credit: `BGN-WMCO`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Hole_punch.JPG`
-- License: `CC BY 2.5`
-- License URL: `https://creativecommons.org/licenses/by/2.5`
+- Alt: `A container ship docked at a port with stacked containers behind it`
+- Caption: `Missing documents often surface only after a shipment is already moving.`
+- Credit: `Thomas from USA`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Container_ship_sunshine_spirit.jpg`
+- License: `CC BY 2.0`
 
 inline 1:
 - Local path: `/images/blog/missing-shipping-documents/inline-1.jpg`
@@ -355,12 +351,11 @@ Hero:
 
 inline 1:
 - Local path: `/images/blog/shipping-document-organization/inline-1.jpg`
-- Alt: `Vitebsky Rail Terminal in Saint Petersburg, Vestibule.`
-- Caption: `Shipping Document Organization visual reference.`
-- Credit: `Alex 'Florstein' Fedorov`
-- Source URL: `https://commons.wikimedia.org/wiki/File:Vitebsky_Rail_Terminal_Vestibule_1.jpg`
-- License: `CC BY-SA 4.0`
-- License URL: `https://creativecommons.org/licenses/by-sa/4.0`
+- Alt: `Shelves filled with labeled file folders`
+- Caption: `An organized record is searchable by shipment, not buried in folders.`
+- Credit: `Alex Gorzen`
+- Source URL: `https://commons.wikimedia.org/wiki/File:Shelves-of-file-folders.jpg`
+- License: `CC BY-SA 2.0`
 
 ## what-is-blocking-my-shipment
 

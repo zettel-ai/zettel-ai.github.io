@@ -9,20 +9,20 @@ topic: Document Management
 readTime: 15 min read
 heroImage:
   src: /images/blog/freight-document-management/hero.jpg
-  alt: Container terminal with stacked shipping containers
+  alt: A container ship being worked by cranes at a port terminal
   caption: Behind most freight delays is a document no one could find in time.
-  credit: Staff Sgt. Julianne Showalter
+  credit: Matti Blume
   sourceUrl: >-
-    https://commons.wikimedia.org/wiki/File:Logistics_cleans_house_to_meet_new_standards_140911-Z-RZ465-061.jpg
-  license: Public domain
+    https://commons.wikimedia.org/wiki/File:Container_Terminal_Tollerort,_Vorhafen,_Hamburg_(P1080405).jpg
+  license: CC BY-SA 4.0
 inlineImages:
   - src: /images/blog/freight-document-management/inline-1.jpg
-    alt: Freight documents and a laptop on an operations desk
-    caption: A connected record gives the team one place to see what is missing.
-    credit: Rosser1954
+    alt: An intermodal gantry crane at a rail freight facility
+    caption: 'A connected record links documents across terminal, rail, and truck moves.'
+    credit: Thomas R Machnitzki
     sourceUrl: >-
-      https://commons.wikimedia.org/wiki/File:Highland_Spring_Freight_Terminal,_Blackford,_Perth_%26_Kinross._Container_crane.jpg
-    license: CC BY-SA 4.0
+      https://commons.wikimedia.org/wiki/File:BNSF_crane_at_intermodal_facility_US78_Memphis_TN_01.jpg
+    license: CC BY 3.0
 diagram:
   src: /diagrams/blog/freight-document-management.svg
   alt: >-

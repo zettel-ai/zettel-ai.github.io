@@ -9,20 +9,20 @@ topic: Exception Management
 readTime: 14 min read
 heroImage:
   src: /images/blog/freight-operations-prioritization/hero.jpg
-  alt: Busy import operations desk with multiple monitors
+  alt: Ship-to-shore cranes working containers at a busy port terminal
   caption: 'On a busy desk, the hardest question is which shipment to work first.'
-  credit: NASA/KSC
+  credit: ROBINSON NIÑAL/PPD
   sourceUrl: >-
-    https://commons.wikimedia.org/wiki/File:Spacehab_Logistics_Double_Module_and_and_ICC_in_Shuttle_payload_canister_for_STS-101_(KSC-00pp0371).jpg
+    https://commons.wikimedia.org/wiki/File:Ship-to-shore_cranes_at_the_Davao_International_Container_Terminal.jpg
   license: Public domain
 inlineImages:
   - src: /images/blog/freight-operations-prioritization/inline-1.jpg
-    alt: Warehouse loading docks with trucks at bays
-    caption: Risk scoring turns a long shipment list into a focused worklist.
-    credit: Robert Yarnall Richie
+    alt: A row of freight trailers backed into a warehouse loading dock
+    caption: Appointment and dock scheduling are part of what drives prioritization.
+    credit: David E. Lucas
     sourceUrl: >-
-      https://commons.wikimedia.org/wiki/File:Warehouse_Loading_Docks,_Texas_and_Pacific_Railway_Company_(12324313855).jpg
-    license: No restrictions
+      https://commons.wikimedia.org/wiki/File:Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg
+    license: Public domain
 diagram:
   src: /diagrams/blog/freight-operations-prioritization.svg
   alt: >-

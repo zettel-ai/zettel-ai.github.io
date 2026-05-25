@@ -9,11 +9,11 @@ topic: Document Management
 readTime: 14 min read
 heroImage:
   src: /images/blog/missing-shipping-documents/hero.jpg
-  alt: Partly empty document folder on a logistics desk
-  caption: 'A missing document is often not lost, just attached to the wrong shipment.'
-  credit: BGN-WMCO
-  sourceUrl: 'https://commons.wikimedia.org/wiki/File:Hole_punch.JPG'
-  license: CC BY 2.5
+  alt: A container ship docked at a port with stacked containers behind it
+  caption: Missing documents often surface only after a shipment is already moving.
+  credit: Thomas from USA
+  sourceUrl: 'https://commons.wikimedia.org/wiki/File:Container_ship_sunshine_spirit.jpg'
+  license: CC BY 2.0
 inlineImages:
   - src: /images/blog/missing-shipping-documents/inline-1.jpg
     alt: Person searching through email for an attachment

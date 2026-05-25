@@ -9,12 +9,12 @@ topic: Document Management
 readTime: 16 min read
 heroImage:
   src: /images/blog/ai-freight-document-management/hero.jpg
-  alt: Stacked shipping containers at a marine terminal
+  alt: Gantry cranes at a container terminal under a clear sky
   caption: Document problems often surface only when a container is close to pickup.
-  credit: Ministry of Road Transport & Highways (GODL-India)
+  credit: H. Zell
   sourceUrl: >-
-    https://commons.wikimedia.org/wiki/File:Nitin_Gadkari_visiting_the_%E2%80%9CIndia_Maritime_2015%E2%80%9D_International_Exhibition_%26_Conference_on_Port,_Shipping,_Logistics_and_Marine_Technology,_in_Mumbai_on_January_08,_2015.jpg
-  license: GODL-India
+    https://commons.wikimedia.org/wiki/File:Container-Terminal_Bremerhaven_02.jpg
+  license: CC BY-SA 3.0
 inlineImages:
   - src: /images/blog/ai-freight-document-management/inline-1.jpg
     alt: Freight paperwork organized on a desk
