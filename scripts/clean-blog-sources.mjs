@@ -65,6 +65,9 @@ function stripLeadingHorizontalRules(markdown) {
   return markdown.replace(/^(?:\s*---\s*\n+)+/, "");
 }
 
+const leadingMetadataLabelPattern =
+  "(?:SEO Meta Description|Meta Description|Image note|Research and image note)";
+
 function stripLeadingMetadata(markdown) {
   let cleaned = markdown;
   let previous;
@@ -72,13 +75,20 @@ function stripLeadingMetadata(markdown) {
   do {
     previous = cleaned;
     cleaned = cleaned.replace(
-      /^\s*\*\*(?:Meta Description|Meta description|Image note|Research and image note):\*\*.*\n+/i,
+      new RegExp(`^\\s*\\*\\*${leadingMetadataLabelPattern}:\\*\\*.*\\n+`, "i"),
       "",
     );
     cleaned = stripLeadingHorizontalRules(cleaned);
   } while (cleaned !== previous);
 
   return cleaned;
+}
+
+function stripStandaloneImageMetadata(markdown) {
+  return markdown.replace(
+    /^\s*\*\*(?:Image note|Research and image note):\*\*.*(?:\n|$)/gim,
+    "",
+  );
 }
 
 function stripLeadingOutline(markdown) {
@@ -103,7 +113,9 @@ function stripMarkdownBoldFromHeadings(markdown) {
 
 function normalize(markdown) {
   return stripMarkdownBoldFromHeadings(
-    stripTopBoilerplate(stripBottomBoilerplate(normalizeLineEndings(markdown))),
+    stripStandaloneImageMetadata(
+      stripTopBoilerplate(stripBottomBoilerplate(normalizeLineEndings(markdown))),
+    ),
   )
     .replaceAll("—", ", ")
     .replace(/\n{3,}/g, "\n\n")
