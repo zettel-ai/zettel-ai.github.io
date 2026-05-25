@@ -5,7 +5,7 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import { CALENDLY_URL } from "./RequestPilotButton";
 
 const TALLY_EMBED_SRC =
-  "https://tally.so/embed/NpRbO0?alignLeft=1&transparentBackground=1&dynamicHeight=1";
+  "https://tally.so/embed/NpRbO0?alignLeft=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1";
 
 // Client-only flag without setState-in-effect; getServerSnapshot returns false
 // so the Tally iframe is never server-rendered (it is mutated by Tally on load).
@@ -81,7 +81,7 @@ export function Contact() {
         </div>
 
         <div className="mt-14 space-y-16">
-          <div>
+          <div id="request-pilot">
             <h3 className="text-2xl font-semibold tracking-tight text-on-background">
               Book a 30-minute call
             </h3>
@@ -90,12 +90,12 @@ export function Contact() {
             </p>
             <div
               ref={calendlyRef}
-              className="mt-6 overflow-hidden border border-outline-variant"
-              style={{ minWidth: 320, height: 1000 }}
+              className="mt-6 w-full min-w-0 overflow-hidden border border-outline-variant"
+              style={{ width: "100%", height: 1000 }}
             />
           </div>
 
-          <div className="border-t border-outline-variant pt-16">
+          <div id="early-access" className="border-t border-outline-variant pt-16">
             <h3 className="text-2xl font-semibold tracking-tight text-on-background">
               Join the early-access list
             </h3>

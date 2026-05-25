@@ -1,9 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 import { RequestPilotButton } from "./RequestPilotButton";
 
 export function TopNav() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinkClass =
+    "text-sm font-medium text-on-surface-variant transition-colors hover:text-primary";
+
   return (
     <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-200">
       <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
@@ -20,27 +28,67 @@ export function TopNav() {
             Zettel Ops
           </span>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            href="/"
+            className={navLinkClass}
+          >
+            Home
+          </Link>
           <Link
             href="/blog"
-            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
+            className={navLinkClass}
           >
             Blog
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
+            className={navLinkClass}
           >
             Contact
           </Link>
           <RequestPilotButton className="group relative inline-flex cursor-pointer items-center justify-center h-10 px-6 text-sm font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors active:scale-95 duration-150">
             Request a Pilot
-            <span className="pointer-events-none absolute top-full right-0 mt-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+            <span className="pointer-events-none absolute right-0 top-full mt-2 hidden rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
               Schedule a time to talk with us
             </span>
           </RequestPilotButton>
         </div>
+        <button
+          type="button"
+          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+          className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-outline-variant text-on-background transition-colors hover:border-primary hover:text-primary"
+        >
+          <span className="material-symbols-outlined text-[24px]" aria-hidden="true">
+            {isMobileMenuOpen ? "close" : "menu"}
+          </span>
+        </button>
       </div>
+      {isMobileMenuOpen && (
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="md:hidden border-t border-outline-variant bg-white px-6 py-4 shadow-lg"
+        >
+          <div className="flex flex-col gap-1">
+            <Link href="/" className="px-1 py-3 text-base font-medium text-on-background">
+              Home
+            </Link>
+            <Link href="/blog" className="px-1 py-3 text-base font-medium text-on-background">
+              Blog
+            </Link>
+            <Link href="/contact" className="px-1 py-3 text-base font-medium text-on-background">
+              Contact
+            </Link>
+            <RequestPilotButton className="mt-3 inline-flex cursor-pointer items-center justify-center h-11 px-5 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors active:scale-95 duration-150">
+              Request a Pilot
+            </RequestPilotButton>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

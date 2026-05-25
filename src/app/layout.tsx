@@ -25,6 +25,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${publicSans.variable} h-full antialiased`}>
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETQ0XMHJ8R"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-ETQ0XMHJ8R');
+            `,
+          }}
+        />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"

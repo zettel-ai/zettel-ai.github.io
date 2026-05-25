@@ -7,6 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "validate:google-tag": "node scripts/validate-google-tag.mjs",
+    "validate:tally-form-events": "node scripts/validate-tally-form-events.mjs",
+    "validate:top-nav-home-link": "node scripts/validate-top-nav-home-link.mjs",
+    "validate:footer-navigation": "node scripts/validate-footer-navigation.mjs",
+    "validate:hero-offer": "node scripts/validate-hero-offer.mjs",
+    "validate:mobile-nav": "node scripts/validate-mobile-nav.mjs",
+    "validate:hero-mobile-image-order": "node scripts/validate-hero-mobile-image-order.mjs",
+    "validate:mobile-overflow-guards": "node scripts/validate-mobile-overflow-guards.mjs",
+    "validate:slack-diagrams": "node scripts/validate-slack-diagrams.mjs",
     "validate:blog": "node scripts/validate-blog-content.mjs"
   },
   "dependencies": {

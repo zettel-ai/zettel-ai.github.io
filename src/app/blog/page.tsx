@@ -19,7 +19,7 @@ export default function BlogIndexPage() {
     <>
       <TopNav />
       <main className="flex-grow bg-background pt-20">
-        <section className="border-b border-outline-variant bg-surface-container-lowest">
+        <section id="featured" className="border-b border-outline-variant bg-surface-container-lowest">
           <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-14 md:py-16 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Zettel Ops Blog</p>
@@ -41,7 +41,7 @@ export default function BlogIndexPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-14">
+        <section id="latest" className="mx-auto max-w-7xl px-6 py-14">
           {posts.length === 0 && (
             <div className="max-w-2xl border-l-4 border-primary bg-surface-container-low px-6 py-5">
               <h2 className="text-xl font-semibold tracking-tight text-on-background">No posts published yet</h2>

@@ -28,20 +28,42 @@ export function Hero() {
               <br />
               through emails, messages, and PDFs.
             </h1>
-            <p className="text-lg text-on-surface-variant mb-8 mx-auto lg:mx-0 leading-relaxed text-pretty">
-              Zettel is an AI operations assistant that turns scattered
-              shipping documents (BOLs, DOs, invoices, arrival notices) into
-              container-level answers, actions, and stakeholder updates. Ask
-              anything, or let it chase what&apos;s missing. All from your
-              inbox.
-            </p>
+            <div className="mb-6 mx-auto lg:mx-0 border border-primary/30 bg-white/85 px-5 py-4 text-left shadow-sm backdrop-blur-sm">
+              <p className="text-lg leading-relaxed text-on-surface-variant text-pretty">
+                Zettel is an AI operations assistant that turns scattered
+                shipping documents (BOLs, DOs, invoices, arrival notices) into
+                container-level answers, actions, and stakeholder updates. Ask
+                anything, or let it chase what&apos;s missing.{" "}
+                <span className="font-semibold text-on-background">
+                  All from your inbox.
+                </span>
+              </p>
+            </div>
+            <div className="mb-8 mx-auto lg:mx-0 inline-flex max-w-full flex-col gap-1 border border-primary bg-primary-fixed px-4 py-3 text-left shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+                Early adopter offer
+              </p>
+              <p className="text-base font-semibold leading-6 text-on-background">
+                Get $200 in usage credits and the first 3 months of platform fees waived.
+              </p>
+            </div>
+            <div className="relative mx-auto mb-8 w-full max-w-[360px] lg:hidden">
+              <Image
+                src="/images/iphone_hero_improved.png"
+                alt="Zettel Ops mobile app preview"
+                width={1024}
+                height={1024}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
               <RequestPilotButton className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-white bg-primary hover:bg-on-primary-fixed-variant transition-colors">
                 Request a Pilot
                 <span className="material-symbols-outlined ml-2 text-[20px] group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
-                <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
                   Schedule a time to talk with us
                 </span>
               </RequestPilotButton>
@@ -56,13 +78,13 @@ export function Hero() {
                 className="group relative inline-flex cursor-pointer items-center justify-center h-12 px-8 text-base font-medium text-primary border border-primary hover:bg-primary-fixed transition-colors"
               >
                 Join Early Access
-                <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-inverse-surface text-inverse-on-surface text-xs font-normal whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-xs font-normal text-inverse-on-surface opacity-0 shadow-lg transition-opacity group-hover:opacity-100 sm:block sm:whitespace-nowrap">
                   Hear updates as the product becomes more publicly available
                 </span>
               </button>
             </div>
           </div>
-          <div className="relative w-full max-w-[563px] mx-auto lg:mx-0 lg:ml-auto">
+          <div className="relative hidden w-full max-w-[563px] mx-auto lg:mx-0 lg:ml-auto lg:block">
             <Image
               src="/images/iphone_hero_improved.png"
               alt="Zettel Ops mobile app preview"
