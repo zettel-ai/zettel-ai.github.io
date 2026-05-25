@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 const sourceDir = "/Users/jallen/projects/zettel_ai/assets/zettel_blogs";
@@ -136,6 +135,12 @@ function normalize(markdown) {
 }
 
 fs.mkdirSync(outputDir, { recursive: true });
+
+for (const entry of fs.readdirSync(outputDir, { withFileTypes: true })) {
+  if (entry.isFile() && entry.name.endsWith(".md")) {
+    fs.unlinkSync(path.join(outputDir, entry.name));
+  }
+}
 
 for (const [sourceFile, slug] of posts) {
   const sourcePath = path.join(sourceDir, sourceFile);
