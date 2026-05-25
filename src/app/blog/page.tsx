@@ -20,15 +20,24 @@ export default function BlogIndexPage() {
       <TopNav />
       <main className="flex-grow bg-background pt-20">
         <section className="border-b border-outline-variant bg-surface-container-lowest">
-          <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
-            <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Zettel Ops Blog</p>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-on-background md:text-5xl">
-              Freight operations guides for teams that need cleaner shipment context.
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-on-surface-variant">
-              Practical articles on document readiness, pickup blockers, last free day risk, and the workflows behind
-              faster exception resolution.
-            </p>
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-14 md:py-16 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Zettel Ops Blog</p>
+              <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight text-on-background md:text-5xl">
+                Freight operations guides for teams that need cleaner shipment context.
+              </h1>
+              <p className="mt-5 max-w-xl text-lg leading-8 text-on-surface-variant">
+                Practical articles on document readiness, pickup blockers, last free day risk, and the workflows behind
+                faster exception resolution.
+              </p>
+            </div>
+
+            {featured && (
+              <div>
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary">Featured</p>
+                <BlogCard post={featured} priority />
+              </div>
+            )}
           </div>
         </section>
 
@@ -39,15 +48,6 @@ export default function BlogIndexPage() {
               <p className="mt-2 text-base leading-7 text-on-surface-variant">
                 Blog posts are being prepared and will be published here as soon as they are ready.
               </p>
-            </div>
-          )}
-
-          {featured && (
-            <div className="mb-12">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary">Featured</p>
-              <div className="max-w-3xl">
-                <BlogCard post={featured} priority />
-              </div>
             </div>
           )}
 
