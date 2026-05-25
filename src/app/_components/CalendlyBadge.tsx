@@ -24,7 +24,7 @@ export function CalendlyBadge() {
           text: "Request a Pilot",
           color: "#006527",
           textColor: "#ffffff",
-          branding: true,
+          branding: false,
         });
       } else {
         // widget.js is loaded async; retry until it is ready.
