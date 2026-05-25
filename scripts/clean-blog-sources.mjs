@@ -1,9 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 
 const sourceDir = "/Users/jallen/projects/zettel_ai/assets/zettel_blogs";
-const outputDir = path.join(process.cwd(), ".blog-drafts");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const outputDir = path.join(repoRoot, ".blog-drafts");
 
 const posts = [
   ["blog.md", "ai-freight-email-automation"],
@@ -26,9 +28,9 @@ const posts = [
   ["blog copy.md", "what-is-blocking-my-shipment"],
 ];
 
-const bottomBoilerplateMarkers = [
-  "You can switch between modes anytime",
-  "What would you like to do next?",
+const bottomBoilerplatePatterns = [
+  /^You can switch between modes anytime\b/im,
+  /^What would you like to do next\?\s*$/im,
 ];
 
 function normalizeLineEndings(markdown) {
@@ -36,8 +38,8 @@ function normalizeLineEndings(markdown) {
 }
 
 function stripBottomBoilerplate(markdown) {
-  const markerIndexes = bottomBoilerplateMarkers
-    .map((marker) => markdown.indexOf(marker))
+  const markerIndexes = bottomBoilerplatePatterns
+    .map((pattern) => markdown.search(pattern))
     .filter((index) => index !== -1);
 
   if (markerIndexes.length === 0) {
@@ -91,6 +93,13 @@ function stripStandaloneImageMetadata(markdown) {
   );
 }
 
+function stripUnlabelledImageMetadata(markdown) {
+  return markdown.replace(
+    /^\s*No (?:AI-generated )?images? (?:are|were) (?:included|used)(?: in this article)?[^\n.]*\.\s*(?:\n|$)/gim,
+    "",
+  );
+}
+
 function stripLeadingOutline(markdown) {
   return markdown.replace(
     /^\s*##\s+\*\*(?:Comprehensive\s+)?(?:SEO\s+)?Outline\*\*\s*\n[\s\S]*?(?:^---\s*\n+|(?=^#{1,6}\s+))/m,
@@ -114,7 +123,11 @@ function stripMarkdownBoldFromHeadings(markdown) {
 function normalize(markdown) {
   return stripMarkdownBoldFromHeadings(
     stripStandaloneImageMetadata(
-      stripTopBoilerplate(stripBottomBoilerplate(normalizeLineEndings(markdown))),
+      stripUnlabelledImageMetadata(
+        stripTopBoilerplate(
+          stripBottomBoilerplate(normalizeLineEndings(markdown)),
+        ),
+      ),
     ),
   )
     .replaceAll("—", ", ")

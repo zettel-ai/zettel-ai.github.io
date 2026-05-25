@@ -37,6 +37,7 @@ yarn-error.log*
 .vercel
 
 # local working files
+/.blog-drafts/
 /.claude/
 /.idea/
 /.playwright-mcp/
