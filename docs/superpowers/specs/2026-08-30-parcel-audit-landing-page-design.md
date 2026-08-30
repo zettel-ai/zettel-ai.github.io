@@ -12,21 +12,26 @@ The page's single job is to get qualified small and midsized parcel shippers to 
 
 1. Zettel audits UPS and FedEx shipping bills.
 2. Zettel identifies refund-eligible service failures and questionable charges.
-3. Zettel builds the evidence trail, handles or coordinates recovery, and verifies posted credits.
+3. Zettel builds an evidence-backed case around each challenge, handles or coordinates recovery, and verifies posted credits.
 4. The customer pays no setup or monthly platform fee for the managed MVP.
 5. Zettel charges 25% of verified credits recovered.
 6. A prospect can begin with an invoice instead of immediately sharing carrier credentials.
 
 The product should feel like a competent financial-recovery operator, not an AI demo, logistics dashboard, or generic shipping-optimization platform.
 
+The underlying implementation must use the shared **Zettel Platform** for agentic reasoning, context/knowledge graph memory, typed semantics, search/retrieval, provenance, durable operations, review, and shared infrastructure. Parcel may add product-specific domain logic and integrations around the Platform, but it must not build a parallel graph, RAG, ontology, search, memory, or agent stack.
+
+---
+
 ## Research Basis
 
-This revision grounds the design in two kinds of evidence:
+This design is grounded in three kinds of evidence:
 
 1. Current parcel-audit competitors and adjacent products, to understand the patterns buyers already recognize.
 2. Qualitative Reddit complaints from shippers, to understand where the current dispute experience breaks down in practice.
+3. The current `zettel-ai/zettel_platform` architecture and implementation, to ensure the landing-page promise maps to the backend that will power the product.
 
-The competitor research is design inspiration, not a source of copy to reproduce. The Reddit posts are anecdotal evidence and must not be presented as representative market statistics.
+The competitor research is design inspiration, not a source of copy to reproduce. The Reddit posts are anecdotal evidence and must not be presented as representative market statistics. The Platform repository is the architectural source of truth for shared intelligence/runtime capabilities; product-specific capabilities described here still require Parcel implementation and validation.
 
 ### Competitor pages reviewed
 
@@ -49,6 +54,216 @@ The competitor research is design inspiration, not a source of copy to reproduce
 - r/smallbusiness, November 2025, a small business reconciling weekly UPS invoices and repeatedly disputing DIM and address-correction surcharges: https://www.reddit.com/r/smallbusiness/comments/1p68wjj/
 - r/FedEx, February 2026, a post-shipment adjustment despite the shipper recording measurements and weight, complicated by a third-party label platform: https://www.reddit.com/r/FedEx/comments/1rfvjyf/
 - r/UPS, July 2024, adjustments posted weeks after delivery with unclear surcharge reasons: https://www.reddit.com/r/UPS/comments/1dw5x4k/
+
+### Zettel Platform sources reviewed
+
+The design specifically relies on the current Platform boundaries and capabilities documented or implemented in:
+
+- `zettel_platform/README.md`
+- `docs/architecture/product-extension-contract.md`
+- `docs/control-plane.md`
+- `docs/superpowers/specs/2026-08-12-aggressive-platform-simplification-design.md`
+- `docs/superpowers/plans/2026-08-26-operational-zettel-platform-wedding-adoption.md`
+- `packages/zettel_core/src/zettel_core/agents.py`
+- `packages/zettel_core/src/zettel_core/operations.py`
+- `packages/zettel_core/src/zettel_core/protocols.py`
+- `packages/zettel_core/src/zettel_core/retrieval.py`
+- `packages/zettel_core/src/zettel_core/reviews.py`
+- `packages/zettel_core/src/zettel_core/sources.py`
+- `packages/zettel_app/src/zettel_app/retrieval.py`
+- `packages/zettel_app/src/zettel_app/actions.py`
+- `packages/zettel_memory/src/zettel_memory/graphiti_memory.py`
+- `packages/zettel_agents/src/zettel_agents/invocation.py`
+- `packages/zettel_product/src/zettel_product/module.py`
+- `packages/zettel_product/src/zettel_product/records.py`
+- `packages/zettel_product/src/zettel_product/work.py`
+- `packages/zettel_workers/src/zettel_workers/products.py`
+- `tests/integration/test_typed_graphiti_contract.py`
+- `features/ask_with_evidence.feature`
+- `features/trace_persistence.feature`
+
+The Platform `main` snapshot used for this design is the currently visible `b4299c3c42024d81356be8bb25dc153633d07437`. If a newer human-authored Platform revision becomes visible before implementation planning, re-check the architectural contract and update this spec if the ownership boundary changed.
+
+---
+
+## Zettel Platform Is A Hard Product Constraint
+
+Zettel Parcel is not a standalone AI application that happens to share a company name with Zettel Platform.
+
+It is a **first-class product extension of Zettel Platform**.
+
+The dependency direction must remain one-way:
+
+**Zettel Parcel imports and consumes Zettel Platform. Zettel Platform never imports Zettel Parcel.**
+
+The current Platform product-extension contract already establishes this pattern. Platform constructs concrete API and worker runtime bundles once; a vertical product supplies explicit product factories and owns its domain behavior. Platform owns generic intelligence/runtime infrastructure and never discovers or interprets arbitrary product plugins.
+
+### Platform owns
+
+- Authentication and workspace isolation.
+- `WorkspaceScope` and generic authorization boundaries.
+- Durable operations, queue dispatch, retries, and operation state.
+- Shared product work dispatch and stable `product_key` namespacing.
+- Canonical knowledge/evidence records and source provenance.
+- Shared source/body storage primitives.
+- Context packs.
+- Self-hosted Graphiti/Neo4j graph memory and maintenance.
+- Typed Graphiti episode/triplet APIs.
+- Canonical + graph retrieval and search infrastructure.
+- Temporal fact validity/invalidation semantics.
+- Retrieval provenance and native evidence citations.
+- Knowledge completeness/degraded-state handling.
+- Bounded AgentCore Harness invocation.
+- Agent usage/cost attribution and bounded execution.
+- Generic reviews, decision traces, and action-approval primitives.
+- Shared AWS/Nango clients and generic provider effects.
+- Generic workspace deletion effects.
+
+### Parcel owns
+
+- The parcel domain model.
+- Carrier-specific invoice/shipment normalization rules.
+- Carrier rule interpretation policy.
+- Parcel entity types and relationships supplied to Platform graph APIs.
+- Stable parcel identities and versioning policy.
+- Parcel-specific prompt/schema for bounded reasoning.
+- Audit-candidate policy and thresholds.
+- Case state and dispute state.
+- Parcel-specific product records.
+- Evidence-to-case mapping.
+- Carrier dispute/appeal business rules.
+- Carrier-specific adapters and workflows not already provided by Platform.
+- Credit verification logic.
+- Contingency-fee calculation and billing workflow.
+- Parcel UI and customer-facing language.
+- Parcel-specific deletion/source hooks.
+
+### Parcel must not own
+
+Parcel must not introduce its own:
+
+- Neo4j or other graph database.
+- Graphiti client/runtime.
+- vector database.
+- RAG framework.
+- semantic-search stack.
+- knowledge-memory layer.
+- ontology engine that bypasses Zettel Platform.
+- AgentCore deployment.
+- generic model router.
+- agent memory.
+- autonomous tool runtime.
+- generic workflow engine.
+- generic provenance system.
+- generic decision-trace system.
+
+If Parcel demonstrates that a reusable semantic, ontology, retrieval, provenance, or agentic capability is missing, the reusable capability should be added to **Zettel Platform**. Parcel should then consume it through the Platform boundary.
+
+---
+
+## What The Platform Changes About The Customer Story
+
+The landing page should not explain Graphiti, Neo4j, AgentCore, reciprocal-rank fusion, context packs, typed Pydantic graph schemas, or DynamoDB operations.
+
+It should expose the customer-visible advantages those systems make possible.
+
+### Platform capability -> Parcel promise
+
+| Platform capability | Customer-facing Parcel expression |
+|---|---|
+| Canonical evidence with provider/version/hash/native locator provenance | **See exactly what evidence supports a challenge.** |
+| Typed temporal Graphiti entities/edges | **Zettel connects the shipment, adjustment, rule, evidence, dispute, decision, and credit.** |
+| Graph fact validity and invalidation timestamps | **Zettel can distinguish the rule/fact that applied at the time from what is true now.** |
+| Exact history hydration plus graph/canonical retrieval | **Zettel can compare this charge with your own prior shipment/case history.** |
+| Retrieval provenance | **A case can point back to the underlying source rather than a black-box score.** |
+| `empty` / `backfilling` / `current` / `degraded` knowledge states | **If the evidence is incomplete, Zettel says so.** |
+| Durable operations | **Cases keep moving through a traceable workflow instead of disappearing in an AI session.** |
+| Review and external-action approval | **Zettel builds the case; you stay in control of sensitive actions.** |
+| Decision traces | **The reasoning outcome and evidence trail persist after the operation completes.** |
+| Bounded structured AgentCore generation | **AI helps assemble a typed recommendation; it is not an unbounded bot roaming carrier systems.** |
+| Product work namespacing and workspace-scoped records | **Parcel case data remains a defined product domain inside a workspace.** |
+
+This should become an internal copy test: if a proposed landing-page claim cannot be mapped to a Platform capability plus a Parcel-specific implementation, narrow or remove the claim.
+
+---
+
+## Parcel Semantic Case Model
+
+The strongest use of Zettel Platform is not a generic "knowledge graph of shipping." It is a typed, temporal **case graph** around the exact question a customer cares about:
+
+**Should this charge be challenged, why, with what evidence, and what happened?**
+
+Conceptual domain path:
+
+**Shipment -> Package -> Invoice -> Charge -> Adjustment -> Carrier Rule -> Evidence -> Audit Case -> Dispute -> Carrier Decision -> Credit**
+
+Other useful entities may include:
+
+- Carrier
+- Service
+- Account
+- Contract / negotiated rate
+- Address classification
+- Tracking event
+- Package profile
+- SKU/package template
+- Evidence artifact
+- Dispute submission
+- Denial reason
+- Escalation
+- Recovery
+
+### Typed semantics
+
+The Platform's current graph contract already supports caller-owned:
+
+- entity types;
+- excluded entity types;
+- edge types;
+- allowed edge maps;
+- custom extraction instructions;
+- stable typed episode identities;
+- one predecessor episode for versioned lineage;
+- explicit triplets;
+- graph searches filtered by node labels, edge types, and valid/invalid dates.
+
+Parcel should define its domain Pydantic graph schema and use the Platform's typed graph contract. It should not call Graphiti directly.
+
+### Ontology rule
+
+For this MVP, "ontology" means the explicit Parcel-owned semantic schema of entities, relations, constraints, identities, and extraction instructions executed through Zettel Platform's typed Graphiti boundary.
+
+The current Platform is **not** a generic OWL/RDF ontology editing/reasoning platform. The landing page must not imply standards-based ontology reasoning that the backend does not provide.
+
+If Parcel later needs a reusable ontology registry, ontology versioning, cross-product semantic constraints, OWL/RDF reasoning, SHACL validation, or another generalized semantic capability, that capability should be designed as an extension to Zettel Platform rather than embedded only in Parcel.
+
+---
+
+## Product-Owned Records
+
+Use a stable product namespace such as:
+
+`parcel`
+
+The Platform product-record store is workspace-scoped, versioned, optimistic-concurrency-aware, and intentionally opaque to Platform domain logic.
+
+Recommended Parcel record types include:
+
+- `shipment`
+- `package_profile`
+- `invoice`
+- `charge`
+- `adjustment`
+- `carrier_rule`
+- `audit_case`
+- `dispute`
+- `carrier_decision`
+- `credit`
+- `recovery_fee`
+
+The exact record model belongs in the later Parcel backend design, not in this landing-page implementation. This section exists to make the landing-page concept technically coherent with the shared Platform.
+
+---
 
 ## What Competitors Teach Us
 
@@ -108,7 +323,9 @@ Zettel's stronger launch version is even lower-friction:
 
 The page should avoid enterprise logo clouds, massive platform diagrams, or security badges that Zettel has not earned.
 
-## What Reddit Changes About the Design
+---
+
+## What Reddit Changes About The Design
 
 The Reddit research changes the page from a generic "carrier billing is complicated" story into a page about four concrete frustrations.
 
@@ -116,15 +333,13 @@ The Reddit research changes the page from a generic "carrier billing is complica
 
 One UPS shipper described sending 5-10 of the same package each week, with 1-2 receiving unexpected Shipping Charge Corrections or Additional Handling fees. Another 2026 UPS post described a package entered as 48 x 6 x 6 being audited at 49 x 7 x 7, which crossed a threshold and triggered a large adjustment.
 
-This is a better problem statement than "billing errors happen."
-
 Approved card headline:
 
 **Same box. Different bill.**
 
 Supporting idea:
 
-A small measurement or classification change can materially alter the final charge. Zettel compares the carrier adjustment with the shipment record and available evidence instead of accepting the revised bill at face value.
+A small measurement or classification change can materially alter the final charge. Zettel compares the carrier adjustment with the shipment record, relevant history, and available evidence instead of accepting the revised bill at face value.
 
 ### Pain 2: The bill says what changed, not why.
 
@@ -142,15 +357,13 @@ Zettel reconstructs the case around the line item: original shipment facts, carr
 
 The 2021 UPS poster explicitly described $15-$30 unexpected charges as impractical to call about every week. The 2025 small-business thread described hundreds of dollars in weekly surcharges while someone manually reconciled invoices.
 
-This should become one of the page's strongest lines.
-
 Approved card headline:
 
 **The problem isn't a $20 surcharge. It's fighting it every week.**
 
 Supporting idea:
 
-Small disputes are economically irrational to chase one at a time. Zettel makes them worth pursuing by turning the repetitive review, evidence gathering, submission, follow-up, and reconciliation into a managed workflow.
+Small disputes are economically irrational to chase one at a time. Zettel makes them worth pursuing by turning repetitive review, evidence gathering, submission, follow-up, and reconciliation into a managed workflow.
 
 ### Pain 4: Evidence exists, but the dispute still stalls.
 
@@ -162,15 +375,17 @@ Approved card headline:
 
 Supporting idea:
 
-Zettel keeps a case file after the first decision. If a legitimate dispute is denied, the workflow records the reason, checks the evidence gap, and determines the next available escalation rather than treating "denied" as the end state.
+Zettel keeps a case file after the first decision. If a legitimate dispute is denied, the workflow records the reason, checks the evidence gap, and determines the next available action rather than treating "denied" as the end state.
 
 ### Important scope note
 
 Some Reddit complaints involve labels purchased through eBay or other third-party platforms. The initial Zettel Parcel service is designed around direct UPS/FedEx billing data. Third-party-label disputes are a later product path and must not be implied as supported at launch unless the operating process is implemented and tested.
 
+---
+
 ## Approved Product Direction
 
-Use the existing Zettel landing page as the visual foundation, but change the storytelling around the category-specific research above.
+Use the existing Zettel landing page as the visual foundation, but change the storytelling around the category-specific research and Platform-backed differentiation.
 
 Preserve:
 
@@ -184,22 +399,31 @@ Preserve:
 
 Add:
 
-- A parcel-specific Recovery Ledger / Case File visual.
+- A parcel-specific **Zettel Case File** as the signature visual.
 - Reddit-informed pain language.
-- A visible denial/escalation state.
+- A visible denial/next-action state.
 - Public contingency pricing.
 - Stronger trust/data handling language.
+- Historical-context demonstration for repeated package patterns.
+- Explicit evidence completeness/missing-evidence states.
+- A **No black-box savings score** trust section.
+- Customer-visible source/rule provenance without exposing backend jargon.
 
 Avoid:
 
 - AI-first positioning.
+- Knowledge-graph diagrams in the hero.
 - Fake refund totals.
 - Fake customer logos.
 - Fake testimonials.
 - Unsupported "average savings" claims.
 - Unsupported error-rate claims such as "1 in 5 invoices."
-- A savings calculator based on assumptions we cannot yet defend.
+- A savings calculator based on assumptions we cannot defend.
 - Copy that accuses UPS or FedEx of intentional wrongdoing.
+- Claims that an autonomous agent directly roams carrier systems.
+- Claims of OWL/RDF ontology reasoning that the current Platform does not provide.
+
+---
 
 ## Product And Audience
 
@@ -226,6 +450,8 @@ Likely early segments include ecommerce brands, specialty retail, toy and hobby 
 
 Shipment-volume thresholds should not be presented as hard requirements until customer discovery establishes a reliable floor.
 
+---
+
 ## Offer And Pricing
 
 The launch offer is intentionally low-friction:
@@ -248,6 +474,8 @@ You keep                            $750
 
 A founding-customer discount may be tested through direct sales, but it is not part of the canonical public landing-page offer unless explicitly approved later.
 
+---
+
 ## Positioning
 
 ### Primary hero message
@@ -268,7 +496,23 @@ Use later on the page:
 
 **The problem isn't a $20 surcharge. It's fighting it every week.**
 
-This is more specific to the lived pain than generic "save time and money" language.
+### Platform-backed trust message
+
+Use later on the page:
+
+**Every flagged charge comes with the reason.**
+
+Supporting idea:
+
+Zettel connects what you shipped, what the carrier changed, which rule applied, what evidence supports the challenge, and what happened next. If the evidence is incomplete, Zettel says so.
+
+### Agentic positioning
+
+Approved concept:
+
+**Zettel builds the case. You stay in control.**
+
+Do not position the MVP as an autonomous carrier-dispute bot. The current Platform AgentCore boundary is intentionally stateless, bounded, schema-constrained, proposal-oriented, and separated from Graphiti, canonical storage, Nango, provider tools, and direct writes. That is a trust advantage for financial disputes.
 
 ### What the page should not lead with
 
@@ -277,11 +521,14 @@ Do not make the hero about:
 - AI-powered logistics intelligence;
 - context graphs or knowledge graphs;
 - autonomous agents;
+- ontology infrastructure;
 - generic parcel optimization;
 - enterprise transformation;
 - estimated or theoretical savings.
 
-The underlying Zettel architecture may support the service, but the landing page should translate that capability into a customer-facing promise: every challenge has a case file, and every claimed recovery is tracked to an actual credit.
+The landing page should translate backend sophistication into a simple promise: every challenge gets an understandable case file, and every claimed recovery is tracked to an actual credit.
+
+---
 
 ## Brand And Domain Architecture
 
@@ -305,36 +552,42 @@ The `parcel` label is preferred over `refunds`, `audit`, or `recover` because it
 
 ### Implementation sequencing
 
-This design does not require a new multi-product platform before launch.
+The website does not require a new multi-product frontend platform before launch.
 
 Recommended sequence:
 
 1. Build the parcel landing page using the existing site's patterns.
 2. Move the existing drayage surface to the `drayage` subdomain.
 3. Replace the apex with a lightweight parent-product selector.
-4. Extract additional shared infrastructure only if maintaining the product surfaces becomes materially painful.
+4. Extract additional shared frontend infrastructure only if maintaining the product surfaces becomes materially painful.
 
-The current app is a static Next.js export, so implementation should favor simple deployable surfaces over premature platform work.
+This frontend simplicity must not be confused with the backend boundary: **Zettel Parcel's intelligent backend behavior must use Zettel Platform from the beginning.**
+
+---
 
 ## Revised Information Architecture
 
-The research changes the middle of the page. The recommended narrative is:
+Recommended narrative:
 
 1. Top navigation
-2. Hero + Recovery Ledger
+2. Hero + example Zettel Case File
 3. Immediate risk-reversal strip
 4. **Why shippers give up on disputes** — Reddit-informed problem section
-5. **How Zettel works** — Send -> Audit -> Build the case -> Recover
-6. **One charge, fully explained** — example case file
-7. **What happens when the carrier says no** — denial/escalation state
-8. What Zettel audits
-9. Pricing
-10. Trust and data handling
-11. FAQ
-12. Final free-audit CTA
-13. Footer / legal language
+5. **One charge. Full context.** — large case-file demonstration
+6. **Same box. Different bill.** — historical/package-pattern demonstration
+7. **How Zettel works** — Send -> Audit -> Build the case -> Recover
+8. **What happens when the carrier says no** — denial/next-action state
+9. What Zettel audits
+10. **No black-box savings score** — evidence/provenance/completeness/review trust
+11. Pricing
+12. Trust and data handling
+13. FAQ
+14. Final free-audit CTA
+15. Footer / legal language
 
-This keeps the current Zettel site's efficient single-page funnel while making the content specific to the actual parcel dispute experience.
+This keeps the current Zettel site's efficient single-page funnel while making the content specific to parcel disputes and the Platform's real differentiation.
+
+---
 
 ## Navigation
 
@@ -350,6 +603,8 @@ Desktop and mobile navigation should use:
 Do not use **Request a Pilot**, **Book a Demo**, or **Join Early Access** on the parcel page.
 
 Anchor labels and CTA labels must remain consistent everywhere on the page.
+
+---
 
 ## Hero
 
@@ -385,61 +640,90 @@ Directly below the hero CTA, use three concise facts:
 
 This borrows the effective reassurance pattern used by category competitors without adding unearned social proof.
 
-## Signature Visual: Recovery Ledger / Case File
+---
 
-The parcel page's distinctive visual element is a realistic, highly legible audit trail built from carrier billing data.
+## Signature Visual: Zettel Case File
 
-The strongest version is not merely a financial ledger. It visually answers the Reddit complaint: **what changed, why did it change, what evidence do I have, and what happened next?**
+The parcel page's distinctive visual element is a realistic, highly legible **case file** built from carrier billing and supporting evidence.
 
-Example:
+The visual should answer:
+
+**What changed? Why does it matter? What evidence supports the challenge? Which rule applied? What happened next?**
+
+The case file is the customer-facing representation of the Platform's canonical evidence, temporal graph relationships, provenance, durable operation, and decision/review concepts.
+
+Do not label the visual as a "knowledge graph," "context graph," or "AI trace."
+
+### Hero case example
 
 ```text
-TRACKING 1Z84...
+CASE #0173                                      NEEDS REVIEW
 
-ORIGINAL SHIPMENT
-Declared dimensions                    48 x 6 x 6 in
-Declared weight                         11.5 lb
-Original charge                          $24.80
+UPS Ground • 1Z84...
+Amount challenged                                  $47.75
 
-CARRIER ADJUSTMENT
-Audited dimensions                     49 x 7 x 7 in
-Billed DIM weight                         40 lb
-Additional adjustment                   +$97.11
+WHY ZETTEL FLAGGED IT
 
-CASE EVIDENCE
-Original shipment record                     ✓
-Package / SKU dimensions                     ✓
-Supporting photo                        available
-Applicable rule                         attached
+Your shipment
+48 x 6 x 6 in • 12.1 lb
+Packing / shipment record                              ✓
 
-CASE STATUS
-Dispute submitted                         Aug 18
-Carrier response                          Denied
-Evidence reviewed                         Aug 20
-Escalation submitted                      Aug 21
-Carrier credit                           -$97.11
+Carrier adjustment
+49 x 7 x 7 in
+Additional Handling                               +$47.75
 
-RECOVERED                                 $97.11
+RULE IN EFFECT ON SHIPMENT DATE
+UPS carrier rule • effective Aug 2026
+View source                                             ↗
+
+YOUR HISTORY
+Same package profile
+14 prior shipments • 0 prior corrections
+
+EVIDENCE
+Shipment record                                        ✓
+Original invoice                                       ✓
+Applicable rule                                        ✓
+Package photo                                     missing
+
+RECOMMENDED ACTION
+Challenge dimensional correction
+
+                                      [ Review case ]
 ```
 
-The numbers are illustrative UI content inspired by the type of issue described in public shipper discussions. They must be labeled **Example case** and must not imply that Zettel recovered this money for a real customer.
+All values are illustrative and must be visibly labeled **Example case**. They must not imply a real Zettel recovery, real carrier outcome, or currently verified carrier rule.
+
+### Why this visual is better than a dashboard
+
+The existing category is full of savings totals, dashboards, and audit-count claims. Zettel should instead make one confusing charge understandable.
+
+The case file visually expresses:
+
+**Shipment -> Package -> Charge -> Adjustment -> Rule -> Evidence -> Dispute -> Decision -> Credit**
+
+without exposing backend implementation details.
 
 ### Visual treatment
 
 - Public Sans for explanatory labels.
 - Restrained monospace for tracking IDs, measurements, invoice rows, timestamps, and dollar values.
 - Green only for verified positive outcomes.
-- Red/orange for challenged/denied states, with text labels so color is never the only signal.
+- Red/orange for challenged or denied states, with text labels so color is never the only signal.
+- Blue/neutral for source facts and rules.
 - Thin evidence connectors rather than decorative AI-node graphics.
-- One subtle sequential reveal may animate the case from adjustment -> evidence -> dispute -> credit, with reduced-motion support.
+- Source affordances should look clickable where a future authenticated product could open the underlying evidence.
+- One subtle sequential reveal may animate case assembly, with reduced-motion support.
 
-The design signature is: **make ugly carrier billing data understandable.**
+The design signature is:
+
+**Make ugly carrier billing data understandable.**
+
+---
 
 ## Risk-Reversal Strip
 
-Competitor research shows that contingency economics are often the most important trust message after the hero.
-
-Use a compact strip rather than a large pricing card this early:
+Use a compact strip rather than a large pricing card immediately after the hero:
 
 - **Start free** — send one invoice/export.
 - **No monthly fee** — for the managed MVP.
@@ -447,13 +731,15 @@ Use a compact strip rather than a large pricing card this early:
 
 Do not use phrases such as "risk free" if legal review has not approved them. State the economics directly instead.
 
+---
+
 ## Reddit-Informed Problem Section: Why Shippers Give Up
 
 Replace generic problem cards with four cards based on the recurring qualitative issues.
 
 ### Card 1: Same box. Different bill.
 
-Small measurement or classification changes can alter the final charge materially. Zettel compares the revised carrier billing with the original shipment record and available evidence.
+Small measurement or classification changes can alter the final charge materially. Zettel compares the revised carrier billing with the original shipment record, relevant historical pattern, and available evidence.
 
 Visual cue: two nearly identical parcel outlines with original vs. carrier dimensions.
 
@@ -467,7 +753,7 @@ Visual cue: an adjustment line expanding into shipment facts, rule, and evidence
 
 The cost of manually investigating, calling, filing, and following up can exceed the value of one small adjustment. Repetition is the real pain.
 
-Visual cue: several small $15-$30 adjustments accumulating into a weekly total and one managed queue.
+Visual cue: several small adjustments accumulating into a managed case queue.
 
 ### Card 4: A denial shouldn't erase the evidence.
 
@@ -477,13 +763,78 @@ Visual cue: case timeline with **Denied** as an intermediate state rather than t
 
 ### Source treatment
 
-The live page may cite carrier documentation for factual rules. Reddit should inform copy and UX, but the page should not present isolated Reddit anecdotes as proof that a specific percentage of shipments are wrong.
+The live page may cite carrier documentation for factual rules. Reddit should inform copy and UX, but isolated anecdotes must not be presented as proof of a population-level error rate.
 
-If public-user excerpts are ever shown, obtain an appropriate reuse basis and avoid exposing usernames or tracking information unnecessarily.
+---
+
+## One Charge. Full Context.
+
+This section replaces a generic SaaS dashboard screenshot.
+
+Headline:
+
+**Every charge gets a case file.**
+
+Supporting copy:
+
+**See what changed, which rule applied, what evidence supports the challenge, what we submitted, what the carrier said, and whether the money actually came back.**
+
+The section should visually connect:
+
+**invoice line -> shipment facts -> adjustment -> rule in effect -> evidence -> dispute -> response -> verified credit**
+
+### Platform-backed details worth surfacing visually
+
+Do not mention internal class names, but the visual may express these concepts:
+
+- **Source:** where a fact came from.
+- **Observed:** when Zettel received it.
+- **Effective:** when a rule/fact applied.
+- **Superseded:** when a newer fact replaced it.
+- **Evidence complete / incomplete:** whether the case has enough authoritative support.
+- **View source:** direct path back to the underlying evidence where the authenticated product supports it.
+
+This is the customer-facing expression of the Platform's temporal provenance and native citations.
+
+---
+
+## Same Box. Different Bill.
+
+This should be more than a problem card. It should demonstrate why persistent semantic history matters.
+
+Suggested visual:
+
+```text
+PACKAGE PROFILE: 18 x 12 x 8 / 7.4 LB
+
+Jan 8       UPS Ground       $14.72       ✓
+Jan 14      UPS Ground       $14.72       ✓
+Jan 21      UPS Ground       $14.72       ✓
+Jan 29      UPS Ground       $34.97       !
+                                         |
+                              Carrier changed:
+                              18x12x8 -> 20x14x9
+                                         |
+                              + Additional Handling
+```
+
+Headline option:
+
+**Zettel remembers what happened before.**
+
+Supporting idea:
+
+One shipment may look ambiguous by itself. Your own prior shipments can provide context. Zettel connects repeated package and charge history so a reviewer can see whether a new adjustment is consistent with the pattern or deserves a closer look.
+
+### Important truth constraint
+
+Historical consistency is **evidence**, not proof that a carrier adjustment is invalid. The live product must not automatically treat prior billing as authoritative measurement evidence.
+
+---
 
 ## How It Works
 
-Use four steps instead of the current three because **Build the case** is a meaningful differentiator.
+Use four steps because **Build the case** is a meaningful differentiator.
 
 ### 1. Send
 
@@ -495,43 +846,27 @@ For the initial assessment, do not require a carrier password if an invoice/expo
 
 **We find charges worth reviewing.**
 
-Zettel compares invoice lines with shipment facts, service commitments, rates, and available carrier rules.
+Zettel connects invoice lines with available shipment facts, service commitments, rates, relevant history, and carrier rules.
 
 ### 3. Build the case
 
 **We assemble the reason and the evidence.**
 
-The case file should show the original charge, carrier adjustment, applicable rule, evidence, dispute state, and any missing information.
+The case file should show the original charge, carrier adjustment, rule in effect, evidence, relevant history, dispute state, and missing information.
 
 ### 4. Recover
 
-**We pursue the credit and verify it actually posts.**
+**We pursue the supported next action and verify any credit that actually posts.**
 
 The final success state is a verified carrier credit, not an estimated saving.
 
-## One Charge, Fully Explained
+### Internal implementation mapping
 
-This section replaces a generic SaaS dashboard screenshot.
+This user-visible process may span Parcel product records, Platform durable product work, Platform graph/canonical retrieval, bounded structured reasoning, review, and Parcel-specific carrier actions. The page should not expose those implementation boundaries.
 
-Use a larger version of the Recovery Ledger with explanatory callouts around one example adjustment.
+---
 
-The section headline should be:
-
-**Every charge gets a case file.**
-
-Supporting copy:
-
-**See what changed, what the carrier says, what the evidence shows, what we submitted, and whether the credit actually came back.**
-
-The visual should connect:
-
-**invoice line -> shipment facts -> carrier adjustment -> rule -> evidence -> dispute -> response -> verified credit**
-
-This is the customer-facing expression of Zettel's provenance/context-graph advantage without using graph terminology.
-
-## What Happens When the Carrier Says No
-
-This is a new standalone section because denial friction appears repeatedly in user complaints and is underexplained on many competitor sites.
+## What Happens When The Carrier Says No
 
 Headline:
 
@@ -539,11 +874,30 @@ Headline:
 
 Body concept:
 
-A carrier response becomes another piece of the case, not a dead end. Zettel records the reason, checks whether the evidence supports another step, requests missing proof when needed, and tracks any supported escalation through resolution.
+A carrier response becomes another piece of the case, not a dead end. Zettel records the response, preserves the evidence, checks what is missing, and determines the next supported action.
+
+### Case states
+
+The UI concept should support states such as:
+
+- Candidate
+- Evidence incomplete
+- Ready for review
+- Approved for submission
+- Submitted
+- Carrier responded
+- Denied
+- Needs more evidence
+- Escalation available
+- Closed / unsupported
+- Credit pending
+- Credit verified
+
+These are Parcel domain states, not direct mappings to the Platform's generic operation status enum.
 
 ### Required truth constraint
 
-The launch site must only claim escalation behavior that the actual managed service can perform reliably. Before implementation publishes this copy, document and test the UPS and FedEx workflows for:
+Before implementation publishes escalation copy, document and test UPS and FedEx workflows for:
 
 - first dispute submission;
 - denial reason capture;
@@ -552,11 +906,11 @@ The launch site must only claim escalation behavior that the actual managed serv
 - status follow-up;
 - final credit verification.
 
-If a carrier or charge category does not support a reliable escalation path, the copy must say Zettel **reviews the denial and next available action**, not that Zettel will necessarily appeal it.
+If a carrier or charge category does not support a reliable escalation path, say Zettel **reviews the denial and next available action**, not that Zettel will necessarily appeal it.
+
+---
 
 ## What We Audit
-
-Reuse the current six-card feature-grid pattern, but make each card a real audit category rather than a generic software feature.
 
 Candidate launch categories:
 
@@ -569,9 +923,9 @@ Candidate launch categories:
 
 A category must not appear on the live site until the operational recovery process for that category has been tested and can be delivered reliably.
 
-### Category-card design change
+### Category-card structure
 
-Each card should answer three things rather than provide generic marketing prose:
+Each card should answer:
 
 - **What you see on the bill**
 - **What Zettel checks**
@@ -582,10 +936,92 @@ Example:
 **DIM / weight correction**
 
 - Bill: carrier-adjusted dimensions or billed weight.
-- Check: original dimensions/weight vs. carrier-adjusted values and applicable DIM rules.
+- Check: original dimensions/weight vs. carrier-adjusted values, history, and applicable rule.
 - Evidence: shipment record, package/SKU dimensions, scale/photo evidence when available.
 
-This directly addresses users who know something looks wrong but do not know what is needed to challenge it.
+---
+
+## No Black-Box Savings Score
+
+This section is a Platform-informed differentiator and should appear before pricing/trust.
+
+Headline:
+
+**Every flagged charge comes with the reason.**
+
+Supporting copy:
+
+Zettel does not need to ask you to trust an unexplained savings score. A case can show what changed, which evidence supports the challenge, which rule applied, and what information is still missing.
+
+### Three trust cards
+
+#### 1. Evidence you can trace
+
+Show source-backed facts rather than only a confidence percentage.
+
+Customer language:
+
+**See the invoice, shipment fact, rule, or evidence behind the recommendation.**
+
+#### 2. Time matters
+
+Carrier rules and shipment facts can change.
+
+Customer language:
+
+**Zettel checks the rule and facts in context, including when they applied.**
+
+Use wording such as **Rule in effect on shipment date** inside case visuals.
+
+#### 3. Missing evidence stays missing
+
+Do not manufacture certainty.
+
+Customer language:
+
+**If the evidence isn't there, Zettel says so.**
+
+Possible visual states:
+
+- Evidence complete
+- Missing package measurement
+- Rule needs verification
+- Historical context available
+- Needs human review
+
+### Degraded knowledge behavior
+
+The Platform can explicitly represent degraded knowledge/retrieval states. The Parcel UI should preserve that philosophy: if part of the evidence/retrieval pipeline is unavailable, do not silently present a complete-looking case.
+
+The exact customer-facing degraded state is a later product design decision, but the landing-page examples should normalize visible uncertainty rather than fake certainty.
+
+---
+
+## Agentic Behavior And Human Review
+
+Zettel Platform's current AgentCore Harness is bounded, stateless, typed, and proposal-only. It has no AgentCore Memory and no direct Graphiti, Nango, product-store, provider-tool, shell, or canonical-write access.
+
+That means the Parcel product should be designed around **assembled context -> bounded structured recommendation -> explicit product acceptance/action**, not an agent that independently explores systems.
+
+### Landing-page implication
+
+Use:
+
+**Zettel builds the case. You stay in control.**
+
+Avoid:
+
+- "Our autonomous AI disputes every charge for you."
+- "The agent logs into UPS and investigates on its own."
+- "AI independently reads your graph and takes action."
+
+### MVP review posture
+
+For financially sensitive external actions, default product design should assume a reviewable case/action until operational evidence supports a narrower automatic mode.
+
+Platform already supports generic review-required vs. automatic workspace policy and bounded automatic operation caps. Parcel may later use those Platform controls, but the landing page should not promise automatic dispute submission until the Parcel workflow is proven.
+
+---
 
 ## Pricing Section
 
@@ -605,11 +1041,15 @@ Do not use fake ROI calculators, estimated savings percentages, or unsupported "
 
 ### Competitive context
 
-Current competitors publish contingency rates ranging from approximately 35% to 50% on the pages reviewed, while Reveel currently markets its audit service as free to shippers. Zettel should therefore avoid claiming to be the "cheapest" or universally lowest-cost option. The design should sell **transparent managed recovery + evidence + low-friction onboarding**, with 25% as the simple launch price.
+Current competitors publish contingency rates ranging from approximately 35% to 50% on the pages reviewed, while Reveel currently markets its audit service as free to shippers. Zettel should therefore avoid claiming to be the "cheapest" or universally lowest-cost option.
+
+Sell:
+
+**transparent managed recovery + evidence-backed cases + low-friction onboarding + verified outcomes.**
+
+---
 
 ## Trust And Data Handling
-
-Parcel auditing asks a prospect to share financial and carrier information, so trust deserves its own section.
 
 Primary message:
 
@@ -627,13 +1067,17 @@ Required trust statements, subject to implementation truth:
 - Place a clear privacy-policy link adjacent to any invoice-upload flow.
 - Include an appropriate footer disclaimer that Zettel is not affiliated with UPS or FedEx.
 
-### Evidence trust message
+### Platform-derived trust facts that may inform future authenticated-product copy
 
-Add a short callout:
+The current Platform architecture provides workspace-scoped canonical/graph/product records, durable operations, and explicit provenance boundaries. These are useful implementation foundations, but the marketing site must still avoid security/compliance claims not formally reviewed for the deployed Parcel environment.
+
+### Evidence trust message
 
 **Already photograph or measure your packages? Send the proof with the case. Don't have it? Zettel shows what evidence is missing and what is worth capturing next time.**
 
-This responds to users who began photographing shipments only after being burned by an adjustment, without requiring Zettel to ship a packing-station capture product in the first release.
+This responds to users who began photographing shipments only after being burned by an adjustment, without requiring a packing-station capture product in the first release.
+
+---
 
 ## Audit Intake Flow
 
@@ -652,17 +1096,89 @@ Do not begin with a long enterprise qualification form.
 
 ### Upload guidance
 
-If invoice upload is available, the form should say exactly what is accepted and why:
+If invoice upload is available:
 
 **Upload one recent carrier invoice or billing export. We'll use it to see whether there are charges worth reviewing.**
 
 If invoice upload is not implemented in the first release, the form must clearly tell the prospect what happens next rather than presenting a dead upload affordance.
 
+### Backend boundary
+
+The landing site's intake mechanism may use a small purpose-built submission service if needed. That does not relax the Platform requirement for the actual Parcel product's agentic/retrieval/semantic workflow.
+
+The eventual ingestion path for carrier data must normalize into a Platform-compatible evidence/canonical model or another explicitly approved Platform extension. Do not create a hidden Parcel-only RAG corpus behind the intake form.
+
+---
+
+## Parcel-Specific Platform Gaps To Design Before Product Implementation
+
+The current Platform provides the intelligence/runtime foundation, but Parcel requires new product/domain capabilities around it.
+
+### Gap 1: UPS/FedEx are not current canonical source providers
+
+Current core source provider types are centered on Gmail, Google Workspace, and application corrections.
+
+Parcel needs a Platform-compatible ingestion path for:
+
+- UPS invoices / billing exports;
+- FedEx invoices / billing exports;
+- shipment manifests / shipment records;
+- tracking/status events as needed;
+- contracts/rate sheets where used;
+- carrier rule documents / structured rules;
+- customer-uploaded evidence.
+
+Architecture principle:
+
+**Extend Platform-compatible source/canonical ingestion rather than maintaining a Parcel-only evidence database for semantic reasoning.**
+
+Whether this requires a new generic Platform provider type, an application/source adapter, or another narrow Platform extension is a backend-design question for the implementation plan.
+
+### Gap 2: Carrier dispute actions are not current Platform external actions
+
+The Platform action system demonstrates the desired safety properties for Gmail/Google Workspace: closed action schemas, exact previews, bounds, digests, review approval, and durable effects.
+
+Parcel should follow the same philosophy for carrier actions.
+
+Do not let the bounded reasoning Harness directly call carrier APIs or websites.
+
+Potential later flow:
+
+**Case recommendation -> Parcel action proposal -> review/authorization -> Parcel carrier adapter -> durable effect receipt/result -> case update**
+
+The exact implementation belongs in a separate Parcel backend design.
+
+### Gap 3: Carrier-rule corpus and temporal rule semantics
+
+Parcel needs an authoritative or carefully sourced carrier-rule corpus with explicit:
+
+- carrier;
+- rule identity;
+- effective date;
+- supersession/version lineage;
+- applicable service/package conditions;
+- source citation;
+- retrieval/search semantics.
+
+Use Zettel Platform's canonical evidence and temporal graph capabilities for semantic memory/search. Do not create a separate rules vector database.
+
+### Gap 4: Parcel-specific semantic schema
+
+Define Parcel entity/edge types and extraction instructions, then use Platform typed Graphiti APIs.
+
+Do not generalize into a cross-product ontology framework until another product proves the need.
+
+### Gap 5: Credit verification
+
+The landing page sells **verified credits**, so Parcel needs a reliable operational mechanism to identify the posted carrier credit and associate it with the case.
+
+This is product-specific financial reconciliation, not a generic graph/agent capability.
+
+---
+
 ## Visual System
 
 ### Existing brand values to preserve
-
-The current site already defines a recognizable Zettel system around:
 
 - Primary green: `#006527`
 - Recovery/light green: `#96F8A1`
@@ -687,80 +1203,86 @@ Add a restrained monospace utility role for:
 
 IBM Plex Mono or a similar restrained open-source monospace is the preferred direction, subject to implementation review and loading cost.
 
-Public Sans remains the display, body, navigation, and control face.
-
 ### Semantic color use
 
-- Green: recovered, accepted, positive financial outcome.
-- Blue: neutral carrier/shipment information.
+- Green: recovered, accepted, verified positive financial outcome.
+- Blue: neutral carrier/shipment/source information.
 - Red/orange: challenged or denied state.
-- Ink/neutral: ordinary financial and explanatory data.
+- Gray/neutral: missing evidence, ordinary financial and explanatory data.
 
-Do not turn the site into a red/green trading dashboard. Financial and case states must remain understandable without color alone.
+Do not turn the site into a trading dashboard. Financial and case states must remain understandable without color alone.
+
+---
 
 ## Revised Layout Concept
 
 ```text
-+--------------------------------------------------------------+
-| ZETTEL PARCEL                 How it works   What we audit    |
-|                               Pricing        [Free audit]     |
-+--------------------------------------------------------------+
-| Managed UPS & FedEx parcel audit                             |
-|                                                              |
-| WE FIND THE SHIPPING CHARGES       +----------------------+   |
-| YOU SHOULDN'T HAVE PAID.           | EXAMPLE CASE FILE    |   |
-|                                    | original / adjusted  |   |
-| Explanation                         | evidence / denied     |   |
-| [ Start a free audit ]             | appeal / recovered   |   |
-| See what we check                  +----------------------+   |
-|                                                              |
-| Start with invoice | 25% verified credits | $0 = $0         |
-+--------------------------------------------------------------+
-| WHY SHIPPERS GIVE UP                                         |
-| [Same box. Different bill.]  [A surcharge without the story] |
-| [$20 every week]             [A denial isn't the end]        |
-+--------------------------------------------------------------+
-| HOW ZETTEL WORKS                                             |
-| SEND -> AUDIT -> BUILD THE CASE -> RECOVER                   |
-+--------------------------------------------------------------+
-| EVERY CHARGE GETS A CASE FILE                                |
-| invoice -> facts -> adjustment -> rule -> evidence           |
-|                     -> dispute -> response -> credit          |
-+--------------------------------------------------------------+
-| DENIED ISN'T THE SAME AS EXPLAINED                           |
-| [denial] -> [evidence gap] -> [next action] -> [resolution]  |
-+--------------------------------------------------------------+
-| WHAT WE AUDIT                                                |
-| [late] [DIM] [duplicates] [residential] [handling] [rates]  |
-+--------------------------------------------------------------+
-| SIMPLE PRICING                                               |
-|                    25% OF VERIFIED CREDITS                   |
-+--------------------------------------------------------------+
-| START WITH AN INVOICE, NOT YOUR PASSWORD                     |
-+--------------------------------------------------------------+
-| FAQ                                                          |
-+--------------------------------------------------------------+
-| THINK YOUR SHIPPING BILL DESERVES A SECOND LOOK?             |
-|                      [ Start free audit ]                     |
-+--------------------------------------------------------------+
++----------------------------------------------------------------+
+| ZETTEL PARCEL                   How it works   What we audit    |
+|                                 Pricing        [Free audit]     |
++----------------------------------------------------------------+
+| Managed UPS & FedEx parcel audit                               |
+|                                                                |
+| WE FIND THE SHIPPING CHARGES       +------------------------+  |
+| YOU SHOULDN'T HAVE PAID.           | EXAMPLE ZETTEL CASE    |  |
+|                                    | original / adjusted    |  |
+| Explanation                         | rule / evidence         |  |
+| [ Start a free audit ]             | history / action       |  |
+| See what we check                  +------------------------+  |
+|                                                                |
+| Start with invoice | 25% verified credits | $0 = $0           |
++----------------------------------------------------------------+
+| WHY SHIPPERS GIVE UP                                           |
+| [Same box. Different bill.] [Surcharge without the story]      |
+| [$20 every week]          [A denial shouldn't erase evidence]  |
++----------------------------------------------------------------+
+| EVERY CHARGE GETS A CASE FILE                                  |
+| invoice -> facts -> rule -> evidence -> dispute -> decision -> $|
++----------------------------------------------------------------+
+| SAME BOX. DIFFERENT BILL.                                      |
+| repeated package history -> unusual adjustment -> closer look  |
++----------------------------------------------------------------+
+| HOW ZETTEL WORKS                                               |
+| SEND -> AUDIT -> BUILD THE CASE -> RECOVER                     |
++----------------------------------------------------------------+
+| DENIED ISN'T THE SAME AS EXPLAINED                             |
+| [denial] -> [evidence gap] -> [next action] -> [resolution]    |
++----------------------------------------------------------------+
+| WHAT WE AUDIT                                                  |
+| [late] [DIM] [duplicates] [residential] [handling] [rates]    |
++----------------------------------------------------------------+
+| NO BLACK-BOX SAVINGS SCORE                                     |
+| [trace evidence] [rule in effect] [missing stays missing]      |
++----------------------------------------------------------------+
+| SIMPLE PRICING                                                 |
+|                    25% OF VERIFIED CREDITS                     |
++----------------------------------------------------------------+
+| START WITH AN INVOICE, NOT YOUR PASSWORD                       |
++----------------------------------------------------------------+
+| FAQ                                                            |
++----------------------------------------------------------------+
+| THINK YOUR SHIPPING BILL DESERVES A SECOND LOOK?               |
+|                      [ Start free audit ]                       |
++----------------------------------------------------------------+
 ```
+
+---
 
 ## Motion And Interaction
 
 The page should remain restrained.
 
-One orchestrated motion moment is enough: the Recovery Ledger / Case File may reveal its stages in order on initial viewport entry, provided reduced-motion preferences are respected and the content remains fully available without animation.
+One orchestrated motion moment is enough: the example Case File may reveal its stages in order on viewport entry, provided reduced-motion preferences are respected and the content remains fully available without animation.
 
 Suggested reveal:
 
 1. Original shipment
 2. Carrier adjustment
-3. Evidence
-4. Dispute
-5. Denial / next action
-6. Verified credit
-
-This sequence makes the workflow understandable without scattered decorative animation.
+3. Rule in effect
+4. Historical context
+5. Evidence state
+6. Recommended action / review
+7. Later resolution / verified credit in the larger downstream example
 
 Preserve existing production-quality behavior from the current site:
 
@@ -773,14 +1295,19 @@ Preserve existing production-quality behavior from the current site:
 - mobile navigation parity;
 - strong source-link contrast.
 
+---
+
 ## FAQ Topics
 
-The initial FAQ should answer the questions most likely to block a free audit:
+The initial FAQ should answer:
 
 - What kinds of UPS/FedEx charges do you review?
 - How much does Zettel cost?
 - What do I need to send you?
 - Do I need to give you my carrier password?
+- How does Zettel decide a charge is worth reviewing?
+- What evidence does Zettel use?
+- What happens if evidence is missing?
 - What happens if the carrier denies a dispute?
 - What if I do not have package photos or scale evidence?
 - How do refunds/credits reach me?
@@ -791,6 +1318,10 @@ The initial FAQ should answer the questions most likely to block a free audit:
 - What data do you keep?
 
 The exact answers to carrier-specific windows, third-party platform support, escalation paths, and data retention must come from verified operating rules before publication.
+
+Do not expose internal Platform implementation details in the FAQ unless they directly help a buyer evaluate security, evidence quality, or control and the statement has been reviewed for accuracy.
+
+---
 
 ## Conversion And Analytics
 
@@ -816,7 +1347,13 @@ Early product metric after manual fulfillment begins:
 
 **percentage of submitted audits with at least one defensible recovery candidate**
 
+Later quality metric:
+
+**verified credits / submitted supported cases**
+
 The page should not optimize for email-list signup because this is intended to be a purchasable managed service, not an early-access waitlist.
+
+---
 
 ## Accessibility And Responsive Requirements
 
@@ -825,11 +1362,14 @@ Target WCAG 2.2 AA.
 - Every interactive element uses native semantics.
 - Keyboard focus is visible and never obscured by fixed navigation.
 - Problem/card information is not encoded by color alone.
-- Recovery Ledger rows remain readable at 200% zoom.
-- On narrow screens, the ledger becomes a vertical timeline rather than horizontally scrolling tiny financial data.
+- Case File rows remain readable at 200% zoom.
+- On narrow screens, the Case File becomes a vertical timeline rather than horizontally scrolling tiny financial data.
 - Any sequential animation respects `prefers-reduced-motion`.
 - Source and privacy links have sufficient contrast and usable touch targets.
 - Mobile CTA access remains obvious without covering page content.
+- Evidence completeness and denial states use explicit text/icon labels in addition to color.
+
+---
 
 ## SEO And Content Direction
 
@@ -845,29 +1385,35 @@ Primary page topics:
 - address correction fee
 - carrier billing audit
 
-The launch page itself should remain conversion-focused. Supporting educational articles can later target specific queries such as:
+Supporting educational articles can later target:
 
 - Why did UPS change my package dimensions?
 - How do I dispute a UPS shipping charge correction?
 - How do FedEx dimensional adjustments work?
 - What evidence should I keep for a carrier billing dispute?
 - Why did I get an Additional Handling charge?
+- How should I document package dimensions before shipping?
+- Why can the same package receive different adjustments?
 
-These topics map naturally to the questions found in public shipper discussions.
+Educational content should use primary carrier sources for factual rules and may use public shipper discussions only as qualitative context.
 
-## MVP Scope
+---
+
+## MVP Landing Page Scope
 
 ### Build now
 
 - Parcel-specific navigation
 - Hero
-- Recovery Ledger / example case file
+- Example Zettel Case File
 - Risk-reversal strip
 - Reddit-informed problem cards
+- Full-context case-file section
+- Same-box historical-context section
 - Four-step process
-- One-charge case-file section
 - Denial / next-action section
 - Audit-category grid
+- No-black-box-score trust section
 - Public pricing
 - Trust/data section
 - FAQ
@@ -877,7 +1423,7 @@ These topics map naturally to the questions found in public shipper discussions.
 - Accessibility/reduced-motion treatment
 - CTA/funnel analytics
 
-### Do not build yet
+### Do not build in the landing-page repo yet
 
 - Customer dashboard
 - Login
@@ -887,15 +1433,55 @@ These topics map naturally to the questions found in public shipper discussions.
 - Automated appeal engine
 - Public API
 - Interactive AI demo
+- Knowledge-graph explorer
+- Ontology editor
 - Multi-carrier platform beyond verified launch support
 - Huge resource center
 - Fake customer logos
 - Fake recovery statistics
 - Fake testimonials
 
+---
+
+## Parcel Backend Design Requirements For The Next Phase
+
+The landing page can be implemented after this design is approved, but the full product requires a separate backend implementation plan/design that respects this boundary.
+
+The next backend design must define:
+
+1. Stable `parcel` product key and product composition factories.
+2. Parcel product records and state transitions.
+3. UPS/FedEx invoice/shipment/evidence ingestion into Platform-compatible canonical evidence.
+4. Parcel semantic entity/edge schema supplied to Platform typed Graphiti.
+5. Stable parcel graph identities and temporal versioning rules.
+6. Carrier-rule source/version/effective-date model.
+7. Retrieval lanes/queries for shipment facts, carrier rules, historical package/case context, and prior outcomes.
+8. Evidence completeness rules.
+9. Bounded Parcel reasoning prompt and structured output schema using Platform AgentCore.
+10. Product review/acceptance behavior.
+11. Carrier dispute action adapter and authorization boundary.
+12. Denial/next-action workflow.
+13. Credit verification/reconciliation.
+14. Product-specific deletion/source hooks.
+15. Contingency-fee calculation and verified-credit billing workflow.
+16. Verification/e2e tests demonstrating no direct Parcel graph/model/search stack exists.
+
+### Suggested retrieval perspectives
+
+Parcel may conceptually retrieve across four perspectives while using Platform retrieval/search machinery:
+
+- **This shipment** — exact shipment/invoice/evidence identity.
+- **Carrier rules** — applicable rules and effective dates.
+- **Your history** — similar package/shipment/charge history.
+- **Prior cases** — relevant dispute decisions and outcomes.
+
+These are product concepts, not a mandate for a specific public API or exactly four internal queries.
+
+---
+
 ## Operational Truth Gate Before Launch
 
-Because the page is selling a managed financial service, the following must be verified before the corresponding copy goes live:
+Because the page sells a managed financial service, verify before corresponding copy goes live:
 
 1. Which UPS charge categories Zettel can reliably identify and dispute.
 2. Which FedEx charge categories Zettel can reliably identify and dispute.
@@ -908,22 +1494,36 @@ Because the page is selling a managed financial service, the following must be v
 9. Whether the customer must authorize Zettel as an agent for any action.
 10. How invoice and shipment data is stored, retained, and deleted.
 11. Whether labels purchased through third-party platforms are explicitly unsupported at launch.
+12. Which carrier/rule sources are authoritative enough to drive case recommendations.
+13. How effective dates and superseded rules are represented.
+14. Which Parcel case actions require human review.
+15. How a degraded or incomplete evidence state is surfaced to operators/customers.
 
-If any item is not verified, the landing page must use narrower wording rather than inventing a capability.
+If any item is not verified, use narrower wording rather than inventing a capability.
 
-## Implementation Notes For Existing Site
+---
+
+## Implementation Notes For Existing Website
 
 The current home page is already split into reusable sections such as Hero, Steps, Problem, Solution, FeatureGrid, FinalCTA, TopNav, and Footer. Implementation should reuse the established design language and interaction patterns while allowing parcel-specific section components where the content model materially differs.
 
-Do not force a one-to-one clone of existing components if that makes the parcel story awkward. Reuse visual primitives and tokens; create parcel-specific components for the Recovery Ledger, denial timeline, and audit-category cards.
+Do not force a one-to-one clone of existing components if that makes the parcel story awkward. Reuse visual primitives and tokens; create parcel-specific components for:
+
+- Zettel Case File;
+- historical-package comparison;
+- denial/next-action timeline;
+- evidence completeness;
+- audit-category cards.
 
 The current site uses a static Next.js export. Keep the landing page compatible with that architecture unless the intake/upload flow creates a verified need for a different runtime boundary.
 
 The existing popup CTA work should be reused where appropriate, but invoice upload introduces privacy and file-handling requirements that must be designed before implementation.
 
-## Competitor-Inspired Patterns To Borrow
+The landing-page repo must not attempt to implement Zettel Platform or duplicate its backend behavior.
 
-Borrow these category conventions deliberately:
+---
+
+## Competitor-Inspired Patterns To Borrow
 
 - **AuditShipment:** free-audit CTA, immediate no-upfront-cost reassurance, clear what-we-audit taxonomy, transparent pricing/trust near the bottom.
 - **LateShipment:** visible contingency pricing, strong explanation of denial escalation, proof near the top, and an explicit recovery-to-optimization narrative for future expansion.
@@ -934,6 +1534,8 @@ Borrow these category conventions deliberately:
 - **TransImpact:** when real outcomes exist, show recovered dollars as the proof rather than estimated opportunity.
 - **Shipware:** explain the scope of invoice-line checks and emphasize that the service removes manual claim work.
 
+---
+
 ## Patterns To Avoid
 
 - Large unsupported market-size or error-rate claims.
@@ -941,30 +1543,42 @@ Borrow these category conventions deliberately:
 - Dense enterprise navigation on a single-product validation page.
 - Hero copy that begins with "AI-powered."
 - Generic dashboards full of charts that do not explain one disputed charge.
+- Decorative network/knowledge-graph art that exposes implementation without clarifying value.
 - Savings calculators that imply certainty from weak assumptions.
 - "We recover every dollar" language.
 - Carrier-blaming language that undermines credibility.
 - Claiming a dispute is valid solely because a Reddit user believed it was valid.
+- Claiming prior similar shipments prove a new adjustment is wrong.
+- Pretending missing evidence is present.
+- Pretending degraded graph/search knowledge is complete.
+- Building or marketing a second Parcel-only graph/search/agent stack.
+
+---
 
 ## Design Success Criteria
 
 A qualified visitor should understand within roughly ten seconds:
 
 1. This is for UPS/FedEx shippers.
-2. Zettel audits shipping bills and finds charges worth challenging.
-3. Zettel handles the repetitive dispute/recovery work.
-4. Zettel preserves the evidence and does not stop conceptually at a first denial.
-5. The customer can start with one invoice.
-6. There is no setup/monthly fee for the managed MVP.
-7. Zettel charges 25% only after a verified credit.
+2. Zettel audits shipping bills and finds charges worth reviewing.
+3. Zettel builds an understandable evidence-backed case rather than only a savings score.
+4. Zettel handles the repetitive dispute/recovery work.
+5. Zettel preserves evidence and does not stop conceptually at a first denial.
+6. The customer can start with one invoice.
+7. There is no setup/monthly fee for the managed MVP.
+8. Zettel charges 25% only after a verified credit.
 
-The design should also make a shipper who has personally experienced a confusing adjustment think:
+A shipper who has experienced a confusing adjustment should think:
 
 **"Yes. This is the exact problem I keep having."**
 
-## Verification Plan For Implementation
+A technical reviewer should also be able to map the public story to the Zettel Platform boundary without finding a hidden duplicate intelligence stack.
 
-Before claiming implementation complete:
+---
+
+## Verification Plan For Landing-Page Implementation
+
+Before claiming landing-page implementation complete:
 
 - Run repository lint, typecheck/test commands if present, and production build.
 - Verify static export still succeeds.
@@ -973,8 +1587,9 @@ Before claiming implementation complete:
 - Verify both CTAs behave as designed.
 - Verify the audit-intake flow's success, failure, validation, keyboard, and privacy-link states.
 - Verify reduced-motion behavior.
-- Verify the Recovery Ledger stays readable without animation.
+- Verify the Case File stays readable without animation.
 - Verify problem cards and audit-category cards remain understandable without color.
+- Verify evidence-completeness states remain understandable without color.
 - Check all factual carrier claims against current UPS/FedEx primary sources.
 - Check every competitor/Reddit-inspired statement on the live page: anecdotes should influence UX/copy but not be presented as population-level facts.
 - Confirm illustrative case data is visibly labeled **Example case**.
@@ -982,10 +1597,31 @@ Before claiming implementation complete:
 - Confirm pricing is consistent everywhere.
 - Confirm third-party label support is not implied unless implemented.
 - Confirm privacy/data-handling copy matches actual behavior.
+- Confirm no landing-page copy implies autonomous carrier actions not implemented by Parcel.
+- Confirm no landing-page copy claims standards-based ontology reasoning not implemented by Platform.
+
+---
+
+## Verification Principles For Future Parcel Backend
+
+The later Parcel backend implementation should include evidence that:
+
+- Parcel uses Zettel Platform product-extension factories.
+- Parcel work uses Platform durable product work/operations.
+- Parcel reasoning uses Platform `StructuredAgentPort` / AgentCore boundary.
+- Parcel graph writes/search use Platform `GraphMemory` / retrieval boundaries rather than direct Graphiti clients.
+- Parcel canonical evidence uses Platform-compatible provenance/citation records.
+- Parcel uses workspace-scoped product records.
+- Parcel preserves knowledge-degraded/incomplete behavior rather than masking it.
+- Carrier actions cannot be performed directly by the bounded AgentCore Harness.
+- Parcel does not introduce another vector database, graph database, model router, RAG stack, or generic ontology engine.
+
+---
 
 ## Out Of Scope
 
 - Implementing the landing page in this design phase.
+- Implementing the Parcel backend in this design phase.
 - Changing the managed-service price beyond the approved 25% launch offer.
 - Building the parent apex page.
 - Performing the drayage subdomain migration.
@@ -993,6 +1629,10 @@ Before claiming implementation complete:
 - Building a packing evidence-capture application.
 - Supporting Shopify/eBay/ShipStation-mediated adjustments without a separately validated workflow.
 - Defining legal terms of service or data-retention policy in this design document.
+- Replacing Zettel Platform's graph/search/agent architecture.
+- Building a generic cross-product ontology framework without evidence from more than one product.
+
+---
 
 ## Final Design Principle
 
@@ -1000,6 +1640,12 @@ Before claiming implementation complete:
 
 The competitive category already knows how to say "we audit invoices." Zettel should make the hidden work visible:
 
-**what changed -> why it matters -> what evidence exists -> what was submitted -> what the carrier said -> what happened next -> whether money actually came back.**
+**what changed -> which rule applied -> what evidence exists -> what history matters -> what is missing -> what was submitted -> what the carrier said -> what happened next -> whether money actually came back.**
 
-That is both the strongest response to the user pain in the Reddit threads and the clearest customer-facing expression of Zettel's provenance advantage.
+The Zettel Platform makes that story technically coherent through durable operations, canonical evidence, temporal typed graph memory, provenance-aware retrieval, review, and bounded structured reasoning.
+
+The Parcel product adds the shipping-specific semantics and operating workflow around that shared foundation.
+
+That combination is the product differentiation:
+
+**not another black-box savings score, and not another generic AI auditor — a managed, evidence-backed case system for parcel recovery.**
