@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function FullContextSection() {
   return (
     <section className="border-b border-outline-variant bg-surface-container-lowest px-6 py-20 sm:py-24">
@@ -20,7 +22,14 @@ export function FullContextSection() {
           </ul>
         </div>
         <figure className="border border-outline-variant bg-white p-3 sm:p-5">
-          <img src="/diagrams/parcel/parcel-case-assembly.svg" alt="Diagram showing invoice, shipment facts, rule, evidence, and relevant history becoming a Zettel Case File, then human review, carrier response, and a verified credit." className="h-auto w-full" />
+          <Image
+            src="/diagrams/parcel/parcel-case-assembly.svg"
+            alt="Diagram showing invoice, shipment facts, rule, evidence, and relevant history becoming a Zettel Case File, then human review, carrier response, and a verified credit."
+            width={946}
+            height={548}
+            unoptimized
+            className="h-auto w-full"
+          />
           <figcaption className="mt-3 border-t border-outline-variant pt-3 text-xs leading-5 text-on-surface-variant">The Case File assembles source facts and context into a reviewable next action. It does not turn history into proof or bypass human control.</figcaption>
         </figure>
       </div>
