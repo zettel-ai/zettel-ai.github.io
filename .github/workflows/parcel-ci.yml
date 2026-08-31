@@ -1,0 +1,44 @@
+name: Verify Parcel landing page
+
+on:
+  push:
+    branches:
+      - feat/parcel-landing-page
+  pull_request:
+    branches:
+      - design/parcel-audit-landing-page
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Record relevant installed Next 16 docs
+        run: |
+          echo "Next package: $(node -p \"require('next/package.json').version\")"
+          find node_modules/next/dist/docs -type f | grep -E 'layouts-and-pages|static-exports|output\.md|metadata' | head -20
+          sed -n '1,180p' node_modules/next/dist/docs/01-app/01-getting-started/03-layouts-and-pages.md
+
+      - name: Parcel validations
+        run: npm run validate:parcel
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Verify Parcel export
+        run: test -f out/parcel/index.html
