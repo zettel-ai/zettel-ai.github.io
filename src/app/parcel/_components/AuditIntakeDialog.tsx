@@ -158,7 +158,7 @@ export function AuditIntakeDialog({ open, placement, onClose }: Props) {
 
         <Field label="Work email" name="workContact" error={errors.workContact}>
           <input
-            id="parcel-audit-work-contact"
+            id="parcel-audit-workContact"
             name="workContact"
             type="email"
             autoComplete="email"
