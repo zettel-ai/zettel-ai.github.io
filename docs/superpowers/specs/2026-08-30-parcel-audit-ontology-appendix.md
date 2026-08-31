@@ -26,8 +26,6 @@ Accordingly, all AI-produced ontology content has the status:
 
 **candidate proposal requiring source mapping and human approval**
 
-The candidate modules, classes, relations, mappings, and constraints in this appendix are therefore a research-backed starting model—not a claim that an LLM has completed the ontology.
-
 ### AI may assist with
 
 - extracting candidate terms and aliases from authoritative documents;
@@ -116,19 +114,41 @@ FedEx materials supply carrier-specific concepts such as actual weight, dimensio
 
 - EPCIS and CBV overview  
   https://www.gs1.org/standards/epcis
-- EPCIS/CBV linked-data reference  
-  https://ref.gs1.org/epcis/
+- EPCIS 2.0.1 standard  
+  https://ref.gs1.org/standards/epcis/2.0.1/
 
 EPCIS provides a reusable event model for the **what, when, where, why, and how** of objects and assets. Parcel should reuse relevant ideas such as event time, record time, business step, disposition, read point/location, source, destination, object aggregation, and business-transaction association instead of inventing incompatible event semantics.
 
 #### OASIS Universal Business Language 2.4
 
 - OASIS UBL 2.4 Standard  
-  https://docs.oasis-open.org/ubl/UBL-2.4.html
+  https://docs.oasis-open.org/ubl/os-UBL-2.4/UBL-2.4.html
 
 UBL provides reusable transportation and billing semantics. Particularly relevant concepts include Shipment, Consignment, Transport Handling Unit, Invoice, Invoice Line, Freight Invoice, Allowance Charge, Application Response, Debit Note, and Credit Note. UBL's distinction between a logical shipment and a consignment governed by a transport arrangement helps prevent the ontology from treating every order, package, tracking number, and carrier movement as the same entity.
 
-### Provenance and constraint semantics
+### Quantity, unit, temporal, vocabulary, provenance, and constraint semantics
+
+#### QUDT and UNECE units
+
+- QUDT Schema and vocabulary  
+  https://qudt.org/doc/DOC_SCHEMA-QUDT.html
+- UNECE Recommendation No. 20, *Codes for Units of Measure Used in International Trade*
+
+QUDT supplies reusable distinctions among quantity kind, quantity value, numeric value, unit, and dimensional structure. UNECE Recommendation No. 20 supplies standardized unit codes commonly used in trade data. Parcel should use these as references for weight, length, volume, and unit normalization rather than treating a number plus free-text suffix as sufficient semantics.
+
+#### W3C Time Ontology in OWL
+
+- OWL-Time Recommendation  
+  https://www.w3.org/TR/owl-time/
+
+OWL-Time supplies reference concepts for instants, intervals, duration, and temporal relationships. Parcel should reuse these distinctions for shipment dates, event times, record times, rule-effective intervals, contract periods, dispute windows, guarantee status, and supersession.
+
+#### W3C SKOS
+
+- SKOS Recommendation  
+  https://www.w3.org/TR/skos-reference/
+
+SKOS supplies reference concepts for controlled concept schemes, preferred and alternative labels, broader/narrower relationships, related concepts, and cross-scheme mappings. Parcel should use SKOS-like mapping semantics for carrier-specific charge codes, service codes, dispute reasons, package types, and normalized concepts even when the MVP does not serialize RDF.
 
 #### W3C PROV-O
 
@@ -269,7 +289,7 @@ Define exactly what the ontology must answer and which launch audit categories i
 
 ### Step 2: Inventory authoritative terms
 
-Extract candidate terms from carrier terms, service guides, rate guides, billing dictionaries, invoice layouts, dispute procedures, customer contracts, GS1 EPCIS/CBV, UBL, PROV-O, and SHACL.
+Extract candidate terms from carrier terms, service guides, rate guides, billing dictionaries, invoice layouts, dispute procedures, customer contracts, GS1 EPCIS/CBV, UBL, QUDT, UNECE units, OWL-Time, SKOS, PROV-O, and SHACL.
 
 Preserve:
 
@@ -283,7 +303,7 @@ Preserve:
 
 ### Step 3: Reuse before inventing
 
-Map common events, documents, financial objects, and provenance to reusable standards where those definitions fit. Create Parcel-specific concepts only when a carrier or product distinction cannot be represented accurately through the reused model.
+Map common events, documents, quantities, units, temporal intervals, controlled vocabularies, financial objects, and provenance to reusable standards where those definitions fit. Create Parcel-specific concepts only when a carrier or product distinction cannot be represented accurately through the reused model.
 
 ### Step 4: Separate words from concepts
 
@@ -357,7 +377,7 @@ These questions define what the first Parcel ontology must support. They are als
 5. What dimensions and weights did the shipper declare?
 6. What dimensions and weights did the carrier assess?
 7. What independent or contemporaneous physical evidence exists?
-8. Which measurement method, unit, rounding rule, timestamp, and observer apply?
+8. Which quantity kind, measurement role, method, unit, rounding rule, timestamp, and observer apply?
 9. Which value became actual weight, dimensional weight, or billable/rated weight under the governing formula?
 10. Are conflicting measurements preserved as separate assertions rather than overwritten?
 
@@ -513,6 +533,8 @@ Parcel does not need to implement the entire EPCIS standard. It should reuse the
 - `CarrierAssessedMeasurement`
 - `PhysicalEvidenceMeasurement`
 - `CalculatedMeasurement`
+- `QuantityKind`
+- `QuantityValue`
 - `Length`
 - `Width`
 - `Height`
@@ -535,9 +557,10 @@ Do not put one mutable `package.weight` or `package.dimensions` value on a packa
 Each measurement must preserve:
 
 - measured subject;
-- measurement kind;
+- quantity kind;
+- measurement role;
 - numeric value;
-- unit;
+- unit and source unit code;
 - source/observer;
 - method;
 - captured time;
@@ -546,7 +569,7 @@ Each measurement must preserve:
 - evidence artifact;
 - confidence/review status where applicable.
 
-Declared, carrier-assessed, calculated, and independently evidenced measurements are separate assertions that may conflict.
+Declared, carrier-assessed, calculated, and independently evidenced measurements are separate assertions that may conflict. Dimensional, rated, and billable weights are derived billing quantities, not physical measurements.
 
 ### Module E: Billing and financial consequences
 
@@ -613,6 +636,7 @@ These are normalized candidate concepts. Raw carrier charge code, label, descrip
 - `EvidenceRequirement`
 - `SubmissionChannel`
 - `ApplicabilityContext`
+- `TemporalInterval`
 - `PrecedenceDecision`
 
 #### Required rule attributes
@@ -712,6 +736,25 @@ The MVP may implement these mappings through Zettel Platform's canonical evidenc
 
 These are Parcel domain states and must not be confused with Zettel Platform's generic operation statuses.
 
+### Module I: Controlled vocabularies and source mappings
+
+#### Candidate concept schemes
+
+- `ChargeCategory`
+- `CarrierChargeCode`
+- `CarrierServiceCode`
+- `AdjustmentReason`
+- `DisputeReason`
+- `EvidenceType`
+- `MeasurementRole`
+- `MeasurementMethod`
+- `PackagingType`
+- `CaseStatus`
+- `DecisionOutcome`
+- `SourceAuthorityType`
+
+Every controlled concept requires a preferred label, definition, carrier/source code, source locator, mapping relation, mapping status, version, and expert approval. Use SKOS-like `exact`, `close`, `broader`, `narrower`, and `related` mappings deliberately; never treat lexical similarity as semantic equivalence.
+
 ---
 
 ## Candidate Relations
@@ -750,6 +793,9 @@ The final relation vocabulary requires expert and knowledge-engineering review. 
 - `measurementIsAboutPackage`
 - `measurementGeneratedByEvent`
 - `measurementSupportedByEvidence`
+- `measurementHasQuantityKind`
+- `measurementHasQuantityValue`
+- `measurementUsesUnit`
 - `calculatedMeasurementUsesInput`
 - `calculatedMeasurementUsesFormula`
 - `chargeArisesFromMeasurement`
@@ -757,6 +803,7 @@ The final relation vocabulary requires expert and knowledge-engineering review. 
 - `ruleVersionContainedInDocument`
 - `ruleVersionAppliesToService`
 - `ruleVersionAppliesToAccount`
+- `ruleVersionValidDuring`
 - `ruleVersionSupersedesRuleVersion`
 - `criterionEvaluatesFact`
 - `exceptionOverridesCriterion`
@@ -820,7 +867,7 @@ These constraints are candidates for Pydantic/domain validation and Platform-com
 
 ### Measurement
 
-11. Every measurement requires a subject, kind, value, unit, source/observer, and relevant time.
+11. Every measurement requires a subject, quantity kind, measurement role, value, unit, source/observer, and relevant time.
 12. Calculated dimensional/billable/rated weight must retain formula version, inputs, rounding, and output.
 13. Declared, carrier-assessed, calculated, and physical-evidence measurements are distinct types or roles.
 14. A historical package profile may inform a review but cannot prove the physical measurement of a specific package.
@@ -868,6 +915,9 @@ These constraints are candidates for Pydantic/domain validation and Platform-com
 | Customer carrier contract/rate agreement | Account-specific rate, discount, minimum, exception, authorization, precedence, effective period |
 | GS1 EPCIS/CBV | Object/event identity, event time, record time, business step, disposition, location, source/destination, aggregation, transaction association |
 | OASIS UBL 2.4 | Shipment/Consignment/Handling Unit distinctions, Invoice, Invoice Line, Freight Invoice, Allowance Charge, Application Response, Credit Note, document references |
+| QUDT and UNECE Recommendation No. 20 | Quantity kind, quantity value, unit, dimensional structure, normalized unit codes |
+| W3C OWL-Time | Instant, interval, duration, effective period, record time, supersession, temporal relationships |
+| W3C SKOS | Controlled concept schemes, preferred/alternative labels, hierarchy, and reviewed source-to-canonical mappings |
 | W3C PROV-O | Entity/Activity/Agent and derivation, generation, usage, attribution, association, revision/invalidation lineage |
 | W3C SHACL | Shape-style cardinality, type, allowed-value, closed-structure, severity, and validation-report design |
 | Customer shipment/packing/finance evidence | Case-specific facts and observations; never generalized into universal carrier rules without expert review |
@@ -885,9 +935,9 @@ CustomerShipment SHIP-204
 
 CarrierConsignment 1Z84...
   consignmentContainsPackage -> Package PKG-204-1
-  shipmentUsesCarrierService -> UPS Ground
 
 Package PKG-204-1
+  shipmentUsesCarrierService -> UPS Ground
   hasMeasurement -> DeclaredMeasurement 48 x 6 x 6 in
   hasMeasurement -> CarrierAssessedMeasurement 49 x 7 x 7 in
   packageUsesPackageProfile -> PackageProfile BOX-A
@@ -1014,7 +1064,7 @@ Do not add an ontology diagram to the landing page merely to signal technical so
 
 ### Standards relationship
 
-The first release should map to GS1, UBL, PROV-O, and SHACL concepts where useful but does not need to serialize or execute their complete standards.
+The first release should map to GS1, UBL, QUDT, UNECE units, OWL-Time, SKOS, PROV-O, and SHACL concepts where useful but does not need to serialize or execute their complete standards.
 
 If a reusable ontology registry, ontology version service, cross-product constraint engine, OWL/RDF serialization, SHACL execution, or standards-mapping framework becomes necessary, design it in **Zettel Platform** and consume it from Parcel. Do not hide a generalized semantic subsystem inside the Parcel package.
 
@@ -1140,7 +1190,7 @@ The later Parcel backend design must include tasks for:
 4. candidate term registry with source locators;
 5. carrier-specific vocabulary and raw-code preservation;
 6. normalized class/relation/constraint model;
-7. GS1/UBL/PROV/SHACL concept mapping decisions;
+7. GS1/UBL/QUDT/UNECE/OWL-Time/SKOS/PROV/SHACL concept mapping decisions;
 8. ontology release/version records;
 9. expert approval records;
 10. typed Pydantic entity/edge schemas for Platform GraphMemory;
@@ -1178,7 +1228,7 @@ Each answer must be recorded as a reviewed ontology decision with rationale and 
 
 **The ontology is a reviewed domain contract, not an LLM-generated diagram.**
 
-Authoritative carrier documents, customer agreements, billing schemas, logistics standards, provenance standards, real cases, and expert judgment define the model. AI may help organize and test that work, but it cannot create domain truth.
+Authoritative carrier documents, customer agreements, billing schemas, logistics standards, quantity/unit standards, temporal and vocabulary standards, provenance standards, real cases, and expert judgment define the model. AI may help organize and test that work, but it cannot create domain truth.
 
 For the landing page, the result should be invisible technical rigor made visible as clarity:
 
