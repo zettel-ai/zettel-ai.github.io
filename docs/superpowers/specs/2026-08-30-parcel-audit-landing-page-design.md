@@ -4,6 +4,8 @@ Date: 2026-08-30
 Project: Zettel website / managed parcel audit product  
 Status: Revised design direction; implementation not started
 
+> **Normative ontology appendix:** This design incorporates `docs/superpowers/specs/2026-08-30-parcel-audit-ontology-appendix.md`. Ontology-informed copy, example case fields, semantic mappings, and future backend behavior are subject to that appendix's authoritative-source, domain-expert-review, AI-assistance, and approval requirements.
+
 ## Goal
 
 Create a dedicated landing page for a managed UPS/FedEx refund and billing-audit service while preserving the existing Zettel visual language and conversion quality.
@@ -231,7 +233,9 @@ Parcel should define its domain Pydantic graph schema and use the Platform's typ
 
 ### Ontology rule
 
-For this MVP, "ontology" means the explicit Parcel-owned semantic schema of entities, relations, constraints, identities, and extraction instructions executed through Zettel Platform's typed Graphiti boundary.
+The authoritative ontology-development and governance requirements are defined in `docs/superpowers/specs/2026-08-30-parcel-audit-ontology-appendix.md`.
+
+For the MVP, ontology implementation means an expert-approved, source-grounded Parcel semantic schema of entities, relations, constraints, identities, mappings, and extraction instructions executed through Zettel Platform's typed Graphiti, canonical evidence, retrieval, provenance, review, and operation boundaries. AI may propose ontology content but may not approve or originate domain truth.
 
 The current Platform is **not** a generic OWL/RDF ontology editing/reasoning platform. The landing page must not imply standards-based ontology reasoning that the backend does not provide.
 
@@ -1166,7 +1170,9 @@ Use Zettel Platform's canonical evidence and temporal graph capabilities for sem
 
 Define Parcel entity/edge types and extraction instructions, then use Platform typed Graphiti APIs.
 
-Do not generalize into a cross-product ontology framework until another product proves the need.
+The schema, source hierarchy, expert-review process, competency questions, candidate classes/relations, constraints, standards mappings, and approval gates are defined in `docs/superpowers/specs/2026-08-30-parcel-audit-ontology-appendix.md`.
+
+Do not generalize into a cross-product ontology framework until another product proves the need. Do not treat an AI-produced ontology draft as approved domain truth.
 
 ### Gap 5: Credit verification
 
@@ -1452,19 +1458,22 @@ The next backend design must define:
 1. Stable `parcel` product key and product composition factories.
 2. Parcel product records and state transitions.
 3. UPS/FedEx invoice/shipment/evidence ingestion into Platform-compatible canonical evidence.
-4. Parcel semantic entity/edge schema supplied to Platform typed Graphiti.
-5. Stable parcel graph identities and temporal versioning rules.
-6. Carrier-rule source/version/effective-date model.
-7. Retrieval lanes/queries for shipment facts, carrier rules, historical package/case context, and prior outcomes.
-8. Evidence completeness rules.
-9. Bounded Parcel reasoning prompt and structured output schema using Platform AgentCore.
-10. Product review/acceptance behavior.
-11. Carrier dispute action adapter and authorization boundary.
-12. Denial/next-action workflow.
-13. Credit verification/reconciliation.
-14. Product-specific deletion/source hooks.
-15. Contingency-fee calculation and verified-credit billing workflow.
-16. Verification/e2e tests demonstrating no direct Parcel graph/model/search stack exists.
+4. Expert-owned ontology development and approval workflow defined by the normative ontology appendix.
+5. Parcel semantic entity/edge schema supplied to Platform typed Graphiti.
+6. Stable parcel graph identities and temporal versioning rules.
+7. Carrier-rule source/version/effective-date model.
+8. Carrier-specific term/code mappings with raw-source preservation and expert approval.
+9. Retrieval lanes/queries for shipment facts, carrier rules, historical package/case context, and prior outcomes.
+10. Evidence completeness rules.
+11. Bounded Parcel reasoning prompt and structured output schema using Platform AgentCore.
+12. Product review/acceptance behavior.
+13. Carrier dispute action adapter and authorization boundary.
+14. Denial/next-action workflow.
+15. Credit verification/reconciliation.
+16. Product-specific deletion/source hooks.
+17. Contingency-fee calculation and verified-credit billing workflow.
+18. Ontology versioning, competency tests, and source-change review.
+19. Verification/e2e tests demonstrating no direct Parcel graph/model/search/ontology stack exists.
 
 ### Suggested retrieval perspectives
 
@@ -1498,6 +1507,9 @@ Because the page sells a managed financial service, verify before corresponding 
 13. How effective dates and superseded rules are represented.
 14. Which Parcel case actions require human review.
 15. How a degraded or incomplete evidence state is surfaced to operators/customers.
+16. Which domain experts approved the ontology release used by the page and product.
+17. Whether every ontology-informed public field maps to an approved concept/property and authoritative source strategy.
+18. Whether any AI-proposed term, mapping, or rule remains unreviewed.
 
 If any item is not verified, use narrower wording rather than inventing a capability.
 
@@ -1552,6 +1564,8 @@ The landing-page repo must not attempt to implement Zettel Platform or duplicate
 - Pretending missing evidence is present.
 - Pretending degraded graph/search knowledge is complete.
 - Building or marketing a second Parcel-only graph/search/agent stack.
+- Claiming AI independently authored or validated the Parcel ontology.
+- Treating unreviewed generated classes, mappings, or rules as domain truth.
 
 ---
 
@@ -1573,6 +1587,8 @@ A shipper who has experienced a confusing adjustment should think:
 **"Yes. This is the exact problem I keep having."**
 
 A technical reviewer should also be able to map the public story to the Zettel Platform boundary without finding a hidden duplicate intelligence stack.
+
+An ontology reviewer should be able to trace every semantic public field to the normative ontology appendix, an authoritative-source strategy, and a human approval gate rather than an LLM-generated taxonomy.
 
 ---
 
@@ -1599,6 +1615,8 @@ Before claiming landing-page implementation complete:
 - Confirm privacy/data-handling copy matches actual behavior.
 - Confirm no landing-page copy implies autonomous carrier actions not implemented by Parcel.
 - Confirm no landing-page copy claims standards-based ontology reasoning not implemented by Platform.
+- Confirm every ontology-informed Case File field maps to the approved ontology release and expert review status.
+- Confirm the site does not claim AI independently authored or validated the ontology.
 
 ---
 
@@ -1615,6 +1633,8 @@ The later Parcel backend implementation should include evidence that:
 - Parcel preserves knowledge-degraded/incomplete behavior rather than masking it.
 - Carrier actions cannot be performed directly by the bounded AgentCore Harness.
 - Parcel does not introduce another vector database, graph database, model router, RAG stack, or generic ontology engine.
+- Ontology terms, carrier mappings, and rule applicability are source-grounded, versioned, and human-approved.
+- AI-generated ontology proposals cannot become authoritative without expert review records.
 
 ---
 
@@ -1622,6 +1642,7 @@ The later Parcel backend implementation should include evidence that:
 
 - Implementing the landing page in this design phase.
 - Implementing the Parcel backend in this design phase.
+- Final expert approval of the candidate ontology in this design phase.
 - Changing the managed-service price beyond the approved 25% launch offer.
 - Building the parent apex page.
 - Performing the drayage subdomain migration.
@@ -1644,7 +1665,7 @@ The competitive category already knows how to say "we audit invoices." Zettel sh
 
 The Zettel Platform makes that story technically coherent through durable operations, canonical evidence, temporal typed graph memory, provenance-aware retrieval, review, and bounded structured reasoning.
 
-The Parcel product adds the shipping-specific semantics and operating workflow around that shared foundation.
+The Parcel product adds the shipping-specific semantics and operating workflow around that shared foundation. Those semantics must be grounded in authoritative carrier and standards sources and approved by qualified domain experts; AI may assist, but it cannot create domain truth.
 
 That combination is the product differentiation:
 
