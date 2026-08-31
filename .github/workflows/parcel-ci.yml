@@ -35,6 +35,30 @@ jobs:
       - name: Parcel validations
         run: npm run validate:parcel
 
+      - name: Parcel UI anti-pattern scan
+        run: |
+          if grep -R -n -E '(window\.)?(alert|confirm|prompt)[[:space:]]*\(' src/app/parcel; then
+            echo "Browser alert/confirm/prompt is not allowed in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n 'href="#"' src/app/parcel; then
+            echo "False hash-link affordance found in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n -E 'dangerouslySetInnerHTML|\.innerHTML[[:space:]]*=' src/app/parcel; then
+            echo "Unsafe HTML injection pattern found in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n -E '<(div|span|p|section)[^>]*onClick' src/app/parcel; then
+            echo "Non-semantic clickable element found in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n 'type="password"' src/app/parcel; then
+            echo "Unexpected password input found in Parcel marketing intake."
+            exit 1
+          fi
+          echo "Parcel UI anti-pattern scan passed."
+
       - name: Lint
         run: npm run lint
 
