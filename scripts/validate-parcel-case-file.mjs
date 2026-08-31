@@ -18,10 +18,11 @@ for (const required of [
   "Rule in effect on shipment date",
   "Missing evidence",
   "Similar package profile",
-  "Review case",
+  "Reviewable next action",
 ]) {
   assert(source.includes(required), `Case File must include: ${required}`);
 }
 
+assert(!source.includes(">Review case</span>"), "Example Case File must not render a faux Review case button.");
 assert(!source.includes("Knowledge graph"), "Case File must not expose knowledge-graph jargon.");
 assert(!source.includes("AI confidence"), "Case File must not replace evidence with an AI confidence score.");
