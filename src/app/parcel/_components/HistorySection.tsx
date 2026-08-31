@@ -1,9 +1,18 @@
+import Image from "next/image";
+
 export function HistorySection() {
   return (
     <section className="border-b border-outline-variant bg-background px-6 py-20 sm:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
         <figure className="order-2 border border-outline-variant bg-white p-3 sm:p-5 lg:order-1">
-          <img src="/diagrams/parcel/same-box-different-bill.svg" alt="Diagram comparing three historically consistent shipments from a similar package profile with one later carrier-assessed adjustment, labeled historical context rather than proof." className="h-auto w-full" />
+          <Image
+            src="/diagrams/parcel/same-box-different-bill.svg"
+            alt="Diagram comparing three historically consistent shipments from a similar package profile with one later carrier-assessed adjustment, labeled historical context rather than proof."
+            width={968}
+            height={346}
+            unoptimized
+            className="h-auto w-full"
+          />
           <figcaption className="mt-3 border-t border-outline-variant pt-3 text-xs leading-5 text-on-surface-variant">Historical context can tell a reviewer where to look closer. It cannot establish the physical facts of a specific package by itself.</figcaption>
         </figure>
         <div className="order-1 lg:order-2">
