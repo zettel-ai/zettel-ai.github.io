@@ -96,7 +96,7 @@ export function AuditIntakeDialog({ open, placement, onClose }: Props) {
       "Please send me the next step for sharing one recent invoice securely.",
     ].join("\n");
 
-    trackParcelEvent("parcel_intake_handoff", { placement, carrier: values.carrier });
+    trackParcelEvent("parcel_intake_handoff", { placement, carrier: values.carrier || undefined });
     setHandoff(true);
     window.location.href = `mailto:zettel.ops@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
