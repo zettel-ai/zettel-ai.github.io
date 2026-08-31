@@ -44,6 +44,7 @@ export const parcelCopy = {
   pricingFacts: ["$0 setup", "$0 monthly platform fee", "$0 recovered = $0 fee"],
   controlLine: "Zettel builds the case. You stay in control.",
   evidenceLine: "If the evidence isn't there, Zettel says so.",
+  denialHeadline: "Denied isn't the same as explained.",
   exampleLabel: "Example case",
   historyLabel: "Similar package profile",
   ruleLabel: "Rule in effect on shipment date",
