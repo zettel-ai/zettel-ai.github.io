@@ -26,6 +26,8 @@ Accordingly, all AI-produced ontology content has the status:
 
 **candidate proposal requiring source mapping and human approval**
 
+The candidate modules, classes, relations, mappings, and constraints in this appendix are therefore a research-backed starting model—not a claim that an LLM has completed the ontology.
+
 ### AI may assist with
 
 - extracting candidate terms and aliases from authoritative documents;
