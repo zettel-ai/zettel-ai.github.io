@@ -1,0 +1,78 @@
+name: Import corrected Parcel diagrams
+
+on:
+  push:
+    branches:
+      - feat/parcel-landing-page
+    paths:
+      - ".github/workflows/import-parcel-diagrams.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    env:
+      ARTIFACT_URL: "https://sdmntprcentralus.oaiusercontent.com/files/00000000-f5ac-81f5-a716-c9f7731b7c7c/raw?se=2026-08-31T04%3A01%3A31Z&sp=r&sv=2026-02-06&sr=b&scid=c3a160ea-9a3f-5207-b20e-39abc932edd1&skoid=77636ecc-ad8d-44df-baa7-163b524a0261&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-30T12%3A00%3A50Z&ske=2026-08-31T12%3A00%3A50Z&sks=b&skv=2026-02-06&sig=FPWv2XdiatyASpJ8qBO/cHjaZo3kXvW1jJBwaxfjek4%3D"
+      DIAGRAM_SOURCE_REPO: "zettel-ai/website_diagram"
+      DIAGRAM_SOURCE_COMMIT: "c5666f1dc7dd5d1cb6196a21a86cc574087bed5b"
+      D2_VERSION: "v0.8.2"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download reviewed diagram artifact
+        run: |
+          curl --fail --location --silent --show-error "$ARTIFACT_URL" --output /tmp/parcel-diagrams.zip
+          unzip -q /tmp/parcel-diagrams.zip -d /tmp/parcel-diagrams
+          test -f /tmp/parcel-diagrams/parcel-case-assembly.svg
+          test -f /tmp/parcel-diagrams/same-box-different-bill.svg
+
+      - name: Copy exact SVGs and record provenance
+        run: |
+          mkdir -p public/diagrams/parcel docs/superpowers
+          cp /tmp/parcel-diagrams/parcel-case-assembly.svg public/diagrams/parcel/parcel-case-assembly.svg
+          cp /tmp/parcel-diagrams/same-box-different-bill.svg public/diagrams/parcel/same-box-different-bill.svg
+
+          CASE_SHA=$(sha256sum public/diagrams/parcel/parcel-case-assembly.svg | awk '{print $1}')
+          HISTORY_SHA=$(sha256sum public/diagrams/parcel/same-box-different-bill.svg | awk '{print $1}')
+
+          cat > docs/superpowers/parcel-diagram-sources.md <<EOF
+          # Parcel Diagram Sources
+
+          Source repository: ${DIAGRAM_SOURCE_REPO}  
+          Canonical render commit: ${DIAGRAM_SOURCE_COMMIT}  
+          D2 version: ${D2_VERSION}
+
+          ## public/diagrams/parcel/parcel-case-assembly.svg
+
+          - D2 source: parcel/parcel-case-assembly.d2
+          - Canonical render: parcel/parcel-case-assembly.svg
+          - SHA-256: ${CASE_SHA}
+          - Purpose: Explain how billing, shipment facts, the rule in effect, customer evidence, and relevant history become a reviewable Zettel Case File and a verified financial outcome.
+          - Text equivalent: Source facts and context feed the Zettel Case File, which proceeds through human review and a carrier response before any credit is called verified.
+
+          ## public/diagrams/parcel/same-box-different-bill.svg
+
+          - D2 source: parcel/same-box-different-bill.d2
+          - Canonical render: parcel/same-box-different-bill.svg
+          - SHA-256: ${HISTORY_SHA}
+          - Purpose: Show a similar package profile with historically consistent billing followed by one carrier-assessed adjustment that deserves closer review.
+          - Text equivalent: Historical similarity gives context for an outlier adjustment but is explicitly not proof that the carrier is wrong.
+          EOF
+
+          cmp /tmp/parcel-diagrams/parcel-case-assembly.svg public/diagrams/parcel/parcel-case-assembly.svg
+          cmp /tmp/parcel-diagrams/same-box-different-bill.svg public/diagrams/parcel/same-box-different-bill.svg
+          test "$CASE_SHA" = "dcb470747364dad9526f63709af7400b05e0c2f7afca8c253091da1bf33f124f"
+          test "$HISTORY_SHA" = "8e9436f702dfaee607774a6847686137caad05be117ac4b93e40777ce461098b"
+
+      - name: Commit imported assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/diagrams/parcel docs/superpowers/parcel-diagram-sources.md
+          git commit -m "chore: refresh reviewed Parcel diagrams"
+          git push
