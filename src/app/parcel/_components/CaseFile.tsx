@@ -54,7 +54,7 @@ export function CaseFile() {
           <div className="mt-5 border-t border-outline-variant pt-5">
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">Recommended action</p>
             <p className="mt-2 text-lg font-semibold tracking-tight text-on-background">Review dimensional correction</p>
-            <span className="mt-4 inline-flex h-10 items-center border border-primary px-4 text-sm font-semibold text-primary">Review case</span>
+            <p className="mt-4 border-l-2 border-primary pl-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary">Reviewable next action</p>
           </div>
         </div>
       </div>
