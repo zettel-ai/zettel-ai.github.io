@@ -43,3 +43,10 @@ jobs:
 
       - name: Verify Parcel export
         run: test -f out/parcel/index.html
+
+      - name: Publish static export for browser review
+        uses: actions/upload-artifact@v4
+        with:
+          name: parcel-static-export
+          path: out
+          if-no-files-found: error
