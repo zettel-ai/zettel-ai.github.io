@@ -1,0 +1,101 @@
+name: Verify Parcel landing page
+
+on:
+  push:
+    branches:
+      - feat/parcel-landing-page
+  pull_request:
+    branches:
+      - design/parcel-audit-landing-page
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Record relevant installed Next 16 docs
+        run: |
+          echo "Next package:"
+          node -p "require('next/package.json').version"
+          find node_modules/next/dist/docs -type f | grep -E 'layouts-and-pages|static-exports|output\.md|metadata' | head -20 || true
+          sed -n '1,180p' node_modules/next/dist/docs/01-app/01-getting-started/03-layouts-and-pages.md
+
+      - name: Parcel validations
+        run: npm run validate:parcel
+
+      - name: Parcel UI anti-pattern scan
+        run: |
+          if grep -R -n -E '(window\.)?(alert|confirm|prompt)[[:space:]]*\(' src/app/parcel; then
+            echo "Browser alert/confirm/prompt is not allowed in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n 'href="#"' src/app/parcel; then
+            echo "False hash-link affordance found in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n -E 'dangerouslySetInnerHTML|\.innerHTML[[:space:]]*=' src/app/parcel; then
+            echo "Unsafe HTML injection pattern found in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n -E '<(div|span|p|section)[^>]*onClick' src/app/parcel; then
+            echo "Non-semantic clickable element found in Parcel UI."
+            exit 1
+          fi
+          if grep -R -n 'type="password"' src/app/parcel; then
+            echo "Unexpected password input found in Parcel marketing intake."
+            exit 1
+          fi
+          echo "Parcel UI anti-pattern scan passed."
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Verify Parcel export
+        run: test -f out/parcel/index.html
+
+      - name: Capture desktop and mobile browser screenshots
+        run: |
+          python3 -m http.server 4173 --directory out >/tmp/parcel-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/parcel/ >/dev/null; then break; fi
+            sleep 0.25
+          done
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=2500 --window-size=1440,1200 --screenshot=parcel-desktop.png http://127.0.0.1:4173/parcel/
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=2500 --window-size=390,844 --screenshot=parcel-mobile.png http://127.0.0.1:4173/parcel/
+          test -s parcel-desktop.png
+          test -s parcel-mobile.png
+
+      - name: Publish browser screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: parcel-browser-screenshots
+          path: |
+            parcel-desktop.png
+            parcel-mobile.png
+          if-no-files-found: error
+
+      - name: Publish static export for browser review
+        uses: actions/upload-artifact@v4
+        with:
+          name: parcel-static-export
+          path: out
+          if-no-files-found: error

@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { CALENDLY_URL } from "./RequestPilotButton";
@@ -10,15 +11,18 @@ type CalendlyWindow = Window & {
 };
 
 export function CalendlyBadge() {
-  useEffect(() => {
-    let cancelled = false;
+  const pathname = usePathname();
 
-    // Calendly powers this always-visible badge and the Request-a-Pilot
-    // buttons site-wide, so load it as soon as we hydrate.
+  useEffect(() => {
+    const existingBadge = document.querySelector(".calendly-badge-widget");
+    if (pathname.startsWith("/parcel")) {
+      existingBadge?.remove();
+      return;
+    }
+
+    let cancelled = false;
     loadCalendly();
 
-    // Calendly owns the badge's click, so we hook the surrounding DOM to
-    // prefetch the popup document the first time the badge is hovered/focused.
     const prewarmOnIntent = (event: Event) => {
       const target = event.target as Element | null;
       if (target?.closest?.(".calendly-badge-widget")) {
@@ -32,7 +36,6 @@ export function CalendlyBadge() {
 
     function init() {
       if (cancelled) return;
-      // Avoid adding a second badge (e.g. on dev fast-refresh).
       if (document.querySelector(".calendly-badge-widget")) return;
 
       const w = window as CalendlyWindow;
@@ -45,8 +48,7 @@ export function CalendlyBadge() {
           branding: false,
         });
       } else {
-        // widget.js is loaded async; retry until it is ready.
-        setTimeout(init, 200);
+        window.setTimeout(init, 200);
       }
     }
 
@@ -56,7 +58,7 @@ export function CalendlyBadge() {
       document.removeEventListener("pointerover", prewarmOnIntent);
       document.removeEventListener("focusin", prewarmOnIntent);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
