@@ -28,6 +28,10 @@ for (const required of [
   assert(dialog.includes(required), `Audit intake must include: ${required}`);
 }
 
+assert(
+  dialog.includes('id="parcel-audit-workContact"'),
+  "Work email input ID must match the Field label htmlFor convention.",
+);
 assert(!dialog.includes('type="file"'), "Website intake must not pretend file upload exists.");
 assert(!analytics.includes("email"), "Analytics helper must not accept email values.");
 assert(!analytics.includes("company"), "Analytics helper must not accept company values.");
