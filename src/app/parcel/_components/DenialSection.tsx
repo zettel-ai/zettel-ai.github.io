@@ -1,3 +1,5 @@
+import { parcelCopy } from "../_lib/content";
+
 const states = [
   ["Submitted", "The exact reviewed case and evidence are preserved."],
   ["Carrier responded", "The response and stated reason become new source material."],
@@ -13,7 +15,7 @@ export function DenialSection() {
         <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary-fixed">Carrier response</p>
-            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Denied isn't the same as explained.</h2>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">{parcelCopy.denialHeadline}</h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-300">The carrier response becomes another piece of the case. Evidence stays attached, gaps stay visible, and the next action stays bounded by what is actually supported.</p>
           </div>
           <ol className="border-y border-zinc-700">
