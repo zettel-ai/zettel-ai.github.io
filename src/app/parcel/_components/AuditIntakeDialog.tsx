@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 import { trackParcelEvent } from "../_lib/analytics";
 import type { AuditPlacement } from "./AuditIntakeProvider";
@@ -49,9 +49,6 @@ export function AuditIntakeDialog({ open, placement, onClose }: Props) {
 
   function close() {
     dialogRef.current?.close();
-    setErrors({});
-    setHandoff(false);
-    onClose();
   }
 
   function update<K extends keyof FormValues>(key: K, value: FormValues[K]) {
@@ -114,6 +111,8 @@ export function AuditIntakeDialog({ open, placement, onClose }: Props) {
         close();
       }}
       onClose={() => {
+        setErrors({});
+        setHandoff(false);
         if (open) onClose();
       }}
       onClick={(event) => {
@@ -256,7 +255,7 @@ function Field({
   label: string;
   name: keyof FormValues;
   error?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div>
