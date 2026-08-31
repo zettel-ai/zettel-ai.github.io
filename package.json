@@ -17,7 +17,15 @@
     "validate:mobile-overflow-guards": "node scripts/validate-mobile-overflow-guards.mjs",
     "validate:slack-diagrams": "node scripts/validate-slack-diagrams.mjs",
     "validate:faq-page": "node scripts/validate-faq-page.mjs",
-    "validate:blog": "node scripts/validate-blog-content.mjs"
+    "validate:blog": "node scripts/validate-blog-content.mjs",
+    "validate:parcel:route": "node scripts/validate-parcel-route.mjs",
+    "validate:parcel:copy": "node scripts/validate-parcel-copy.mjs",
+    "validate:parcel:case": "node scripts/validate-parcel-case-file.mjs",
+    "validate:parcel:intake": "node scripts/validate-parcel-intake.mjs",
+    "validate:parcel:sections": "node scripts/validate-parcel-sections.mjs",
+    "validate:parcel:evidence": "node scripts/validate-parcel-public-evidence.mjs",
+    "validate:parcel:diagrams": "node scripts/validate-parcel-diagrams.mjs",
+    "validate:parcel": "npm run validate:parcel:route && npm run validate:parcel:copy && npm run validate:parcel:case && npm run validate:parcel:intake && npm run validate:parcel:sections && npm run validate:parcel:evidence && npm run validate:parcel:diagrams"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
